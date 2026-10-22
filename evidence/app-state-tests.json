@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T17:24:21.411Z",
+  "generatedAt": "2026-10-22T17:31:15.147Z",
   "suite": "V7 app action/state guards in Node VM",
   "environment": "v24.22.0",
   "scope": "Minimal DOM and fake Audio; real app.js, core.js and data.js are evaluated. No browser rendering, service worker, real audio, GPS, provider or live AI verified.",
