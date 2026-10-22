@@ -1,0 +1,688 @@
+{
+  "generatedAt": "2026-10-22T17:24:21.474Z",
+  "tool": "GoNarra V7 static assets and finite contrast-pair audit",
+  "node": "v24.22.0",
+  "counts": {
+    "passed": 32,
+    "total": 32,
+    "failed": 0,
+    "realWavFiles": 5,
+    "localImages": 6,
+    "sourceDefinitions": 5,
+    "resolvedSourceReferences": 13,
+    "answersWithEmptySourceReferences": 3
+  },
+  "passed": true,
+  "checks": [
+    {
+      "name": "Source definitions have stable unique IDs and valid linked URLs",
+      "status": "PASS",
+      "detail": {
+        "definedSourceIds": 5,
+        "limit": "URL syntax and identifiers only; no network source access or claim entailment tested."
+      }
+    },
+    {
+      "name": "cathedral: source IDs in story and answers resolve",
+      "status": "PASS"
+    },
+    {
+      "name": "cathedral: local image exists and is nonempty",
+      "status": "PASS",
+      "detail": {
+        "file": "prototype/assets/cathedral.png",
+        "bytes": 2612953,
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "name": "cathedral: real WAV data and duration",
+      "status": "PASS",
+      "detail": {
+        "file": "prototype/assets/audio/cathedral.wav",
+        "durationSeconds": 34.99972789115646,
+        "dataBytes": 1543488,
+        "dataChunkOffsets": [
+          4096
+        ]
+      }
+    },
+    {
+      "name": "museum: source IDs in story and answers resolve",
+      "status": "PASS"
+    },
+    {
+      "name": "museum: local image exists and is nonempty",
+      "status": "PASS",
+      "detail": {
+        "file": "prototype/assets/museum.png",
+        "bytes": 2637329,
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "name": "museum: real WAV data and duration",
+      "status": "PASS",
+      "detail": {
+        "file": "prototype/assets/audio/museum.wav",
+        "durationSeconds": 41.20426303854875,
+        "dataBytes": 1817108,
+        "dataChunkOffsets": [
+          4096
+        ]
+      }
+    },
+    {
+      "name": "lunch: source IDs in story and answers resolve",
+      "status": "PASS"
+    },
+    {
+      "name": "lunch: local image exists and is nonempty",
+      "status": "PASS",
+      "detail": {
+        "file": "prototype/assets/coast.png",
+        "bytes": 2427748,
+        "width": 1672,
+        "height": 941
+      }
+    },
+    {
+      "name": "beach: source IDs in story and answers resolve",
+      "status": "PASS"
+    },
+    {
+      "name": "beach: local image exists and is nonempty",
+      "status": "PASS",
+      "detail": {
+        "file": "prototype/assets/beach.png",
+        "bytes": 2344949,
+        "width": 1672,
+        "height": 941
+      }
+    },
+    {
+      "name": "beach: real WAV data and duration",
+      "status": "PASS",
+      "detail": {
+        "file": "prototype/assets/audio/beach.wav",
+        "durationSeconds": 37.457913832199544,
+        "dataBytes": 1651894,
+        "dataChunkOffsets": [
+          4096
+        ]
+      }
+    },
+    {
+      "name": "mountain: source IDs in story and answers resolve",
+      "status": "PASS"
+    },
+    {
+      "name": "mountain: local image exists and is nonempty",
+      "status": "PASS",
+      "detail": {
+        "file": "prototype/assets/mountain.png",
+        "bytes": 3314289,
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    {
+      "name": "mountain: real WAV data and duration",
+      "status": "PASS",
+      "detail": {
+        "file": "prototype/assets/audio/mountain.wav",
+        "durationSeconds": 21.246712018140588,
+        "dataBytes": 936980,
+        "dataChunkOffsets": [
+          4096
+        ]
+      }
+    },
+    {
+      "name": "bridge: source IDs in story and answers resolve",
+      "status": "PASS"
+    },
+    {
+      "name": "bridge: local image exists and is nonempty",
+      "status": "PASS",
+      "detail": {
+        "file": "prototype/assets/coast.png",
+        "bytes": 2427748,
+        "width": 1672,
+        "height": 941
+      }
+    },
+    {
+      "name": "bridge: real WAV data and duration",
+      "status": "PASS",
+      "detail": {
+        "file": "prototype/assets/audio/bridge.wav",
+        "durationSeconds": 22.817641723356008,
+        "dataBytes": 1006258,
+        "dataChunkOffsets": [
+          4096
+        ]
+      }
+    },
+    {
+      "name": "Templates contain only real catalogue IDs, with valid bounded visit durations",
+      "status": "PASS"
+    },
+    {
+      "name": "Prototype HTML JS/CSS dependencies exist locally, including visuals and theme",
+      "status": "PASS"
+    },
+    {
+      "name": "Stylesheet imports and file URLs have no missing or remote runtime dependencies",
+      "status": "PASS"
+    },
+    {
+      "name": "Service-worker shell dependencies exist and include the actual HTML shell",
+      "status": "PASS",
+      "detail": {
+        "shellReferences": [
+          "./",
+          "index.html",
+          "styles.css",
+          "theme.css",
+          "data.js",
+          "core.js",
+          "visuals.js",
+          "app.js"
+        ],
+        "limit": "File existence only; install/fetch/cache behavior must be tested in a browser."
+      }
+    },
+    {
+      "name": "No external script, stylesheet, font or shell dependency is needed to boot the prototype",
+      "status": "PASS",
+      "detail": {
+        "scope": "Static HTML script/style references, CSS import/url assets, SW shell and URL module imports. User-opened source/Maps links are intentional outbound navigation, not boot dependencies. Same-origin media download still requires a local server before caching."
+      }
+    },
+    {
+      "name": "Known contrast pair: Navy on white",
+      "status": "PASS",
+      "detail": {
+        "ratio": 19.05327729791661,
+        "normalTextMinimum": 4.5
+      }
+    },
+    {
+      "name": "Known contrast pair: Button white on navy",
+      "status": "PASS",
+      "detail": {
+        "ratio": 14.706376289584677,
+        "normalTextMinimum": 4.5
+      }
+    },
+    {
+      "name": "Known contrast pair: Body copy on page",
+      "status": "PASS",
+      "detail": {
+        "ratio": 6.5667100841299515,
+        "normalTextMinimum": 4.5
+      }
+    },
+    {
+      "name": "Known contrast pair: White on action blue",
+      "status": "PASS",
+      "detail": {
+        "ratio": 4.548219584702995,
+        "normalTextMinimum": 4.5
+      }
+    },
+    {
+      "name": "Known contrast pair: Muted copy on white",
+      "status": "PASS",
+      "detail": {
+        "ratio": 5.1731357206840585,
+        "normalTextMinimum": 4.5
+      }
+    },
+    {
+      "name": "Known contrast pair: Small badge copy",
+      "status": "PASS",
+      "detail": {
+        "ratio": 6.785371061339264,
+        "normalTextMinimum": 4.5
+      }
+    },
+    {
+      "name": "Known contrast pair: Eyebrow on white",
+      "status": "PASS",
+      "detail": {
+        "ratio": 4.578716515476998,
+        "normalTextMinimum": 4.5
+      }
+    },
+    {
+      "name": "Known contrast pair: Secondary chip copy",
+      "status": "PASS",
+      "detail": {
+        "ratio": 13.250867978966125,
+        "normalTextMinimum": 4.5
+      }
+    },
+    {
+      "name": "Known contrast pair: Caption on white",
+      "status": "PASS",
+      "detail": {
+        "ratio": 5.929108507829594,
+        "normalTextMinimum": 4.5
+      }
+    }
+  ],
+  "audio": [
+    {
+      "placeId": "cathedral",
+      "storyId": "cathedral-story",
+      "file": "prototype/assets/audio/cathedral.wav",
+      "fileBytes": 1547584,
+      "riffBytes": 1547584,
+      "dataBytes": 1543488,
+      "nonZeroDataBytes": 1472884,
+      "durationSeconds": 34.99972789115646,
+      "sampleFrames": 771744,
+      "format": 1,
+      "channels": 1,
+      "sampleRate": 22050,
+      "byteRate": 44100,
+      "blockAlign": 2,
+      "bitsPerSample": 16,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "payloadOffset": 20,
+          "bytes": 16
+        },
+        {
+          "id": "FLLR",
+          "offset": 36,
+          "payloadOffset": 44,
+          "bytes": 4044
+        },
+        {
+          "id": "data",
+          "offset": 4088,
+          "payloadOffset": 4096,
+          "bytes": 1543488
+        }
+      ],
+      "sha256": "05826258ae41f5637789a2f72ab7c23a400bfd5adafbb2eabef618cf577aef2c"
+    },
+    {
+      "placeId": "museum",
+      "storyId": "museum-story",
+      "file": "prototype/assets/audio/museum.wav",
+      "fileBytes": 1821204,
+      "riffBytes": 1821204,
+      "dataBytes": 1817108,
+      "nonZeroDataBytes": 1735316,
+      "durationSeconds": 41.20426303854875,
+      "sampleFrames": 908554,
+      "format": 1,
+      "channels": 1,
+      "sampleRate": 22050,
+      "byteRate": 44100,
+      "blockAlign": 2,
+      "bitsPerSample": 16,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "payloadOffset": 20,
+          "bytes": 16
+        },
+        {
+          "id": "FLLR",
+          "offset": 36,
+          "payloadOffset": 44,
+          "bytes": 4044
+        },
+        {
+          "id": "data",
+          "offset": 4088,
+          "payloadOffset": 4096,
+          "bytes": 1817108
+        }
+      ],
+      "sha256": "015e63b9a3ed956f24b576819960983b16e280a73bafec5d34f9f9b7fc0d5adf"
+    },
+    {
+      "placeId": "beach",
+      "storyId": "beach-story",
+      "file": "prototype/assets/audio/beach.wav",
+      "fileBytes": 1655990,
+      "riffBytes": 1655990,
+      "dataBytes": 1651894,
+      "nonZeroDataBytes": 1569613,
+      "durationSeconds": 37.457913832199544,
+      "sampleFrames": 825947,
+      "format": 1,
+      "channels": 1,
+      "sampleRate": 22050,
+      "byteRate": 44100,
+      "blockAlign": 2,
+      "bitsPerSample": 16,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "payloadOffset": 20,
+          "bytes": 16
+        },
+        {
+          "id": "FLLR",
+          "offset": 36,
+          "payloadOffset": 44,
+          "bytes": 4044
+        },
+        {
+          "id": "data",
+          "offset": 4088,
+          "payloadOffset": 4096,
+          "bytes": 1651894
+        }
+      ],
+      "sha256": "4f0d4e04691c3acc84a05033f00c42cea39b2fe450587b4f4d445e416ed29a37"
+    },
+    {
+      "placeId": "mountain",
+      "storyId": "mountain-story",
+      "file": "prototype/assets/audio/mountain.wav",
+      "fileBytes": 941076,
+      "riffBytes": 941076,
+      "dataBytes": 936980,
+      "nonZeroDataBytes": 883369,
+      "durationSeconds": 21.246712018140588,
+      "sampleFrames": 468490,
+      "format": 1,
+      "channels": 1,
+      "sampleRate": 22050,
+      "byteRate": 44100,
+      "blockAlign": 2,
+      "bitsPerSample": 16,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "payloadOffset": 20,
+          "bytes": 16
+        },
+        {
+          "id": "FLLR",
+          "offset": 36,
+          "payloadOffset": 44,
+          "bytes": 4044
+        },
+        {
+          "id": "data",
+          "offset": 4088,
+          "payloadOffset": 4096,
+          "bytes": 936980
+        }
+      ],
+      "sha256": "b17f7b7a79069e5ddfe5a82dbbdcdc199d531b1e46ea63e513dfc441cd97fa69"
+    },
+    {
+      "placeId": "bridge",
+      "storyId": "bridge-story",
+      "file": "prototype/assets/audio/bridge.wav",
+      "fileBytes": 1010354,
+      "riffBytes": 1010354,
+      "dataBytes": 1006258,
+      "nonZeroDataBytes": 957375,
+      "durationSeconds": 22.817641723356008,
+      "sampleFrames": 503129,
+      "format": 1,
+      "channels": 1,
+      "sampleRate": 22050,
+      "byteRate": 44100,
+      "blockAlign": 2,
+      "bitsPerSample": 16,
+      "chunks": [
+        {
+          "id": "fmt ",
+          "offset": 12,
+          "payloadOffset": 20,
+          "bytes": 16
+        },
+        {
+          "id": "FLLR",
+          "offset": 36,
+          "payloadOffset": 44,
+          "bytes": 4044
+        },
+        {
+          "id": "data",
+          "offset": 4088,
+          "payloadOffset": 4096,
+          "bytes": 1006258
+        }
+      ],
+      "sha256": "ccf40016083673adb7ed1dff3aaab1cf0bd8161b0b248c706254df64f5cbf512"
+    }
+  ],
+  "images": [
+    {
+      "placeId": "cathedral",
+      "file": "prototype/assets/cathedral.png",
+      "bytes": 2612953,
+      "sha256": "0443bcc290ae36e98476566f07b2eafacd1c66ebcc5c2f2965186b5f6122f4d6",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "placeId": "museum",
+      "file": "prototype/assets/museum.png",
+      "bytes": 2637329,
+      "sha256": "0328c83da35beab17a85a9468742f6b7b908b418187172496d772e5084234234",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "placeId": "lunch",
+      "file": "prototype/assets/coast.png",
+      "bytes": 2427748,
+      "sha256": "bd1bfad4705c86ba65bd9dc708f94f9640bf60c86635c72d082318da78a3fff9",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "placeId": "beach",
+      "file": "prototype/assets/beach.png",
+      "bytes": 2344949,
+      "sha256": "ce76a85d3c3f846016ba47dd6773d2c81385147fe82c88a3d2a131f660fecf5a",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "placeId": "mountain",
+      "file": "prototype/assets/mountain.png",
+      "bytes": 3314289,
+      "sha256": "184c98850862444b75a7e8669331cb864b28f4ab7213a4da426c55caecd74722",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "placeId": "bridge",
+      "file": "prototype/assets/coast.png",
+      "bytes": 2427748,
+      "sha256": "bd1bfad4705c86ba65bd9dc708f94f9640bf60c86635c72d082318da78a3fff9",
+      "width": 1672,
+      "height": 941
+    }
+  ],
+  "references": [
+    {
+      "from": "prototype/index.html",
+      "ref": "data.js",
+      "file": "prototype/data.js"
+    },
+    {
+      "from": "prototype/index.html",
+      "ref": "core.js",
+      "file": "prototype/core.js"
+    },
+    {
+      "from": "prototype/index.html",
+      "ref": "visuals.js",
+      "file": "prototype/visuals.js"
+    },
+    {
+      "from": "prototype/index.html",
+      "ref": "app.js",
+      "file": "prototype/app.js"
+    },
+    {
+      "from": "prototype/index.html",
+      "ref": "styles.css",
+      "file": "prototype/styles.css"
+    },
+    {
+      "from": "prototype/index.html",
+      "ref": "theme.css",
+      "file": "prototype/theme.css"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "./",
+      "file": "prototype/index.html"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "index.html",
+      "file": "prototype/index.html"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "styles.css",
+      "file": "prototype/styles.css"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "theme.css",
+      "file": "prototype/theme.css"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "data.js",
+      "file": "prototype/data.js"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "core.js",
+      "file": "prototype/core.js"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "visuals.js",
+      "file": "prototype/visuals.js"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "app.js",
+      "file": "prototype/app.js"
+    }
+  ],
+  "networkDependencies": [],
+  "contrastPairs": [
+    {
+      "name": "Navy on white",
+      "foreground": "#021024",
+      "background": "#ffffff",
+      "ratio": 19.05327729791661,
+      "ratioDisplay": "19.05:1",
+      "normalTextMinimum": 4.5,
+      "passesNormalText": true
+    },
+    {
+      "name": "Button white on navy",
+      "foreground": "#ffffff",
+      "background": "#052659",
+      "ratio": 14.706376289584677,
+      "ratioDisplay": "14.71:1",
+      "normalTextMinimum": 4.5,
+      "passesNormalText": true
+    },
+    {
+      "name": "Body copy on page",
+      "foreground": "#4a5c6a",
+      "background": "#f7f9fb",
+      "ratio": 6.5667100841299515,
+      "ratioDisplay": "6.57:1",
+      "normalTextMinimum": 4.5,
+      "passesNormalText": true
+    },
+    {
+      "name": "White on action blue",
+      "foreground": "#ffffff",
+      "background": "#2d6aff",
+      "ratio": 4.548219584702995,
+      "ratioDisplay": "4.55:1",
+      "normalTextMinimum": 4.5,
+      "passesNormalText": true
+    },
+    {
+      "name": "Muted copy on white",
+      "foreground": "#597081",
+      "background": "#ffffff",
+      "ratio": 5.1731357206840585,
+      "ratioDisplay": "5.17:1",
+      "normalTextMinimum": 4.5,
+      "passesNormalText": true
+    },
+    {
+      "name": "Small badge copy",
+      "foreground": "#285484",
+      "background": "#e8f0f9",
+      "ratio": 6.785371061339264,
+      "ratioDisplay": "6.79:1",
+      "normalTextMinimum": 4.5,
+      "passesNormalText": true
+    },
+    {
+      "name": "Eyebrow on white",
+      "foreground": "#557b8a",
+      "background": "#ffffff",
+      "ratio": 4.578716515476998,
+      "ratioDisplay": "4.58:1",
+      "normalTextMinimum": 4.5,
+      "passesNormalText": true
+    },
+    {
+      "name": "Secondary chip copy",
+      "foreground": "#052659",
+      "background": "#edf4fa",
+      "ratio": 13.250867978966125,
+      "ratioDisplay": "13.25:1",
+      "normalTextMinimum": 4.5,
+      "passesNormalText": true
+    },
+    {
+      "name": "Caption on white",
+      "foreground": "#526772",
+      "background": "#ffffff",
+      "ratio": 5.929108507829594,
+      "ratioDisplay": "5.93:1",
+      "normalTextMinimum": 4.5,
+      "passesNormalText": true
+    }
+  ],
+  "limits": [
+    "No global WCAG conformance or accessibility certification. Only these nine explicit solid-color pairs were calculated.",
+    "No photographic/dynamic overlay contrast, text size, focus, target size, keyboard, screen reader or browser rendering was verified.",
+    "WAV chunk/data integrity and computed duration do not establish audible quality, pronunciation, script accuracy or factual correctness.",
+    "Source ID resolution and URL syntax do not establish that claims are entailed, sources remain current, or media/content rights are granted.",
+    "Static local-dependency checks do not prove service-worker installation, offline playback or absence of all possible network behavior."
+  ],
+  "inputs": {
+    "dataSha256": "02812d3bdd92d47f6d31d9a133fd37191cf2c2426f0bdd3c921e7cd5ab648d4b",
+    "htmlSha256": "4e8f19aeb4ad99834e4dedc8a55efa95c6aaebac11ed63390c86eb65c998f935",
+    "swSha256": "a8d1f4d63c755a30b3073a32b63694865946057c7838d96490eae211f54e836d"
+  }
+}

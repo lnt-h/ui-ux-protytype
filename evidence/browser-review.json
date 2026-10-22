@@ -1,0 +1,176 @@
+{
+  "reviewMethod": "CUA browser interactions and DOM observations; no headless browser assertions or native device testing",
+  "scope": "Browser shell, interaction and media/cache observations on local HTTP origins",
+  "cases": [
+    {
+      "id": "B01",
+      "task": "Home has map, two planning entries and four labeled navigation tabs",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B02",
+      "task": "Pin selection marks My Khe Beach and opens corresponding place card",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B03",
+      "task": "Drawer cycles through full, compact and medium using tap controls",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B04",
+      "task": "Actual bundled WAV starts playback and exposes Pause control",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B05",
+      "task": "Player exposes actual 37-second duration and adjustable speed/progress",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B06",
+      "task": "Transcript matches beach story and official source link",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B07",
+      "task": "Supported place question returns bounded answer with source",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B08",
+      "task": "Unknown operational question gives unsupported-answer fallback",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B09",
+      "task": "Generation shows semantic demo stages and cancel control before proposal",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B10",
+      "task": "Proposal retains required museum as locked, includes return trip and unsaved state",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B11",
+      "task": "Manual remove offers Undo and restores the bridge in the draft",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B12",
+      "task": "Cancel dirty draft preserves accepted revision and schedule",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B13",
+      "task": "Browser completes real asset download with ready status and measured MB",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B14",
+      "task": "Unrecognized Adjust request is refused without overwriting tour",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B15",
+      "task": "AI adjustment previews beach duration change and preserves museum lock",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B16",
+      "task": "Applying itinerary change increments revision and marks old package update-needed",
+      "pass": null,
+      "status": "inconclusive",
+      "note": "The page changed between observations and follow-up actions. No failure of app state was established; not counted as a pass."
+    },
+    {
+      "id": "B17",
+      "task": "Welcome has two steps and completion persists across reload",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B18",
+      "task": "Prepared personal tour saves three actual WAV files with measured browser cache bytes",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B19",
+      "task": "Start opens focused leg with sample guidance, mini-player and manual arrival",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B20",
+      "task": "Reload restores active trip at stop one without marking arrival",
+      "pass": null,
+      "status": "inconclusive",
+      "note": "The page changed between observations and follow-up actions. No failure of app state was established; not counted as a pass."
+    },
+    {
+      "id": "B21",
+      "task": "Choosing a sample maneuver updates current instruction without advancing itinerary stop",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B22",
+      "task": "Manual arrival opens place content at the same current stop",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B23",
+      "task": "Arrival Play control fits inside first visible main viewport",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B24",
+      "task": "+15 opens unapplied preview with derived new finish",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B25",
+      "task": "Service worker restores saved tour and shell after localhost server is stopped",
+      "pass": true,
+      "status": "observed-pass"
+    },
+    {
+      "id": "B26",
+      "task": "Bundled cathedral WAV plays from browser cache with localhost server stopped",
+      "pass": true,
+      "status": "observed-pass",
+      "initialPauseAssertionAtLaterObservation": false,
+      "evidence": "Immediate post-start snapshot showed Pause and actual duration; later snapshot showed progress34.9s of34s displayed duration and Play after natural completion, with the local server already stopped."
+    }
+  ],
+  "offlineMethod": "Saved a complete 12.0 MB package on port8769, terminated its local HTTP server, reloaded the app through the service worker, opened cathedral story and observed actual WAV playback controls/duration.",
+  "limitations": [
+    "No native iPhone, background GPS or navigation SDK test",
+    "No live LLM or RAG integration",
+    "Two browser assertions were inconclusive because the page changed between actions",
+    "No full WCAG or VoiceOver certification",
+    "Screenshots are browser review captures; 402×874 logical frame, not claimed as physical iPhone captures"
+  ],
+  "observedPasses": 24,
+  "inconclusive": 2
+}

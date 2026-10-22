@@ -1,0 +1,24 @@
+PASS schedule includes start leg, every visit, inter-stop leg and return
+PASS generic lunch is a break, not a fictitious restaurant/route coordinate
+PASS a stop at the selected starting POI does not invent start travel
+PASS return trip consumes budget and can turn a fitting plan into a conflict
+PASS invalid/duplicate POIs and out-of-bounds durations are rejected
+PASS one-day contract rejects unsupported origins, modes and overnight windows
+PASS generation returns a bounded, valid, deterministic proposal with required places
+PASS must-visit time conflicts are explicit and never solved by dropping a required place
+PASS impossible walking travel is not replaced with car time or a fabricated zero leg
+PASS generation rejects invented/duplicate must-visits and unbounded stop count
+PASS unknown requests fail rather than interpreting a substring as a supported change
+PASS a supported beach proposal changes only requested duration and leaves input untouched
+PASS active visited/current prefix survives a culture-only proposal exactly
+PASS less walking recognises the real stairs tag without changing mode or protected visits
+PASS locked points are never removed by culture-only and locked durations remain fixed
+PASS three-hour adjustment cannot shorten a protected current visit to manufacture feasibility
+PASS three-hour adjustment trims only mutable suffix and validates proposed budget
+PASS English/Vietnamese supported intents agree; contradictory intents are refused
+PASS compound less-walking plus more-beach keeps the requested new beach visit
+PASS unknown protected IDs reject safely instead of weakening protection
+PASS diff describes reorder/removal/addition/duration/budget rather than replacing whole plan
+PASS formatters handle hours, minute padding and unavailable estimates
+
+22/22 domain tests passed. Explicit demo fixtures only; no live AI/Routes/GPS/audio tested.

@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-10-22T17:24:21.411Z",
+  "suite": "V7 app action/state guards in Node VM",
+  "environment": "v24.22.0",
+  "scope": "Minimal DOM and fake Audio; real app.js, core.js and data.js are evaluated. No browser rendering, service worker, real audio, GPS, provider or live AI verified.",
+  "appSha256": "0fb5e60cd89fbc132b7c8c2e3ebd1c5fac57c7a595cf6870526c0186525a9ced",
+  "passed": 28,
+  "total": 28,
+  "results": [
+    {
+      "name": "finishing before arrival and double-finishing cannot advance an unconfirmed next stop",
+      "status": "PASS"
+    },
+    {
+      "name": "arrival and manual playback context never complete a stop by themselves",
+      "status": "PASS"
+    },
+    {
+      "name": "skip confirmation is consumed once and cannot skip the next stop on a repeat event",
+      "status": "PASS"
+    },
+    {
+      "name": "+15 is a preview; discard leaves accepted duration/revision/progress unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit +15 Apply changes only confirmed current duration and bumps one plan revision",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit current +15 keeps a must-visit locked instead of silently unlocking it",
+      "status": "PASS"
+    },
+    {
+      "name": "pending +15 survives manual future edits and one explicit Apply",
+      "status": "PASS"
+    },
+    {
+      "name": "pending +15 survives Adjust remaining without allowing AI to change past/current identity",
+      "status": "PASS"
+    },
+    {
+      "name": "pending +15 cannot become +30 through an invalid proposal mutation",
+      "status": "PASS"
+    },
+    {
+      "name": "stale pending extension cannot overwrite a newer accepted plan",
+      "status": "PASS"
+    },
+    {
+      "name": "manual stale-revision review rejects overwrite after the editor opened",
+      "status": "PASS"
+    },
+    {
+      "name": "AI stale-revision protection uses the snapshot at Adjust entry, not late review creation",
+      "status": "PASS"
+    },
+    {
+      "name": "progress advancing while a manual preview waits makes that preview stale",
+      "status": "PASS"
+    },
+    {
+      "name": "forged disabled actions cannot remove, move or resize fixed prefix or locked future stop",
+      "status": "PASS"
+    },
+    {
+      "name": "adjust checkboxes cannot silently unlock an existing must-visit",
+      "status": "PASS"
+    },
+    {
+      "name": "manual future unlock requires confirmation and authorises only that draft removal",
+      "status": "PASS"
+    },
+    {
+      "name": "no-op manual review does not create a review or increment revision",
+      "status": "PASS"
+    },
+    {
+      "name": "header Back prompts for dirty editor and discard preserves the saved plan",
+      "status": "PASS"
+    },
+    {
+      "name": "Back from Add stop returns to the same unsaved draft without discard",
+      "status": "PASS"
+    },
+    {
+      "name": "unvisited unavailable current stop has an explicit replacement preview and safe apply",
+      "status": "PASS"
+    },
+    {
+      "name": "replacement of locked unavailable current stop requires explicit unlock consent",
+      "status": "PASS"
+    },
+    {
+      "name": "confirmed current stop cannot be replaced; only future editing is offered",
+      "status": "PASS"
+    },
+    {
+      "name": "arrival after replacement preview makes the replacement stale",
+      "status": "PASS"
+    },
+    {
+      "name": "resuming a paused tour requires confirmation before pausing another active tour",
+      "status": "PASS"
+    },
+    {
+      "name": "no reviewed mutation may change an earlier visited prefix even if the draft is corrupted",
+      "status": "PASS"
+    },
+    {
+      "name": "completed journeys cannot resume or be edited in place",
+      "status": "PASS"
+    },
+    {
+      "name": "new/adapted proposal selection cannot reuse the previous saved-trip route context",
+      "status": "PASS"
+    },
+    {
+      "name": "keeping current tour after pending adjustment clears the unapplied extension",
+      "status": "PASS"
+    }
+  ]
+}
