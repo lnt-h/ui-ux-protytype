@@ -1,0 +1,1166 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GoNarra · Product & Design Handbook</title><style>:root{color:#11212d;font:16px/1.75 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f8fb}*{box-sizing:border-box}body{margin:0}a{color:#154b86;text-underline-offset:3px}.shell{max-width:1180px;margin:auto;display:grid;grid-template-columns:250px 1fr;gap:44px;padding:40px 30px}aside{position:sticky;top:32px;align-self:start}aside a{display:block;font-size:13px;padding:7px 0}main{min-width:0}header{padding:24px 0 35px}h1,h2,h3{line-height:1.25;color:#052659}h1{font-size:38px;letter-spacing:-1.4px}h2{margin-top:36px;font-size:25px}h3{font-size:19px}section{margin-bottom:70px;background:white;border:1px solid #dce5ef;border-radius:20px;padding:28px;scroll-margin-top:25px}section>h1{font-size:29px}table{border-collapse:collapse;width:100%;display:block;overflow:auto;font-size:13px;line-height:1.65;margin:20px 0}th,td{border:1px solid #dce5ef;padding:10px 12px;vertical-align:top;min-width:115px}th{background:#edf4fa}pre{background:#edf4fa;padding:18px;overflow:auto;border-radius:12px}code{font-size:13px;background:#edf4fa;padding:2px 4px;border-radius:4px}blockquote{margin:20px 0;padding:10px 20px;border-left:4px solid #5483b3;background:#edf4fa}img{max-width:100%;border-radius:14px}li+li{margin-top:7px}.button{display:inline-block;background:#052659;color:white;text-decoration:none;padding:12px 18px;border-radius:12px;font-weight:700}.pill{font-size:11px;letter-spacing:1px;text-transform:uppercase;background:#c1e8ff;color:#052659;padding:7px 10px;border-radius:8px;display:inline-block}.muted{color:#4a5c6a}.screen-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.screen-grid img{width:100%}.screen-grid figure{margin:0}.screen-grid figcaption{font-size:12px;color:#4a5c6a}.swatches{display:flex;gap:8px;margin:24px 0}.swatches span{width:55px;height:55px;border-radius:14px}.link-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}.callout{padding:18px;border-radius:14px;background:#edf4fa;font-size:14px}.iframewrap{display:flex;justify-content:center;background:#eaf0f5;border-radius:24px;padding:20px;margin-top:24px}iframe{width:402px;height:874px;border:7px solid #021024;box-sizing:content-box;border-radius:45px;background:white}.top{max-width:1080px;margin:auto;padding:44px 30px}.intro-grid{display:grid;grid-template-columns:1fr 416px;gap:44px;align-items:start}.intro-grid h1{font-size:51px}.toccards{display:grid;gap:12px}.toccard{display:block;padding:18px;background:white;border:1px solid #dce5ef;border-radius:15px;text-decoration:none;font-weight:650}.toccard small{display:block;font-weight:400;color:#4a5c6a}.preview-label{font-size:12px;text-align:center;color:#4a5c6a}.research{background:#052659;color:white;padding:30px;border-radius:20px}.research h2{color:white;margin-top:0}.research a{color:#c1e8ff}@media(max-width:850px){.shell{display:block;padding:22px 16px}.shell aside{position:relative;top:0;margin-bottom:25px}.intro-grid{display:block}.intro-grid h1{font-size:38px}.iframewrap{overflow:auto;justify-content:flex-start}.top{padding:24px 16px}section{padding:18px}.screen-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media print{aside,.button,.iframewrap{display:none}.shell{display:block;padding:0}section{break-before:page;border:0;padding:0}table{display:table}h1{font-size:24pt}a{color:inherit}}</style><div class="shell"><aside><span class="pill">GoNarra V7</span><h2>Product & design</h2><a href="index.html">← Project overview</a><a class="button" href="prototype/index.html">Open prototype</a><hr><a href="#doc-1">GoNarra V7 — Sản phẩm và UX</a><a href="#doc-2">GoNarra V7 — Flow, state và bảo toàn dữ liệu</a><a href="#doc-3">GoNarra V7 — Hợp đồng AI, audio và offline</a><a href="#doc-4">GoNarra V7 — Kiểm chứng và bàn giao</a><a href="#doc-5">GoNarra V7 — Nội dung, nguồn và quyền sử dụng</a><a href="#doc-6">Nghiên cứu thực hành mobile UX</a><a href="#doc-7">GoNarra V7 — Design system</a><a href="#doc-8">Kết quả review và bàn giao</a><a href="evidence/browser-review.json">Browser evidence</a></aside><main><header><h1>A considered day.<br>A coherent experience.</h1><p class="muted">Sản phẩm, flow, mobile UX, AI/audio/offline và handoff. Guideline research không thay UAT; evidence được ghi đúng theo môi trường thực sự chạy.</p></header><section id="doc-1"><h1>GoNarra V7 — Sản phẩm và UX</h1>
+<p>Ngày: 22/10/2026. Tài liệu mô tả baseline V7 để xây và review prototype; chưa phải bằng chứng sản phẩm native, kết quả UAT hay xác nhận thị trường. UI dùng English; bộ tài liệu dùng tiếng Việt. Các kết quả kiểm tra thực tế, khi có, nằm trong <code>evidence/</code> và được giải thích ở <a href="#doc-4">04-Validation-Handoff.md</a>. Cơ sở UX ở <a href="#doc-6">06-Mobile-UX-Research.md</a>, tokens/layout ở <a href="#doc-7">07-Design-System.md</a>.</p>
+<h2>1. Sản phẩm được chốt</h2>
+<p><strong>GoNarra cho khách chọn một tour chuẩn bị sẵn hoặc tạo một ngày khám phá theo sở thích, tự chỉnh lịch và nghe/hỏi về địa điểm qua cùng một thư viện câu chuyện.</strong> Không bắt tạo tour để mở một story.</p>
+<p>Ba cửa vào dùng chung dữ liệu và player:</p>
+<table>
+<thead>
+<tr>
+<th>Hoàn cảnh</th>
+<th>Cửa vào</th>
+<th>Kết quả đầu tiên</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Muốn một hành trình biên tập sẵn</td>
+<td>Home → Ready-made tours → Tour detail → Use this tour</td>
+<td>Có bản cá nhân lưu local; từ Ready có Start/Download</td>
+</tr>
+<tr>
+<td>Đã có lựa chọn hoặc cần một ngày riêng</td>
+<td>Create with AI → requirements/preferences → proposal</td>
+<td>Một lịch demo có thể chỉnh, khóa điểm cần giữ, xem trước rồi nhận</td>
+</tr>
+<tr>
+<td>Đã ở điểm hoặc chỉ muốn nghe</td>
+<td>Search/Explore/Story library → Place/story</td>
+<td>Nghe, đọc transcript hoặc Ask theo POI; không trip/GPS/account</td>
+</tr>
+</tbody></table>
+<p>Phân khúc làm việc: khách tự khám phá Đà Nẵng, đọc/nghe English, muốn vừa chủ động lịch vừa hiểu nơi ghé. Đây là giả thuyết; chưa có interview để xác nhận nhu cầu, tần suất hay willingness-to-pay. V7 hỗ trợ một ngày; phương tiện chính là <strong>car/taxi passenger</strong>. Walking là fixture so sánh nếu có dữ liệu tương ứng, không phải chứng minh route đi bộ đã khảo sát.</p>
+<h2>2. Thay đổi có chủ đích từ V6</h2>
+<table>
+<thead>
+<tr>
+<th>V6</th>
+<th>Quyết định V7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mô phỏng hướng dẫn từng chặng trong app, ba nhóm phương tiện/driver</td>
+<td>Tập trung car passenger; trong app là itinerary/leg summary, <strong>Open Google Maps</strong> để chỉ đường. Không SDK turn-by-turn hay driver experience trong milestone này.</td>
+</tr>
+<tr>
+<td>AI generate/refine là local rules; Ask chưa được thể hiện</td>
+<td>Giữ generate/refine demo và thêm contextual Ask demo có câu hỗ trợ/nguồn, fallback ngoài phạm vi. Không nói đã tích hợp LLM/RAG live.</td>
+</tr>
+<tr>
+<td>Download chỉ đổi trạng thái mẫu, không có file</td>
+<td>Tải asset thật bằng Cache API/service worker khi phục vụ qua localhost/HTTPS; manifest kiểm trạng thái. Gói có gì được ghi đúng theo asset thực.</td>
+</tr>
+<tr>
+<td>My Trips/localStorage</td>
+<td>Giữ guest/local-first, mở rộng nhiều trip, một trip active tại một thời điểm; không thêm login/auth/cloud sync.</td>
+</tr>
+<tr>
+<td>Màn và dữ liệu tình huống lỗi</td>
+<td>Giữ các case riêng trong Review panel; tách rõ khỏi lỗi provider/GPS thật.</td>
+</tr>
+</tbody></table>
+<p>Các giới hạn này là thay đổi scope để có lát cắt chạy được, không phải kết luận V6 đã triển khai sai. Không áp lại gate đăng nhập hay car-only PRD DaNavi cũ như một yêu cầu ngầm.</p>
+<h2>3. Inventory màn hình và supporting surfaces</h2>
+<p>ID dưới đây phục vụ trace review, không yêu cầu một URL/file riêng cho mỗi màn. Màn dài có thể cuộn; sheet không được tính thành một app độc lập.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Màn/cụm</th>
+<th>Hành động chính</th>
+<th>Trạng thái cần có</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UX01</td>
+<td>Home map + persistent drawer</td>
+<td>Search; pin/card; create; ready-made; resume</td>
+<td>Compact/medium/full; selected place; không live location</td>
+</tr>
+<tr>
+<td>UX02</td>
+<td>Explore list/search results</td>
+<td>Mở tour/POI/story</td>
+<td>List riêng với Home map; kết quả/rỗng/filter</td>
+</tr>
+<tr>
+<td>UX03</td>
+<td>Ready-made tours</td>
+<td>Chọn template</td>
+<td>Nội dung mẫu, mode/ngôn ngữ/phạm vi rõ</td>
+</tr>
+<tr>
+<td>UX04</td>
+<td>Tour detail</td>
+<td>Use this tour; Customize copy</td>
+<td>Template bất biến; tạo bản saved trước Start/Download</td>
+</tr>
+<tr>
+<td>UX05</td>
+<td>Place detail</td>
+<td>Play/Read/Ask; Add to trip</td>
+<td>Không có audio; sources; không trip/GPS</td>
+</tr>
+<tr>
+<td>UX06</td>
+<td>Story library</td>
+<td>Chọn story/POI trực tiếp</td>
+<td>Không đổi trip đang đi; transcript fallback</td>
+</tr>
+<tr>
+<td>UX07</td>
+<td>Requirements</td>
+<td>Start/end/time window/mode</td>
+<td>Required fields; input được giữ</td>
+</tr>
+<tr>
+<td>UX08</td>
+<td>Preferences</td>
+<td>Interests/pace/must-keep</td>
+<td>Không tìm thấy candidate; không hứa facts thiếu</td>
+</tr>
+<tr>
+<td>UX09</td>
+<td>Generating</td>
+<td>Chờ demo/hủy/thử lại</td>
+<td>Local demo label; lỗi giả lập; không kết quả rỗng giả thành thành công</td>
+</tr>
+<tr>
+<td>UX10</td>
+<td>Proposal/Itinerary</td>
+<td>Xem schedule/reasons; nhận/lưu</td>
+<td>Valid/conflict/unknown; chưa overwrite bản cũ</td>
+</tr>
+<tr>
+<td>UX11</td>
+<td>Manual editor</td>
+<td>Add/remove/move/duration/undo</td>
+<td>Draft, cancel phục hồi, vượt time budget</td>
+</tr>
+<tr>
+<td>UX12</td>
+<td>Adjust request</td>
+<td>Nhập mục tiêu; chọn locked places</td>
+<td>Chỉ hỗ trợ demo requests công bố; giữ current/past</td>
+</tr>
+<tr>
+<td>UX13</td>
+<td>Review changes</td>
+<td>Apply/Keep current</td>
+<td>Trước/sau, travel/visit/total; stale revision</td>
+</tr>
+<tr>
+<td>UX14</td>
+<td>Trip ready</td>
+<td>Xác nhận trip/start; download tùy chọn</td>
+<td>Save khác download; passenger; location tùy chọn</td>
+</tr>
+<tr>
+<td>UX15</td>
+<td>Focused active leg map</td>
+<td>Demo step/Steps; mini-player; Maps; I&#39;m here</td>
+<td>Ba chỉ dẫn mẫu chọn thủ công, không live guidance; pause/skip/end qua options</td>
+</tr>
+<tr>
+<td>UX16</td>
+<td>Arrival</td>
+<td>Listen / Transcript / Info / Ask</td>
+<td>Arrival khác Finish stop; +15 preview; missing audio</td>
+</tr>
+<tr>
+<td>UX17</td>
+<td>My Trips</td>
+<td>Mở/sửa/start/resume trip</td>
+<td>Planned/paused/active/completed/ended early; local persistence</td>
+</tr>
+<tr>
+<td>UX18</td>
+<td>Downloads</td>
+<td>Tải/refresh/remove theo trip; export JSON</td>
+<td>Actual bytes/items; failed/update-needed/unavailable; JSON không chứa audio bytes</td>
+</tr>
+<tr>
+<td>UX19</td>
+<td>Recap</td>
+<td>Xem visited/skipped/not visited</td>
+<td>Completed khác ended early; đếm xác nhận thực</td>
+</tr>
+<tr>
+<td>UX20</td>
+<td>Preferences &amp; Review panel</td>
+<td>Xem giới hạn; inject/seed case</td>
+<td>Controls ghi rõ simulated; seed có thể lưu review trip và pause trip đang active</td>
+</tr>
+<tr>
+<td>UX21</td>
+<td>Welcome hai bước</td>
+<td>Next/Back/Skip/Let&#39;s explore</td>
+<td>Bỏ qua được; lưu onboarded; không auth/GPS/download gate</td>
+</tr>
+<tr>
+<td>UX22</td>
+<td>Route overview</td>
+<td>Chọn pin/list/card; xem route</td>
+<td>Map toàn vùng nội dung + drawer ba mức; selection không ghi arrival</td>
+</tr>
+</tbody></table>
+<p>Supporting surfaces: nguồn, duration picker, chọn/add place, move menu, xác nhận remove/undo, +15/time warning, Steps, pause/end/start-another confirmation, change preview và lỗi tải. Mỗi tác vụ phải có đường hủy/quay lại giữ input thích hợp. Home drawer là persistent/nonmodal, không phải modal dialog; sheet xác nhận/Steps là tương tác riêng, không chồng nhiều modal.</p>
+<h2>4. Nguyên tắc tương tác</h2>
+<ul>
+<li>Giữ navy/blue và ảnh V6 làm tham chiếu, áp một visual system chung. Welcome bước một là collage nhẹ, bước hai là ảnh/gradient navy với chữ sáng. Ảnh kế thừa là minh họa, không xác nhận media rights hay entrance.</li>
+<li>Frame review có <strong>402×874 vùng logical bên trong</strong>; device border/chrome là phần trình bày prototype. Export ở 3× là 1206×2622 cho vùng nội dung; không chụp outer frame rồi gọi cùng kích thước. Native cần safe-area thật; browser hẹp responsive và không dùng khung desktop.</li>
+<li>Search, named start anchors và Play không cần location. V7 hiện <strong>không gọi geolocation</strong> và không geocode địa chỉ nhập tự do. Location screen/review states chỉ giải thích manual path; không là permission/GPS thật. Nếu thêm browser/native API sau này chỉ xin đúng action, không lúc mở app.</li>
+<li>Một chuyến có nhiều stop nhưng chỉ một current stop. Mở story/Ask của POI khác không đổi stop hiện tại.</li>
+<li>Manual edits dùng thao tác trực tiếp; không gọi AI chỉ để kéo thứ tự, đổi duration hay +15. AI xử lý mục tiêu bằng đề xuất, không tự ghi dữ liệu.</li>
+<li>Proposal, editor draft và +15 đều phải thể hiện cái gì chưa áp dụng. Cancel/Keep current không làm mất bản đã chấp nhận.</li>
+<li>Arrival xác nhận đã tới; <strong>Finish stop</strong> mới chuyển sang stop kế. Skip không được tính là visited. Pause không complete và không tự thay vị trí.</li>
+<li>Tour template gốc bất biến. Start/customize từ template tạo hoặc mở bản cá nhân, không sửa template cho những lần khác.</li>
+<li>Không ép mọi người nghe theo thứ tự hay tạo trip. Library/Detail luôn có direct playback/transcript; quay về vẫn giữ trip đang đi.</li>
+<li>Home map dùng pin ảnh và selected card, drawer đổi ba mức bằng grip/tap và pointer drag. Explore list giữ lối vào dễ đọc; map + ba mức là quyết định thiết kế chưa có UAT, không một xu hướng đã chứng minh tốt hơn list.</li>
+<li>Tabs chính <strong>Home · Explore · Plan · Trips</strong>. Ask nằm trong context POI; không thêm tab AI thứ năm. Focused leg bỏ cạnh tranh nhiều CTA; Steps chỉ đổi demo instruction selection, không tự chuyển trip progress.</li>
+</ul>
+<p>Review panel là công cụ tạo tình huống, không phải sandbox bất biến: một số case tạo review trip, thay request form hoặc pause một trip đang active và lưu trong khóa V7. Nên dùng profile test riêng hoặc export plan trước khi seed. Reset chỉ tác động dữ liệu/cache V7; không đụng prototype V6 hay browser data khác.</p>
+<h2>5. Nội dung và audio</h2>
+<p>POI, story, template và personal trip là các đối tượng riêng. Hai loại tour tham chiếu cùng story library; thay route/thời lượng không sinh lại bài kể. Bữa trưa generic là một break, không phải nhà hàng đã xác minh.</p>
+<p>Script/nguồn và tình trạng từng asset được mô tả ở <a href="#doc-5">05-Content-Sources.md</a>. Bundle hiện có năm WAV sample cho Cathedral/Museum/Beach/Mountain/Bridge, giọng hệ thống Samantha tạo trước; lunch không có audio. Đây là <strong>synthetic audio sample</strong>, không live AI voice, human narration, production-reviewed hay public/commercial rights đã xác minh. Player đọc file thực; thiếu/lỗi file thì dùng transcript và trạng thái lỗi, không chạy progress giả. File tồn tại không thay evidence đã nghe/đã kiểm player.</p>
+<p>Download hiện theo <strong>saved trip</strong>: tạo/lưu personal copy rồi mở Ready → Download. Chưa có nút tạo package riêng cho một POI tại Detail. Story đã được cache qua một trip có thể nghe độc lập trong library; direct story playback online không cần trip. Đây là phạm vi implementation hiện tại, không hứa mọi story đang browse đã tải sẵn.</p>
+<p>GPS không biết khách đang nhìn gì. Story mô tả đối tượng bằng tên/ảnh hoặc điều kiện rõ như “nếu bạn đang nhìn mặt tiền trong ảnh”. Không khẳng định “bên trái/trước mặt bạn” từ GPS đơn lẻ. Giờ/giá/entrance chưa xác minh giữ nhãn chưa xác minh; không gán từ nguồn cũ thành facts live.</p>
+<h2>6. Ranh giới prototype</h2>
+<p>V7 cần chứng minh browser interactions, tính lịch thống nhất, bảo toàn draft/proposal/current stop, local persistence, media playback khi có file, caching có kiểm tra và Ask demo theo nguồn. Chưa chứng minh native GPS/background/audio focus, turn-by-turn SDK, live LLM, đồng bộ cloud, booking/payment, quyền ảnh hay tính khả thi thực địa của fixture.</p>
+<p>Không có tài khoản, không thanh toán, không gọi model trong background. Mọi số thời gian/tổng stop/tình trạng itinerary lấy từ state/core; không hardcode một tổng khác trong screenshot hoặc tài liệu. Không dùng một màn đẹp hay một JSON test để suy ra PMF hoặc khả năng xuất bản app store.</p>
+<p class="muted"><a href="docs/01-Product-UX.md">Markdown source ↗</a></p></section><section id="doc-2"><h1>GoNarra V7 — Flow, state và bảo toàn dữ liệu</h1>
+<p>Baseline hợp đồng ngày 22/10/2026. Tên dưới đây mô tả ý nghĩa dữ liệu; tên property thực trong <code>prototype/core.js</code>/<code>app.js</code> là nguồn để debug. Sau thay đổi code phải giữ các invariant và acceptance ở đây; không gọi kết quả kiểm thử là đã đạt chỉ vì có mô tả.</p>
+<h2>1. Các đối tượng không được gộp</h2>
+<table>
+<thead>
+<tr>
+<th>Đối tượng</th>
+<th>Dữ liệu tối thiểu/ý nghĩa</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Place</td>
+<td>Stable ID, name/aliases, category/tags, source IDs, facts/review state; tọa độ fixture có nhãn. Generic break không có entrance giả.</td>
+</tr>
+<tr>
+<td>Story</td>
+<td>ID, POI ID, title, transcript/script revision, source IDs, audio asset nếu có, audio/review status.</td>
+</tr>
+<tr>
+<td>Template</td>
+<td>ID/version, ordered stop IDs/durations, mode và mô tả; bản gốc bất biến.</td>
+</tr>
+<tr>
+<td>Personal trip</td>
+<td>Unique ID, name/origin/template reference, start/end/time budget/mode/preferences/must-keep, stops, revisions, status/current pointer và arrival/finish/skip records.</td>
+</tr>
+<tr>
+<td>Editor draft</td>
+<td>Trip/proposal nguồn, base revision, bản copy đang sửa, một last-removed-stop Undo, validation state. Không chính là accepted trip.</td>
+</tr>
+<tr>
+<td>Change proposal</td>
+<td>Trip nguồn và base revision, pending changes, reasons, before/after schedule, conflicts; chỉ apply khi người dùng xác nhận và base còn phù hợp.</td>
+</tr>
+<tr>
+<td>App selection</td>
+<td>Trip đang xem, active trip, selected POI/story/tab. Selection để đọc không phải progression.</td>
+</tr>
+<tr>
+<td>Download manifest</td>
+<td>Trip reference/plan snapshot, plan/content revision, required asset URLs, total bytes và thời điểm save. Không chỉ một boolean downloaded; badge hiện dựa revision metadata.</td>
+</tr>
+<tr>
+<td>Ask result</td>
+<td>Selected POI, normalized exact question, response/source IDs và demo/fallback label. Saved answer có nhãn Saved answer; hiện chưa lưu timestamp/content revision cho từng answer.</td>
+</tr>
+</tbody></table>
+<p>V7 giữ nhiều personal trips. Template/library dùng chung, nhưng sửa một trip không lan sang trip khác. Chỉ một trip active toàn app; bắt đầu trip khác cần dialog xác nhận pause trip cũ. Cancel dialog giữ nguyên cả hai.</p>
+<h3>Interface core hiện có để bàn giao</h3>
+<p><code>GN_DATA.places</code> dùng IDs <code>cathedral</code>, <code>museum</code>, <code>lunch</code>, <code>beach</code>, <code>mountain</code>, <code>bridge</code>; start fixture là <code>river</code> hoặc một POI có tọa độ, không dùng lunch làm start. Đây là năm POI được đặt tên và một break, không phải sáu địa điểm đã xác minh. Templates <code>river-coast</code> và <code>slow-coast</code> là fixture, chưa field-test.</p>
+<pre><code class="language-text">plan = { id, title, revision, date, startId, startMinutes, budget,
+         mode, endMode, stops: [{ id, duration, locked }] }
+schedule(plan) -&gt; { stops[{ arrival, departure, travelMinutes, distanceKm, ... }],
+                    totalMinutes, finishMinutes, overBudget, travelMinutes,
+                    visitMinutes, returnMinutes, returnDistanceKm, distanceKm,
+                    routeKind: &#39;demo-fixture&#39;, hoursStatus: &#39;unverified&#39; }
+generate({ ...requirements, interests, pace, mustVisit })
+  -&gt; { ok: true, plan, explanations } hoặc { ok: false, reason, requiredMinutes? }
+adjust(plan, { intent, lockedIds, preserveIds })
+  -&gt; { ok: true, plan, changes, explanations } hoặc { ok: false, reason, ... }
+validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixture/rules
+</code></pre>
+<p>Core giới hạn bốn stops, tính cả break nếu được chọn; generation cần ít nhất hai stops. <code>endMode</code> hiện là <code>last</code> hoặc <code>start</code>, không geocode một địa chỉ tùy ý. Date/time window trong cùng ngày; duration min theo POI, max 180 phút/stop, budget 1–720 phút trong validation. Đây là giới hạn implementation demo, không phải tiêu chuẩn du lịch. Core không tự lưu trip, không gọi model/maps/GPS và không quản lý player/Cache API; app layer chịu các phần đó.</p>
+<h3>Mapping app storage hiện tại</h3>
+<p><code>localStorage[&#39;gonarra-v7-review&#39;]</code> chứa <code>{ version: 7, trips, favorites, packages, req, answers, onboarded }</code>. Trip là <code>{ id, plan, status, progress: { index, phase, visited, skipped }, createdAt, completedAt? }</code>; status trong code là <code>upcoming/active/paused/completed/ended</code> (tương ứng planned/active/paused/completed/ended early trong tài liệu). Phase <code>leg/stop</code> tách hành trình tới nơi với giai đoạn đã xác nhận.</p>
+<p><code>ui.edit</code> có <code>source/tripId/basePlan/plan/undo</code>, plan/progress stamps và unlock/extension guards; <code>ui.pending</code> là plan +15 chưa áp; <code>ui.review</code> có before/plan/kind/context/request/changes và guard data. <code>ui.route/placeId/tripId/stopTab</code>, <code>homeSnap/selectedMapPlace/selectedRoutePlace/navStep/welcomeStep</code> là context trong bộ nhớ. Refresh mở Welcome nếu chưa onboarded, hoặc Home để Resume; không hứa khôi phục mọi màn draft đang mở. <code>db.answers</code> lưu global theo POI + normalized exact question, không gắn lịch sử chat vào trip hoặc gửi memory tới provider.</p>
+<h2>2. Luồng các cửa vào</h2>
+<p><strong>Welcome:</strong> lần đầu → bước 1 → Next → bước 2 → Let&#39;s explore → Home; Skip ở mỗi bước đi thẳng Home, Back ở bước 2 về bước 1. Hoàn thành/Skip lưu <code>db.onboarded</code>; không permission/account/download. Replay từ review/settings không xóa trips.</p>
+<p><strong>Ready-made:</strong> Home/Explore → tours → tour detail → Use this tour → saved Ready, hoặc Customize copy trước Save. Copy giữ template reference, nhận ID riêng. Download hiện mở từ saved trip; Download không Start và Save không đồng nghĩa có media trên máy.</p>
+<p><strong>AI custom:</strong> Requirements → Preferences/must-keep → generating demo → proposal/reasons → manual editor hoặc Adjust → preview → accept/save → Ready → Start. Inputs giữ khi hủy/lỗi; chưa accept không thay trip cũ. Những field thiếu/invalid bị chặn trước generate.</p>
+<p><strong>Nghe riêng:</strong> Search/Library/Detail → player/transcript/Info/Ask → back. Không tạo active trip, không ghi arrival và không đổi current pointer. Quay lại chuyến cũ vẫn đúng stop/player context.</p>
+<p><strong>Chỉnh đã có:</strong> My Trips → trip → manual draft hoặc Adjust → kiểm trước/sau → update. Nếu đang active chỉ được tác động phần upcoming; past/current được giữ, trừ +15 current duration và closure replacement trước arrival theo hai flow riêng, có xác nhận rõ.</p>
+<h3>Home map, drawer và focused navigation</h3>
+<ul>
+<li><code>homeSnap</code> là <code>compact/medium/full</code>; CSS hiện đặt khoảng 24%/48%/82% phần map-content. Đây là preset prototype, không native detent cố định cho mọi máy. Grip button cycle hoặc pointer drag đổi mức; đổi mức không tạo/sửa trip. Explore giữ list độc lập.</li>
+<li>Home pin → <code>selectedMapPlace</code> và selected card. Route map/list → <code>selectedRoutePlace</code> của itinerary đang xem. Cả hai chỉ selection; không ghi arrival. Route overview dùng cùng stops/timing và cho mở Detail của selected POI.</li>
+<li>Active leg giữ progress pointer; top instruction và Steps modal có <strong>ba step mẫu</strong>. <code>navStep</code> đổi theo người review chọn, không theo GPS, khoảng cách live hoặc nhận biết đã rẽ. Số phút/km là schedule fixture, không tự cập nhật từ vị trí thật.</li>
+<li>Mini-player dùng cùng <code>Audio</code> object với full player, không tạo một stream khác. I&#39;m here vẫn cần xác nhận thủ công. Về Home/Trips từ focused view giữ plan/progress/audio state trong phiên; không auto Pause/Finish chỉ do điều hướng.</li>
+<li>Modal đóng bằng Close/Cancel/Escape khi phù hợp; thao tác xem step không thay accepted plan. Home drawer là nonmodal, không dùng cùng state với confirmation dialog.</li>
+</ul>
+<p>Thiết kế và phép kiểm gesture/focus/reduced motion chi tiết ở <a href="#doc-6">06-Mobile-UX-Research.md</a> và <a href="#doc-7">07-Design-System.md</a>.</p>
+<h2>3. State chuyến đi</h2>
+<table>
+<thead>
+<tr>
+<th>Từ state</th>
+<th>Action</th>
+<th>Kết quả</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Chưa có trip</td>
+<td>Accept proposal/template copy</td>
+<td>Planned trip lưu local; không tự Start</td>
+</tr>
+<tr>
+<td>Planned</td>
+<td>Start hợp lệ</td>
+<td>Active, current là stop đầu chưa xử lý</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>I&#39;m here</td>
+<td>Ghi xác nhận arrival cho current stop, đếm confirmed/visited; <strong>không</strong> chuyển next</td>
+</tr>
+<tr>
+<td>Active, đã arrival</td>
+<td>Finish stop</td>
+<td>Ghi hoàn tất stop; chuyển current tới stop chưa xử lý kế tiếp</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>Skip current</td>
+<td>Ghi skipped, không ghi visited; chuyển next</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>Pause</td>
+<td>Paused; giữ pointer/confirmed/finished/skipped</td>
+</tr>
+<tr>
+<td>Paused</td>
+<td>Resume</td>
+<td>Active ở đúng pointer, không auto-arrive hoặc replay một action</td>
+</tr>
+<tr>
+<td>Active/Paused</td>
+<td>End early + confirm</td>
+<td>Ended early; giữ actual confirmed/skipped và những điểm chưa đi</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>Không còn stop chưa xử lý sau Finish/Skip</td>
+<td>Completed; summary ghi số confirmed/skipped, không nói tất cả đã tham quan nếu có skipped</td>
+</tr>
+<tr>
+<td>Bất kỳ draft/proposal</td>
+<td>Cancel/Keep current</td>
+<td>Hủy pending state; accepted trip giữ nguyên</td>
+</tr>
+</tbody></table>
+<p><code>current</code> và <code>confirmed/visited</code> không đồng nghĩa: một người có thể đã tới current stop nhưng chưa Finish stop. Vì vậy count confirmed phải dựa record arrival, không đếm index hay số audio đã phát. I&#39;m here idempotent cho cùng stop; nhiều lần nhấn không tăng số visited. Play/seek/Ask không ghi arrival hoặc finish.</p>
+<p>Start chặn empty/invalid known constraints và giải thích lý do. Fixture unknown không biến thành guarantee thực địa; cảnh báo demo vẫn hiện. Kết thúc sớm và completed là hai outcome riêng; Resume card chỉ dành cho trip còn active/paused phù hợp, không hiện một trip đã kết thúc như chưa xong.</p>
+<h2>4. State chỉnh tay và proposal</h2>
+<p>Manual editor mở một bản draft của trip, không ghi trực tiếp từng gesture vào accepted trip. V7 dùng <strong>Move up/down</strong>, chưa triển khai drag; duration picker, add, remove và Undo lần remove cuối cùng cập nhật draft/schedule. Cancel phục hồi toàn bộ thứ tự/duration ban đầu. Update đi qua Review; Apply cần validation và base revision còn đúng. Nếu conflict/stale thì giữ draft và cho re-open/review, không overwrite âm thầm. Đây là invariant cần evidence, không phải pass claim.</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>UI/hành vi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Unchanged draft</td>
+<td>Xem bản sao; Update không hứa có thay đổi</td>
+</tr>
+<tr>
+<td>Dirty valid</td>
+<td>Hiện tổng tính lại, diffs; có Update/Cancel</td>
+</tr>
+<tr>
+<td>Dirty conflict</td>
+<td>Nêu trường vượt budget/duplicate/missing stop; giữ draft; không save như hợp lệ</td>
+</tr>
+<tr>
+<td>Removed stop</td>
+<td>Undo khôi phục đúng stop/thứ tự/duration trong draft</td>
+</tr>
+<tr>
+<td>Applying</td>
+<td>Khóa lệnh apply lặp; sau thành công cập nhật một lần</td>
+</tr>
+<tr>
+<td>Base stale</td>
+<td>Nêu bản nguồn đã đổi; không ghi đè state mới; giữ lựa chọn để xem lại</td>
+</tr>
+</tbody></table>
+<p>AI Adjust có request, must-keep/locked IDs và phần được phép đổi. Những request ngoài demo-supported set nhận thông báo phạm vi, không sinh kết quả giả. Review changes phải có trước/sau: stop nào giữ/bỏ/thêm, duration nào đổi, transfer và total. Apply phải recheck locked/active prefix/base revision ngay trước ghi. Keep current không thay dữ liệu.</p>
+<h2>5. +15 và xử lý thời gian</h2>
+<p><strong>+15 mở preview, chưa commit duration.</strong> Pending plan tăng duration current stop thêm 15 phút, tính lại kết thúc/travel/total bằng core và chỉ rõ có vượt budget không. Không dùng một số giờ kết thúc hardcode khác với itinerary.</p>
+<p>Các lựa chọn:</p>
+<ul>
+<li><strong>Apply longer schedule / Confirm +15:</strong> xác nhận tăng duration current; giữ các stop khác, thông báo budget/warnings tương ứng.</li>
+<li><strong>Review later visits:</strong> mở manual draft trên pending +15 plan; chỉ chỉnh upcoming. Cancel quay về accepted trip chưa +15.</li>
+<li><strong>Adjust remaining tour:</strong> tạo demo AI proposal từ pending +15 plan, giữ current duration đã tăng trong đề xuất và giữ past/current/must-keep; chưa apply cho tới review xác nhận.</li>
+<li><strong>Keep current plan:</strong> thoát, không tăng duration và không sửa lịch.</li>
+</ul>
+<p>Thời gian chưa đủ cho phần còn lại không cho phép tự bỏ điểm khóa. Một rule “trễ hơn ngưỡng” hoặc review-panel injection là cảnh báo; không tự gọi AI hoặc áp một plan mới. Không tuyên bố prototype có đồng hồ/GPS phát hiện khách thật ở quá lâu nếu chưa có implementation và evidence.</p>
+<h2>6. Tính lịch và context</h2>
+<p>Một hàm core là nguồn chung cho visit sum, transfer sum, start leg, end leg nếu có, total/end time, budget remaining và conflicts. Generated plan, manual draft, +15 preview, change review và recap lấy từ cùng schedule; không duy trì số tổng riêng trong UI.</p>
+<p>Routes trong V7 là fixture, không live ETA. Nếu break generic chưa có vị trí, nó là khoảng nghỉ có semantics rõ; không dựng tọa độ nhà hàng và không gọi travel của nó là route provider thật. Thay mode chỉ nhận sau preview/confirm nếu mode fixture được hỗ trợ. Không suy từ mode label thành tính khả thi đường hoặc quyền lưu/vẽ map SDK.</p>
+<p>Selected POI dùng cho Detail/Ask/player; current trip stop dùng cho progression. I&#39;m here/Finish/Skip phải kiểm current stop của trip được action hướng tới; mở story khác không đổi field đó. External Maps dùng tọa độ/địa điểm có nhãn fixture; không khẳng định entrance đã field-verified. Khi quay lại không auto-advance; refresh/restore trip và cho manual action.</p>
+<h2>7. Persistence và mất mạng</h2>
+<ul>
+<li>Accepted trips, progress và selection cần thiết lưu localStorage với schema version; refresh khôi phục ID/state, không tạo trip trùng.</li>
+<li>Draft/input giữ qua điều hướng/lỗi đúng scope; không hứa draft chưa save sống qua mọi storage reset nếu chưa kiểm.</li>
+<li>Local-only nghĩa là dữ liệu trên trình duyệt/thiết bị này; xóa site data hoặc đổi browser không có cloud backup. Không dùng nút reset không xác nhận; chỉ reset khóa của prototype.</li>
+<li>Save/arrival/finish/skip của V7 là <strong>local mutations</strong>, không chờ server xác nhận và không được gắn nhãn “synced”. Đây khác bản thiết kế DaNavi có offline server queue.</li>
+<li>Offline có saved local plan/text và các media đã được cache thật. New Generate/Adjust/Ask bị chặn theo offline state dù thuật toán demo là local; đây là mô phỏng giới hạn sản phẩm tương lai, không phải LLM offline. Ask chỉ mở lại exact question đã lưu, nhãn Saved answer và source IDs cũ; hiện chưa có expiration/revision check riêng cho cached answer.</li>
+<li>Download thất bại không xóa trip đã lưu. Trip edit đổi manifest dependency; giữ asset bytes không đổi, cho retry/update phần thiếu, không nhận cả gói ready chỉ vì metadata đã ghi.</li>
+</ul>
+<h3>Closure review case</h3>
+<p>Closure trong Review panel là <strong>mô phỏng</strong>, không là tin venue thật. Nhánh replacement cho chọn một POI khác chưa nằm trong plan, preview route/timing rồi confirm, chỉ khi current chưa arrival/visited hoặc skipped. Nếu target locked, cần xác nhận unlock riêng trước xem alternatives; Keep locked không sửa plan. Apply kiểm plan/progress stamps và giữ các stop còn lại; không ứng viên thì báo rõ.</p>
+<p>Đây là exception có chủ ý của quy tắc current fixed. Current đã confirmed không được thay bằng venue khác để viết lại lịch sử; UI chuyển sang chỉnh upcoming, hoặc dùng Finish/end. Skip chỉ hợp lệ khi chưa confirmed. +15 cho phép chính người dùng tăng duration của current đã confirmed, kể cả current locked, nhưng giữ ID/lock flag/past history và cần apply rõ. Chưa có closure service thật; phải xem evidence tương ứng trước gọi nhánh replacement đã test pass.</p>
+<h2>8. Invariants để review</h2>
+<ol>
+<li>Template không bị sửa qua personal trip; trip này không đổi trip khác.</li>
+<li>Tối đa một active trip; start another phải có xác nhận pause trip hiện tại.</li>
+<li>Arrival count từ confirmed records, skip không phải visited, Play không advance.</li>
+<li>Cancel/Keep current không ghi pending proposal/draft/+15 vào accepted trip.</li>
+<li>Trong active trip, mọi apply giữ past/current/locked prefix, ngoại trừ +15 đã xác nhận hoặc current-unvisited closure replacement đã unlock/preview/apply đúng flow riêng.</li>
+<li>Mọi total/diff/time warning có cùng input/revision và core tính lịch.</li>
+<li>Story context và trip progression độc lập.</li>
+<li>Saved trip, cached assets và readiness của package là ba trạng thái riêng.</li>
+</ol>
+<p>Kịch bản xác minh và cách đọc kết quả ở <a href="#doc-4">04-Validation-Handoff.md</a>.</p>
+<p class="muted"><a href="docs/02-Flow-State-Contract.md">Markdown source ↗</a></p></section><section id="doc-3"><h1>GoNarra V7 — Hợp đồng AI, audio và offline</h1>
+<p>Ngày: 22/10/2026. Phân biệt <strong>hành vi browser thực</strong>, <strong>thuật toán demo</strong> và <strong>tích hợp sản phẩm sau này</strong>. V7 không gọi LLM, không có navigation SDK, không AI chạy offline và không tài khoản/cloud sync. Không đổi các nhãn này chỉ vì UI có nút AI.</p>
+<h2>1. Một thư viện, ba tác vụ trợ giúp</h2>
+<p>Template và personal trip cùng dùng Place/Story/Source IDs. AI không sáng tác POI hoặc audio mới mỗi lần lập lịch. Điều kiện dữ liệu và media xem <a href="#doc-5">05-Content-Sources.md</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Tác vụ</th>
+<th>V7 thực hiện</th>
+<th>Không được hàm ý</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Create with AI</td>
+<td>Local demo ranking/selection và scheduler trên fixture; có loading/error states</td>
+<td>Đã gọi model, hiểu mọi yêu cầu hay tìm web thật</td>
+</tr>
+<tr>
+<td>Adjust remaining tour</td>
+<td>Local supported requests → pending proposal → before/after → apply/keep</td>
+<td>Tự tối ưu mọi constraint hoặc tự sửa accepted trip</td>
+</tr>
+<tr>
+<td>Ask about this place</td>
+<td>Exact-question lookup từ các câu mẫu có source IDs; fallback cho câu không khớp</td>
+<td>Semantic retrieval/live RAG, hiểu mọi hiện vật, nhớ conversation hoặc truy cập thông tin mới</td>
+</tr>
+</tbody></table>
+<p>Manual editor, +15, skip/finish, tính tổng và mode comparison là quy tắc/chức năng phần mềm. Gọi route provider trong sản phẩm thật cũng không biến phép cộng thời gian thành LLM.</p>
+<p>Orb gradient/stage labels ở màn generating là visual feedback cho workflow demo. Animation không chứng minh model đang xử lý; stage text phải giữ nhãn local demo. Reduced motion dừng loop/giảm transition nhưng không bỏ status/Cancel. Quy tắc trình bày ở <a href="#doc-7">07-Design-System.md</a>, nguồn thực hành ở <a href="#doc-6">06-Mobile-UX-Research.md</a>.</p>
+<h2>2. Generate và Adjust</h2>
+<h3>Đầu vào có thể xử lý</h3>
+<p>Start/end lựa chọn, ngày/giờ dự kiến, time budget, mode fixture, interests/pace, must-keep/locked IDs và plan revision. Free text chỉ được hiểu trong các request demo công bố. Tag “ít bậc thang” hoặc mode fixture không phải xác nhận đường đi/accessibility thật.</p>
+<p><code>core.adjust</code> hiện hỗ trợ bốn intent <strong>More beach time</strong>, <strong>Less walking</strong>, <strong>Only culture</strong>, <strong>Make it 3 hours</strong>, cùng các alias/cặp kết hợp được parser cho phép. “Less walking” không tự đổi car thành walking/taxi: trong fixture nó tránh tagged stairs venue hoặc rút bớt hành trình đi bộ khi được phép. Các yêu cầu mâu thuẫn hoặc câu ngoài supported intents bị từ chối; không dùng keyword nằm trong một câu bất kỳ để tự suy rằng đã hiểu cả câu.</p>
+<h3>Hợp đồng output</h3>
+<p>Output phải dùng ID tồn tại, không duplicate, có ordered stops/durations/reasons và schedule từ core. Travel/visit/start/end legs và total phải có chung nguồn tính; fixture luôn có nhãn estimate/simulation. Nếu không đủ pool hoặc vượt constraint, giữ input/trip cũ và giải thích; không dùng địa điểm mới do model đoán để làm đầy kết quả.</p>
+<p>Đối với Adjust, proposal giữ base trip revision và phần được phép đổi. Locked/must-keep không tự bị bỏ; khi active, giữ past/current và chỉ đổi upcoming. Thay một điểm không cho phép tự thay cả ngày. Request không được hỗ trợ → nói phạm vi và giữ tour, không áp một output mặc định vô can với yêu cầu.</p>
+<p>Preview phải cho biết stop bỏ/thêm/giữ, duration đổi, transfer đổi và total/end time. Apply là action duy nhất ghi accepted trip. Stale proposal hoặc trip đã chuyển current stop cần revalidate; không im lặng ghi state cũ. Keep current/Cancel không ghi gì. +15 dùng pending plan được mô tả riêng ở <a href="#doc-2">02-Flow-State-Contract.md</a>.</p>
+<h2>3. Ask khác Adjust</h2>
+<p>Ask nhận <strong>selected POI</strong>; nếu mở từ trip thì có thể lấy current stop làm mặc định, nhưng UI vẫn nói rõ “About [place]”. Hỏi một POI khác không sửa trip và không khẳng định khách đã tới POI đó. Không có camera/heading nên “chi tiết này” cần tên/đối tượng rõ trước khi trả lời.</p>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Hành vi bắt buộc</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Câu khớp exact sample question sau normalize punctuation/case</td>
+<td>Trả câu mẫu theo facts/script, evidence cards/IDs và nhãn demo</td>
+</tr>
+<tr>
+<td>Câu vượt topic/ngoài POI/cần dữ liệu không có</td>
+<td>Insufficient evidence hoặc giải thích demo chỉ hỗ trợ các câu mẫu; không đoán</td>
+</tr>
+<tr>
+<td>Hỏi giờ/giá/entrance chưa xác minh</td>
+<td>Nêu chưa xác minh và nguồn/cách kiểm; không nói đang mở/miễn phí/đúng cửa vào</td>
+</tr>
+<tr>
+<td>Nguồn mâu thuẫn/claim không có support</td>
+<td>Không biến một URL liên quan thành chứng cứ cho claim; nêu giới hạn</td>
+</tr>
+<tr>
+<td>Lỗi provider trong sản phẩm tương lai</td>
+<td>Phải khác insufficient evidence; V7 hiện không có provider thật hoặc Ask-specific failure injection, không nhận là nhánh đã kiểm</td>
+</tr>
+<tr>
+<td>Offline</td>
+<td>Không tạo câu trả lời mới. Exact question đã lưu được mở với nhãn Saved answer/source IDs; hiện chưa lưu timestamp/revision riêng cho answer; sources link ngoài có thể cần mạng</td>
+</tr>
+</tbody></table>
+<p>Suggested questions cho phép người review thấy đúng phạm vi có hỗ trợ. Free text vẫn có đường gửi, nhưng ngoài exact sample sẽ nhận fallback không bịa; không hứa hiểu paraphrase. Các câu mô tả giới hạn prototype có thể không có source bên ngoài và phải giữ cách diễn đạt đó. Source IDs thuộc POI/corpus đang dùng; answer-level source card là cue kiểm chứng, chưa chứng minh từng claim đúng. V7 không có embeddings/vector/semantic retrieval; không dùng từ “đã triển khai RAG” cho lookup local này.</p>
+<p>Nội dung nguồn là dữ liệu. Câu hỏi hoặc source không được chạy lệnh, sửa trip, đọc secret hay mở context ngoài phạm vi. Không làm claim prompt-injection-resistant chỉ từ vài case demo. Không gửi key model xuống browser; V7 không chứa key provider thật.</p>
+<h2>4. Audio production và playback</h2>
+<p>Năm WAV sample được bundle tại <code>prototype/assets/audio/</code> cho Cathedral/Museum/Beach/Mountain/Bridge; giọng hệ điều hành <strong>Samantha</strong> tạo trước để kiểm player/cache, không có audio lunch. Nhãn nói rõ <strong>synthetic narration preview / review pending</strong>. Không gán human-recorded, professionally reviewed, native-speaker reviewed hoặc quyền thương mại đã đủ khi chưa có bằng chứng. File sample không đại diện chất lượng narration sẽ phát hành; sự tồn tại file không tự chứng minh playback/offline đã được test.</p>
+<p>Quy trình nội dung tối thiểu: claim → nguồn mở được → script viết riêng → owner factual check → kiểm cách đọc/tên riêng → xuất file → transcript khớp → manifest/version. Target-listener check là kiểm độ hiểu, không thay reviewer lịch sử hoặc review song ngữ độc lập. Hạn chế hiện tại được giữ trong source doc, không điền tên reviewer giả.</p>
+<p>Player có Play/Pause/seek/resume khi file thật có; duration đọc từ metadata/media, không chỉ từ text fixture. File thiếu/lỗi → thông báo và transcript vẫn đọc. Không hiển thị progress giả như audio đang chạy. Download thiếu audio không trở thành “full audio package ready”.</p>
+<p>Audio theo địa điểm/đối tượng, không yêu cầu trip/arrival/GPS. Không autoplay theo location trong V7; không microphone/STT, spoken Ask answer hoặc runtime TTS. Tải/remux/script revision đổi phải nhận diện file mới; đổi duration của itinerary không tự thay nội dung audio.</p>
+<h2>5. Offline có điều kiện thật</h2>
+<h3>Môi trường</h3>
+<p>Service worker/Cache API cần chạy trong origin phù hợp, ở đây là <strong>localhost hoặc HTTPS</strong>. Mở HTML trực tiếp hoặc browser không hỗ trợ không được giả một download đã sẵn sàng; hiển thị cách mở bằng local server trong README. Cache thuộc origin/browser hiện tại; không phải một thư viện download trên mọi thiết bị.</p>
+<h3>Nội dung và entry gói</h3>
+<p>Download hiện theo <strong>personal trip đã save</strong>, không có package action riêng cho một POI/template chưa save. Template → Use this tour → Ready → Download là đường tới gói; story được cache trong một trip có thể mở độc lập ở Library. JSON export là snapshot để đọc/backup, <strong>không</strong> chứa audio bytes hay một file offline app độc lập.</p>
+<ul>
+<li>App shell cần thiết để mở lại giao diện offline khi service worker/cache đã được chuẩn bị.</li>
+<li>Saved itinerary/local text/transcript và metadata nguồn.</li>
+<li>Ảnh/audio thực trong manifest được chọn, chỉ khi file tồn tại và fetch/cache thành công.</li>
+</ul>
+<p>Không gồm map tiles/offline navigation, route computation/rerouting, live ETA, nguồn website bên ngoài hay live AI. Có file audio nào thì manifest liệt kê file đó; nếu chỉ text/transcript phải nói rõ, không dựa vào số story để suy ra có audio.</p>
+<p>Home/route/leg map là SVG minh họa trong bundle; việc nó vẫn render offline không làm nó thành bản đồ đường phố offline. Ba step mẫu trong Steps cũng không phải navigation service. Open Google Maps tạo HTTPS directions link thật tới destination fixture; Google Maps có availability riêng và điểm đến chưa field-verified. V7 không gọi geolocation hoặc tự phát hiện đã rẽ/đã tới.</p>
+<h3>State download</h3>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Điều kiện</th>
+<th>UX/hành động</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Not downloaded</td>
+<td>Chưa có manifest/cache đầy đủ</td>
+<td>Download; trip đã save vẫn là trip đã save</td>
+</tr>
+<tr>
+<td>Downloading</td>
+<td>Đang fetch/cache item thật</td>
+<td>Bytes/items dựa response; không phần trăm giả</td>
+</tr>
+<tr>
+<td>Ready</td>
+<td>Download run đã fetch/cache xong các required files và commit manifest</td>
+<td>Badge hiện theo manifest revision, không cache-probe từng item ở mỗi render; browser vẫn có thể evict</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>Có request/injection fail</td>
+<td>Không commit gói mới; rollback newly-created entries, giữ manifest complete cũ; Retry/refresh cả run</td>
+</tr>
+<tr>
+<td>Needs update</td>
+<td>Trip plan revision khác saved package revision</td>
+<td>Package cũ còn; Update refresh manifest/files. V7 chưa có content-revision invalidator độc lập.</td>
+</tr>
+<tr>
+<td>Unavailable</td>
+<td>Context/API/browser không hỗ trợ</td>
+<td>Hướng dẫn môi trường phù hợp; vẫn đọc local plan nếu có</td>
+</tr>
+<tr>
+<td>Removed</td>
+<td>User xóa gói/cache theo scope</td>
+<td>Không tự xóa personal trip hoặc template gốc</td>
+</tr>
+</tbody></table>
+<p>Download ghi <code>db.packages[tripId] = { tripId, revision, planSnapshot, assets, bytes, savedAt, contentRevision }</code> sau khi run thành công. <code>assets</code> là ảnh/audio thực có trong stops, bytes được đo từ fetched body. Progress % hiện là tỷ lệ <strong>số asset đã xử lý</strong>, không tỷ lệ bytes truyền. UI chưa có per-item retry manager hoặc resumable byte download; không hứa hai khả năng đó.</p>
+<p>Badge Ready offline hiện so package revision với plan revision từ metadata local; chưa kiểm mọi cache hit mỗi lần render. Khi Play offline, app kiểm file có trong Cache API và báo nếu browser đã dọn file. Vì thế đây không phải bảo đảm native download bền vững. Cache/offline evidence cần kiểm required responses và offline playback/reload thật, không chỉ nhìn badge. File preview có thể export/read saved plan nhưng không bật SW packages.</p>
+<p>Khi run lỗi, code rollback các cache entries mới tạo trong run và không commit manifest mới; những URL có sẵn có thể được refresh trong quá trình chạy. Không gọi đây là transaction nguyên tử cho toàn bộ Cache API hoặc một persisted partial package. Review download failure ghi simulated; không thay evidence fetch/cache thật.</p>
+<p>Progress actions không tăng plan revision nên Finish/skip/arrival không làm badge package stale. Edit/+15 tăng plan revision, gói cần update nhưng asset bytes cũ không bị xóa trước. Content revision được lưu trong manifest nhưng hiện badge chưa tự so khác revision nội dung; khi thay corpus/file cần refresh package và test lại. Hướng tích hợp sau này cần so dependency/content fingerprint thay vì chỉ một revision tổng.</p>
+<h2>6. Local state khi offline</h2>
+<p>V7 là guest/local-only: save/edit/arrival/finish/skip ghi dữ liệu local theo state contract, không là thao tác server chờ sync. UI không báo “synced to your account”. Không tự đưa lại kiến trúc offline mutation queue của tài liệu DaNavi cũ vào prototype này.</p>
+<p>Khi mất mạng: mở saved plan và transcript đã có; media dùng cache; Google Maps/nguồn web/live route vẫn có thể không dùng. Đổi route khi offline chỉ có fixture estimate nếu hợp lệ, không có live ETA. Mở story khác không làm mất progression. Xóa site storage/browser khác có thể mất personal data; chưa có cross-device restore.</p>
+<p>Review panel có thể bật offline/denial/failure để xem UI nhưng <strong>không phải</strong> bằng chứng browser thực đã mất mạng, Cache API đã ghi file hay GPS thật bị từ chối. Evidence phải nêu cách test dùng injection hay browser/network/file thật.</p>
+<h2>7. Thay demo bằng integrations thật sau milestone</h2>
+<table>
+<thead>
+<tr>
+<th>Integration tương lai</th>
+<th>Đầu ra cần chứng minh trước khi bỏ nhãn demo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LLM planner/refine</td>
+<td>Server adapter, bounded IDs/schema, constraint checks, timeout/cost/quota, giữ edits khi fail; cùng corpus so baseline</td>
+</tr>
+<tr>
+<td>Contextual RAG</td>
+<td>Corpus/revision/embedding config, retrieval context theo POI, evidence validation và held-out claim/refusal evaluation</td>
+</tr>
+<tr>
+<td>Maps/Routes</td>
+<td>Provider/mode phù hợp, reviewed entrance, route freshness, attribution/caching terms; không dùng duration fixture như provider response</td>
+</tr>
+<tr>
+<td>Native location/audio</td>
+<td>Permission và resume trên thiết bị, denied/weak fixes, interruption/audio focus, foreground policy thực; không suy từ browser thành native</td>
+</tr>
+<tr>
+<td>Offline native</td>
+<td>File/cache lifecycle, size/rights, interrupted/partial download, stale revision và device test</td>
+</tr>
+<tr>
+<td>Cloud/account nếu chọn</td>
+<td>Có nhu cầu sync rõ; identity/ownership/deletion riêng; không thêm gate trước nội dung chỉ vì thiết kế cũ có auth</td>
+</tr>
+</tbody></table>
+<p>Điểm học thuật phải báo đúng implementation level: V7 có demo rules/source-linked answers và browser cache; real AI/navigation/native evidence chỉ được ghi sau tích hợp và đo. Không có con số support/latency/market fit đã đạt trong hợp đồng này.</p>
+<p class="muted"><a href="docs/03-AI-Offline-Contract.md">Markdown source ↗</a></p></section><section id="doc-4"><h1>GoNarra V7 — Kiểm chứng và bàn giao</h1>
+<p>Ngày: 22/10/2026. Tài liệu này là <strong>acceptance plan và cách đọc evidence</strong>, không là biên bản tuyên bố test pass. Chỉ kết quả thực trong <code>evidence/</code> với thời điểm, environment, case và outcome mới là evidence đã chạy. File/chỉ mục evidence chưa được tạo hoặc case không có kết quả thì ghi <strong>NOT RUN / chưa có bằng chứng</strong>, không suy từ tài liệu thành pass.</p>
+<h2>1. Bàn giao cần đọc theo thứ tự</h2>
+<ol>
+<li>README ở root: cách chạy localhost, giới hạn và entry point.</li>
+<li><a href="#doc-1">01-Product-UX.md</a>: identity, scope V7 và screen inventory.</li>
+<li><a href="#doc-2">02-Flow-State-Contract.md</a>: state, invariants, draft/proposal/+15 và progression.</li>
+<li><a href="#doc-3">03-AI-Offline-Contract.md</a>: local demo khác live AI, audio và download thật.</li>
+<li><a href="#doc-5">05-Content-Sources.md</a>: sources, script/media status và dữ kiện chưa xác minh.</li>
+<li><a href="#doc-6">06-Mobile-UX-Research.md</a> và <a href="#doc-7">07-Design-System.md</a>: nguồn primary UX, các giả thuyết Home/drawer và visual tokens.</li>
+<li><code>evidence/</code>: đọc tên file thực có trong gói; JSON có outcome/case cụ thể, ảnh có viewport và screen name. Không mặc định tên ví dụ dưới đây đã tồn tại.</li>
+</ol>
+<p>Artifacts kỳ vọng: kiểm tra core/state, browser journeys, render/screenshots và cache/audio checks; có thể được gộp trong JSON theo runner thực. Evidence index phải chỉ đúng file tồn tại, công cụ/môi trường, điểm pass/fail/not run và giới hạn. Screenshot chỉ chứng minh UI được render ở trạng thái đó; không tự chứng minh logic, asset download, route live hoặc audio đã nghe.</p>
+<p>File hiện có: <a href="../evidence/app-state-tests.json">app-state-tests.json</a> ghi VM action/state suite, counts và hash <code>app.js</code>. VM dùng DOM/Audio tối thiểu nên không chứng minh browser render/media/SW. <a href="../scripts/test-core.cjs">test-core.cjs</a> là executable suite; script tồn tại không tự là pass evidence. Nếu hash/code đổi sau một run, xem kết quả đó như snapshot cũ đến khi chạy lại. Browser/cache/audio/contrast results chỉ được bổ sung khi quan sát thực và có artifact tương ứng.</p>
+<h2>2. Acceptance journeys cần chạy</h2>
+<p>Các case dưới đây dùng fixture và app state sạch riêng của prototype; không xóa toàn bộ browser/site data khác. Ghi device/browser/viewport/URL, fixture/code version và injection dùng hay không. Khi một case fail, lưu actual vs expected và retest sau sửa; không thay expected để hợp thức hóa.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario/thao tác</th>
+<th>Expected quan trọng</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>V01</td>
+<td>Home → search theo tên/local alias → Detail</td>
+<td>Đúng POI; query không khớp có empty state; không đổi active trip</td>
+</tr>
+<tr>
+<td>V02</td>
+<td>Library/Detail → Listen/Transcript khi chưa có trip</td>
+<td>Không account/GPS/start gate; missing media có transcript và label thật</td>
+</tr>
+<tr>
+<td>V03</td>
+<td>Mở story khác trong lúc có active trip, rồi back</td>
+<td>Context nghe đổi; current stop/progress của trip giữ nguyên</td>
+</tr>
+<tr>
+<td>V04</td>
+<td>Template detail → Customize copy → chỉnh/lưu</td>
+<td>Có personal trip ID riêng; template gốc không đổi</td>
+</tr>
+<tr>
+<td>V05</td>
+<td>Requirements → preferences/must-keep → generate → proposal</td>
+<td>Inputs giữ; IDs/ràng buộc/tổng nhất quán; demo label rõ</td>
+</tr>
+<tr>
+<td>V06</td>
+<td>Hủy/lỗi generation bằng Review panel</td>
+<td>Không tạo trip rỗng; input và accepted trip cũ giữ nguyên; retry/cancel được</td>
+</tr>
+<tr>
+<td>V07</td>
+<td>Manual editor up/down/duration/add/remove/last-remove Undo/cancel</td>
+<td>Draft tính lại từ core; Undo lần remove cuối đúng; Cancel phục hồi accepted plan; không nhận drag đã triển khai</td>
+</tr>
+<tr>
+<td>V08</td>
+<td>Editor valid Update; editor known conflict Update</td>
+<td>Valid áp một lần; conflict không giả thành plan hợp lệ; draft không mất</td>
+</tr>
+<tr>
+<td>V09</td>
+<td>Adjust supported request → preview → Keep current</td>
+<td>Request có diff/reasons; giữ tour gốc, không apply ngầm</td>
+</tr>
+<tr>
+<td>V10</td>
+<td>Adjust → lock một/một số stop → Apply</td>
+<td>Locked giữ; total/transfer tính cùng input; no-candidate nói rõ</td>
+</tr>
+<tr>
+<td>V11</td>
+<td>Unsupported Adjust request / stale base proposal</td>
+<td>Không áp fallback vô nghĩa hoặc overwrite revision mới; bản cũ giữ</td>
+</tr>
+<tr>
+<td>V12</td>
+<td>Active trip → +15 → Keep current</td>
+<td>Duration, total và trip revision không bị thay bởi preview</td>
+</tr>
+<tr>
+<td>V13</td>
+<td>+15 → Review later visits/Adjust remaining → Apply</td>
+<td>Pending +15 chỉ commit khi xác nhận; past/current/must-keep đúng contract</td>
+</tr>
+<tr>
+<td>V14</td>
+<td>Ready → Start → I&#39;m here nhiều lần → Finish stop</td>
+<td>Arrival chỉ đếm một lần; Finish mới chuyển next</td>
+</tr>
+<tr>
+<td>V15</td>
+<td>Skip current</td>
+<td>Không cộng visited; chuyển đúng next và summary ghi skipped</td>
+</tr>
+<tr>
+<td>V16</td>
+<td>Pause → refresh → Resume</td>
+<td>Đúng trip/current/confirmed state; không tự arrival/complete</td>
+</tr>
+<tr>
+<td>V17</td>
+<td>Start trip khác khi đang active, Cancel rồi Confirm</td>
+<td>Cancel giữ cả hai; Confirm pause trip cũ, chỉ một active</td>
+</tr>
+<tr>
+<td>V18</td>
+<td>End early trước khi hết stop</td>
+<td>Outcome ended early; confirmed/skipped/not visited đúng, không full-completed giả</td>
+</tr>
+<tr>
+<td>V19</td>
+<td>Xử lý hết stop qua Finish/Skip</td>
+<td>Completed; recap không gọi skipped là visited</td>
+</tr>
+<tr>
+<td>V20</td>
+<td>My Trips nhiều bản, refresh/chuyển trip</td>
+<td>Không trùng ID/mất state/cross-write; lưu local được công bố</td>
+</tr>
+<tr>
+<td>V21</td>
+<td>Ask supported question ở POI đúng</td>
+<td>Demo answer/source đúng phạm vi; không mutate trip</td>
+</tr>
+<tr>
+<td>V22</td>
+<td>Ask unknown/wrong-POI/operational fact chưa verified</td>
+<td>Fallback/insufficient evidence; không bịa facts hoặc citation</td>
+</tr>
+<tr>
+<td>V23</td>
+<td>Ask offline; mở exact saved answer nếu có</td>
+<td>Nhãn Saved answer; no-cache fallback rõ; không gọi đây là AI offline/provider-failure test</td>
+</tr>
+<tr>
+<td>V24</td>
+<td>Open Maps và trở lại app</td>
+<td>Đúng destination theo fixture, có thông báo giới hạn; không advance trip</td>
+</tr>
+<tr>
+<td>V25</td>
+<td>Named anchors/location info và location-off/weak injection</td>
+<td>Manual path dùng được; không permission request thật; source của case là review injection</td>
+</tr>
+<tr>
+<td>V26</td>
+<td>Browser geolocation allowed/denied/timeout</td>
+<td><strong>Not implemented</strong> trong V7 hiện tại; không điền pass từ V25. Chỉ test sau khi thêm API thật.</td>
+</tr>
+<tr>
+<td>V27</td>
+<td>Download package trên localhost</td>
+<td>Required asset cache responses tồn tại; size/items dựa file thật; save khác download</td>
+</tr>
+<tr>
+<td>V28</td>
+<td>Inject download failure hoặc asset request fail</td>
+<td>Không commit manifest mới; rollback newly-created cache entries, giữ previous complete package; retry toàn run</td>
+</tr>
+<tr>
+<td>V29</td>
+<td>Edit trip/+15/finish rồi xem package</td>
+<td>Plan-revision badge update đúng; progression không làm stale. Test ghi rõ content-revision invalidation chưa tự động.</td>
+</tr>
+<tr>
+<td>V30</td>
+<td>Browser offline/reload sau khi shell+package ready</td>
+<td>Saved plan/text và cached media mở được; không tuyên bố offline Maps/AI</td>
+</tr>
+<tr>
+<td>V31</td>
+<td>Remove download rồi mở saved trip</td>
+<td>Xóa đúng gói/cache scope; trip còn, missing asset được nói đúng</td>
+</tr>
+<tr>
+<td>V32</td>
+<td>Player dùng file sample thực: play/pause/seek/resume</td>
+<td>Media time/duration thật, không fake progress; label synthetic/unreviewed</td>
+</tr>
+<tr>
+<td>V33</td>
+<td>Thiếu file hoặc audio lỗi</td>
+<td>Player báo unavailable/error; transcript đọc được; package không hứa audio đủ</td>
+</tr>
+<tr>
+<td>V34</td>
+<td>Compact viewport, scroll, keyboard, touch actions</td>
+<td>CTA không che nội dung quan trọng; move thay drag; labels readable</td>
+</tr>
+<tr>
+<td>V35</td>
+<td>Closure current chưa arrival → chọn replacement → Keep hoặc Apply</td>
+<td>Closure là simulated; Keep không đổi, Apply chỉ thay current eligible và tính lại; locked cần unlock xác nhận trước</td>
+</tr>
+<tr>
+<td>V36</td>
+<td>Closure current đã confirmed hoặc stale proposal sau progress đổi</td>
+<td>Không thay venue đã visited, không overwrite history; sửa upcoming hoặc báo stale</td>
+</tr>
+<tr>
+<td>V37</td>
+<td>Welcome hai bước → Back/Skip/complete → reload</td>
+<td>Không auth/GPS; onboarded persistence; trip cũ không mất; Replay không reset dữ liệu</td>
+</tr>
+<tr>
+<td>V38</td>
+<td>Home pin/card + drawer compact/medium/full bằng button và grip</td>
+<td>Selection đồng bộ; không đổi current stop; list Explore vẫn truy cập được</td>
+</tr>
+<tr>
+<td>V39</td>
+<td>Route overview pin/list → selected card/Detail → back</td>
+<td>Đúng selected POI; itinerary/progress không mutate; step/time là fixture</td>
+</tr>
+<tr>
+<td>V40</td>
+<td>Focused leg → Steps chọn demo step → mini-player → Home/Resume</td>
+<td>Step selection không auto-arrive/advance; cùng Audio object; current/progress giữ</td>
+</tr>
+<tr>
+<td>V41</td>
+<td>Frame nội dung 402×874, compact browser, chữ lớn/reduced motion</td>
+<td>Export 3× đúng vùng logical; simulated chrome khác native safe area; CTA/labels không che nhau</td>
+</tr>
+</tbody></table>
+<p>Nếu UI/runner không hỗ trợ một nhánh trong gói hiện tại, ghi “not implemented/not run” thay vì gộp cùng một case pass rộng hơn. Core test không thay browser journey; browser journey không thay device field test.</p>
+<h2>3. Kiểm tính lịch và dữ liệu</h2>
+<p>Unit/state cases tập trung các invariant dễ gây mất dữ liệu: sum visit/transfer/start/end legs, thay thứ tự/duration, duplicate/missing IDs, sparse pool, must-keep, active prefix, +15 pending, stale apply và arrival idempotence. Expected nên tính độc lập từ fixture input hoặc invariant; không chỉ snapshot chính hàm cần kiểm.</p>
+<p>Check cùng một plan ở proposal/editor/review/ready/active không có tổng hardcode khác. Time strings phải xuất phát cùng schedule. Unknown/unverified hours/entrances không được biến thành verified/open. Lunch generic không thành nhà hàng có tọa độ giả. Tọa độ fixture không được gọi là reviewed entrance.</p>
+<p>Đối với Ask demo, chấm supported answer/source mapping, unsupported fallback và no-trip-mutation. Không tính “RAG accuracy” từ số câu mẫu match local. Nếu nguồn có citation nhưng không support claim, ghi fail; không coi link hợp lệ là đủ.</p>
+<h2>4. Cách đọc bằng chứng browser/cache/audio</h2>
+<ul>
+<li>Browser checks: thao tác thực, outcome và state sau action; phân biệt programmatic/core calls với click journey.</li>
+<li>Screens/render: viewport, route/state, full content và console errors. Ảnh trông hợp lý không chứng minh every control works.</li>
+<li>Export review: vùng logical bên trong là 402×874 → 1206×2622 ở 3×; outer desktop border khác kích thước này. Status bar/island/home indicator là minh họa. Không dùng ảnh để suy native safe-area/thiết bị thật đã được test.</li>
+<li>Cache checks: origin, service worker control state, manifest revision, required URLs/cache hits, partial fail và offline reload. Review-panel offline alone không chứng minh browser offline.</li>
+<li>Audio checks: file tồn tại/bytes/duration và playback events. OS synthetic file không phải người kể đã review; automated playback event không thay nghe chất lượng hoặc phát âm.</li>
+<li>Location checks: explicit API call/permissions nếu có; simulated denial/GPS state ghi simulated. Browser geolocation không chứng minh native/background arrival.</li>
+<li>Accessibility checks: semantic labels, keyboard/focus, scaling/contrast theo phần đã kiểm; không gọi một bảng contrast là chứng nhận toàn app.</li>
+</ul>
+<p>Không ghi pass date/model/reviewer giả. Failure/retest giữ trong ledger; report summary phải dùng đúng denominators và environment.</p>
+<h3>Phạm vi implementation cần giữ khi đọc kết quả</h3>
+<ul>
+<li>Review scenario có thể tạo/persist seed trip, thay request preferences và pause trip active cũ trong storage V7. Đây không là view-only control; dùng profile test riêng. Reset chỉ khóa/cache V7, không xóa V6 hoặc browser dữ liệu khác.</li>
+<li>Ask hiện exact sample match, cache answer theo POI/question local; chưa có semantic retrieval, timestamp/revision expiry hay Ask-specific provider failure.</li>
+<li>Download hiện từ saved trip; metadata-ready không bảo đảm cache chưa bị browser evict. Có actual fetch/cache/media checks mới chứng minh offline. JSON export không phải audio package.</li>
+<li>Browser location hiện không được gọi; mọi location-off/weak là manual/review UI. Không ghi GPS SDK test passed.</li>
+<li>Closure replacement current chưa visited là exception có explicit unlock/preview/apply, cần xem V35/V36 evidence; không sửa một arrival đã confirmed hoặc coi simulated closure là tin venue thật.</li>
+</ul>
+<h2>5. Cổng hoàn thành prototype</h2>
+<p>Một bản handoff đáng review phải có ba entry journeys hoạt động, một trip đi hết được, cancel/keep bảo toàn dữ liệu, không double-count arrival, Ask demo có support/fallback, playback/cache đúng asset thật và review controls riêng. Không còn lỗi khiến mất trip, nhảy current stop hoặc downloaded giả trong những case đã chạy.</p>
+<p>Nếu phần offline/audio/API browser chưa chạy được trong môi trường người nhận, docs/UI phải hạ claim và hướng dẫn điều kiện chạy; không đổi simulation thành bằng chứng thật. Native, live AI/Routes, venue facts/media rights và user value chưa đạt chỉ vì prototype gate đạt.</p>
+<h2>6. Lộ trình sau handoff trong 2–3 tháng</h2>
+<p>Đồ án ưu tiên một vertical slice có chứng cứ. Giờ/tuần/rubric/budget còn phải chốt; bảng là thứ tự 8–12 tuần, không cam kết tiến độ. Giữ UI V7 có thể dùng lại; không thêm brand/module mới để thay bằng chứng còn thiếu.</p>
+<table>
+<thead>
+<tr>
+<th>Giai đoạn</th>
+<th>Đầu ra</th>
+<th>Gate để mở phần tiếp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tuần 1</td>
+<td>Review V7 thực, xác nhận objectives/capacity; kiểm nguồn/script và 1–2 sample audio với người nghe; thử đúng hoàn cảnh direct listen/template/custom</td>
+<td>Ghi giả thuyết/negative cases; xác định phần prototype còn mô phỏng; scope có người chịu trách nhiệm</td>
+</tr>
+<tr>
+<td>Tuần 2–3</td>
+<td>Một template và corpus nhỏ đã review, real media rights, một nền tảng native; server/model/map adapter spikes</td>
+<td>Một POI và một route/Ask live có evidence; không gọi fixture là production</td>
+</tr>
+<tr>
+<td>Tuần 4–5</td>
+<td>Live bounded planner/adjust + source-grounded Ask; edit/progress/cancel đúng, external Maps</td>
+<td>IDs/facts/constraints/ownership hoặc local-data policy rõ; provider fail không mất trip</td>
+</tr>
+<tr>
+<td>Tuần 6</td>
+<td>Download/media trên thiết bị, location explicit, interruption/resume; field trial nhỏ</td>
+<td>Không fake ready/ETA, entrance/content được kiểm theo phạm vi; defect/retest</td>
+</tr>
+<tr>
+<td>Tuần 7</td>
+<td>Held-out planner/Ask evaluation, usability tasks với người target độc lập khi có thể</td>
+<td>Báo counts/latency/cost/support/refusal và giới hạn; freeze feature</td>
+</tr>
+<tr>
+<td>Tuần 8</td>
+<td>Sửa blockers, report, demo và reproduction</td>
+<td>Objective met/partial/unmet có evidence; source/version/data-rights status thật</td>
+</tr>
+<tr>
+<td>Tuần 9–12 nếu có</td>
+<td>Retest, tăng content có review và chất lượng; chưa mặc định auth/payment/SDK navigation</td>
+<td>Chỉ mở scope khi core và học thuật đã có evidence</td>
+</tr>
+</tbody></table>
+<p>Tách tuning set khỏi evaluation set; pin model/prompt/corpus khi chấm real AI. Cùng input/facts, so planner AI với deterministic baseline; chấm preference/feasibility/latency, không optimality chưa định nghĩa. Ask cần supported/unanswerable/wrong-POI/conflicting facts/adversarial, claim support và false refusal; không chỉ chấm có nguồn.</p>
+<p>Usability sample nhỏ báo số ca independent/assisted/fail và lỗi quan trọng; SUS nếu dùng là cảm nhận usability, không tỷ lệ hoàn thành. Participant consent/recording/retention phải có trước thu thập; không ghi persona/quote hư cấu. Chưa có PMF, willingness-to-pay hoặc user satisfaction thật thì ghi chưa có.</p>
+<h2>7. Release/handoff notes</h2>
+<p>Handoff browser này không phải app store release. Muốn pilot thật cần đối chiếu actual corpus/entrance, quyền ảnh/audio/offline, English/listener quality, secrets/provider terms/budget, target device và research consent. Chỉ thêm cloud account khi scope có nhu cầu sync; khi đó identity/ownership/logout/deletion là work riêng, không cho login flow cũ âm thầm lọt vào guest prototype.</p>
+<p>Người nhận nên bắt đầu bằng localhost và ba entry, sau đó dùng Review panel cho failure cases, rồi đối chiếu evidence JSON. Cần phân biệt “review được một trạng thái” với “đã kiểm chứng hệ thống thật ở ngoài thực địa”.</p>
+<p class="muted"><a href="docs/04-Validation-Handoff.md">Markdown source ↗</a></p></section><section id="doc-5"><h1>GoNarra V7 — Nội dung, nguồn và quyền sử dụng</h1>
+<p>Ngày đối chiếu nguồn: <strong>22/10/2026</strong>, múi giờ Việt Nam. Dữ liệu ở <code>prototype/data.js</code>, revision <code>2026-10-22-draft-1</code>, dùng cho <strong>prototype đánh giá nội bộ</strong>. Đã đọc nguồn công khai dưới đây; chưa có bilingual reviewer, narrator hoặc đánh giá thực địa. Có nguồn không đồng nghĩa đã được biên tập viên độc lập phê duyệt.</p>
+<h2>Phạm vi nội dung</h2>
+<p>Ba script English gốc dài khoảng 100–140 từ cho Cathedral, Museum, Beach; hai đoạn giới thiệu ngắn cho Bridge và Mountain. Chúng được viết riêng cho prototype từ dữ kiện chọn lọc, không sao chép audio hoặc nguyên bài. Câu khuyến nghị cách trải nghiệm là lời biên tập của GoNarra, không phải sự kiện lịch sử hay kết quả nghiên cứu người dùng. Script độc lập thứ tự, không dùng “bên trái”, “phía trước” hoặc giả định hướng nhìn từ GPS.</p>
+<p><code>questions</code> là <strong>câu hỏi/trả lời mẫu có sẵn</strong>, phục vụ review giao diện và nguồn; không phải bằng chứng hệ thống đã thực hiện retrieval, RAG hay trả lời câu hỏi tự do bằng mô hình. <code>sourceIds: []</code> ở câu về giới hạn prototype xác nhận khả năng của bản demo, không đóng giả citation bên ngoài.</p>
+<h2>Nguồn và nhóm claim</h2>
+<table>
+<thead>
+<tr>
+<th>Source ID</th>
+<th>Nguồn, ngày bài nếu hiển thị</th>
+<th>Claim được dùng / giới hạn</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cathedral-tourism</code></td>
+<td>Trung tâm Xúc tiến Du lịch Đà Nẵng, <a href="https://danangfantasticity.com/en/nha-tho-giao-xu-chanh-toa-da-nang-vn">Nhà thờ giáo xứ Chính tòa Đà Nẵng</a>, <strong>15/09/2015</strong>, nội dung tiếng Việt dù URL <code>/en/</code>.</td>
+<td>Tên Con Gà, hình con gà, liên hệ Thánh Phêrô, Gothic. Phần English là bản diễn đạt của prototype, chưa được reviewer song ngữ duyệt. Không dùng số đo hoặc lịch lễ.</td>
+</tr>
+<tr>
+<td><code>museum-tourism</code></td>
+<td>Trung tâm Xúc tiến Du lịch Đà Nẵng, <a href="https://danangfantasticity.com/en/danang-museum-of-cham-sculpture/overview-da-nang-museum-of-cham-sculpture">Da Nang Museum of Cham Sculpture</a>, <strong>07/09/2020</strong>, tiếng Anh.</td>
+<td>Bối cảnh sưu tập, các mốc 1915/1919, cảm hứng kiến trúc và tên gallery. Không tái sử dụng giờ, vé hoặc mô tả dịch vụ như xác nhận hiện tại.</td>
+</tr>
+<tr>
+<td><code>beach-tourism</code></td>
+<td>Trung tâm Xúc tiến Du lịch Đà Nẵng, <a href="https://danangfantasticity.com/en/enjoy-da-nang-at-two-beaches-named-among-lonely-planets-10-best-beaches-in-vietnam">Enjoy Da Nang at Two Beaches</a>, <strong>13/07/2026</strong>, tiếng Anh.</td>
+<td>Biển gắn với đời sống đô thị, đi bộ, vận động và thư giãn. Không dùng giải thưởng, lịch festival hoặc nhận định nước an toàn để bơi.</td>
+</tr>
+<tr>
+<td><code>mountain-vnat</code></td>
+<td>Cục Du lịch Quốc gia Việt Nam, <a href="https://vietnam.travel/things-to-do/around-marble-mountains">A walk around Marble Mountains</a>, không thấy ngày xuất bản, tiếng Anh.</td>
+<td>Năm yếu tố trong tên núi, hang/chùa và việc leo bậc. Không lấy giờ/giá hoặc niên đại chi tiết vào corpus.</td>
+</tr>
+<tr>
+<td><code>bridge-wsp</code></td>
+<td>WSP, <a href="https://www.wsp.com/en-gb/projects/fire-breathing-dragon-bridge-vietnam">Fire-breathing Dragon Bridge, Vietnam</a>, không thấy ngày xuất bản, tiếng Anh.</td>
+<td>Đơn vị thiết kế kế thừa mô tả sáu làn, cảm hứng rồng thời Lý, mở tháng 3/2013 và khả năng phun lửa/nước. Không xác nhận lịch biểu diễn.</td>
+</tr>
+</tbody></table>
+<p>Đây là nguồn chính thức/đơn vị tham gia dự án phù hợp để bắt đầu đối chiếu; không phải bảo đảm mọi dòng đều đúng. Đặc biệt, bài cũ có thể giữ giờ/giá đã thay đổi; corpus này chủ động không đưa các dữ kiện vận hành đó vào script. Ngày truy cập không thay thế ngày xuất bản. Trước pilot cần chủ dự án review fact, tên riêng và English; sau đó nhờ <strong>1–2 người dùng mục tiêu nghe thử</strong>, ghi lỗi phát âm/độ rõ và sửa. Hiện chưa thực hiện các bước review đó.</p>
+<h2>Audio và disclosure</h2>
+<p>Chủ dự án xác nhận <strong>không có người đọc English hoặc reviewer hỗ trợ</strong>, nên hướng mới là <strong>TTS tạo trước từ script biên tập có nguồn</strong>, thay cho baseline human narration. Không sinh chuyện lịch sử theo thời gian thực và không clone giọng của người khác.</p>
+<p>Khi tạo file dữ liệu, <code>story.audio</code> đều là <code>null</code>. Bản đóng gói có thể được root bổ sung file preview từ giọng tổng hợp của hệ điều hành tại <code>assets/audio/&lt;placeid&gt;.m4a</code> cho năm POI có script; lunch không có audio. Các file này là <strong>synthetic preview để review</strong>, không có nghĩa đã qua nghe kiểm tra, được narrator đọc, hoặc có giấy phép public/commercial đã xác minh. Nhãn dùng trong sản phẩm: “Synthetic narration preview — not reviewed for public release.” Không giả claim “recorded by a local guide”.</p>
+<p>Nếu có spike ElevenLabs sau này: <a href="https://help.elevenlabs.io/hc/en-us/articles/13313564601361-Can-I-publish-the-content-I-generate-on-the-platform">hướng dẫn quyền xuất bản chính thức</a>, kiểm tra <strong>22/10/2026</strong>, phân biệt Free noncommercial có attribution với generation trong paid plan có commercial license theo điều khoản; Beta có giới hạn riêng. Audio tạo khi Free không tự có quyền thương mại khi mua gói sau đó. Chỉ thử preset hợp lệ, kiểm tra plan/model/voice cụ thể và lưu bằng chứng; chưa tạo tài khoản, mua gói hay dùng provider này. <a href="https://elevenlabs.io/use-policy">Use Policy</a>, cập nhật <strong>09/10/2026</strong>, quy định quyền/consent đối với giọng và nội dung. Đây là kiểm tra điều kiện provider, không phải tư vấn pháp lý hoặc xác nhận đã đủ quyền.</p>
+<h2>Ảnh kế thừa</h2>
+<p>Các file <code>cathedral.png</code>, <code>museum.png</code>, <code>mountain.png</code>, <code>beach.png</code>, <code>coast.png</code> được <strong>copy nguyên trạng</strong> từ <code>/Users/lengoctanhien/Downloads/GoNarra-V6 2/prototype/assets/</code>. Không chỉnh bản V6. Đã xem <code>coast.png</code>: ảnh thể hiện Cầu Rồng, vì vậy dùng cho bridge và thumbnail tour river-coast. Lunch dùng ảnh này chỉ như minh họa nhịp nghỉ trong tour, <strong>không phải ảnh nhà hàng</strong>. Chưa nhận diện tác giả/stock provider, nguồn gốc chụp hay AI, giấy phép, attribution hoặc quyền thương mại của cả năm ảnh. <strong>Không coi là đã cleared để phát hành public/commercial</strong>. Cần thay bằng ảnh tự sở hữu hoặc có license được lưu trước phát hành.</p>
+<h2>Fixture hành trình và vị trí</h2>
+<ul>
+<li>Cathedral, museum, beach, mountain, bridge có tọa độ <strong>xấp xỉ để mô phỏng</strong>. Không phải kết quả geocoding đã kiểm tra hay tọa độ cổng/điểm dừng xe an toàn. Bridge là điểm ven sông mô phỏng, không cố ý dẫn khách lên lòng cầu.</li>
+<li>Lunch là <strong>break placeholder</strong>, không phải một quán đã xác minh; <code>coordinates: null</code>, không có booking, nguồn POI hoặc audio. Engine giữ break ở vị trí trước đó, không phát sinh điểm ăn giả.</li>
+<li>Duration/minDuration là tham số thiết kế để thử flow và chỉnh lịch, không phải thời lượng đã đo hoặc lời bảo đảm phù hợp cho mọi khách. Travel fixtures do engine sở hữu là số mô phỏng; không gọi live Routes hoặc kiểm tra giờ mở cửa.</li>
+<li>Hai tour mẫu chưa được đi thử. River-coast: Cathedral → Museum → Lunch → Beach. Slow-coast: Beach → Lunch → Bridge. Không cam kết mọi khách hoàn thành, không hứa swimming/show và không làm accessibility claim từ category/tag.</li>
+</ul>
+<p>Trước khi có pilot dùng để đi thật, thay fixture bằng tọa độ lối vào được field-test, xác nhận dữ kiện vận hành liên quan ngày đi, quyền tài sản, review nội dung/giọng và hành vi mất mạng. Prototype hiện tại dùng để làm các điểm đó cụ thể và review được, chưa phải một tour đã sẵn sàng đưa khách đi.</p>
+<p class="muted"><a href="docs/05-Content-Sources.md">Markdown source ↗</a></p></section><section id="doc-6"><h1>Nghiên cứu thực hành mobile UX</h1>
+<p>Đối chiếu nguồn sơ cấp ngày <strong>22/10/2026</strong>. Đây là guideline review và quyết định thiết kế, <strong>chưa có interview/UAT</strong>. HIG/WCAG không chứng minh khách Đà Nẵng thích Home bản đồ, ba mức drawer hay giọng AI.</p>
+<h2>Nguồn và áp dụng</h2>
+<table>
+<thead>
+<tr>
+<th>Nguồn đã đọc</th>
+<th>Điểm hỗ trợ</th>
+<th>Áp dụng GoNarra</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Apple <a href="https://developer.apple.com/design/human-interface-guidelines/onboarding">Onboarding</a></td>
+<td>Trải nghiệm ngắn, có thể bỏ qua; hướng dẫn đúng ngữ cảnh</td>
+<td>Welcome hai bước, Skip; không auth/GPS/download bắt buộc</td>
+</tr>
+<tr>
+<td>Apple <a href="https://developer.apple.com/design/human-interface-guidelines/sheets">Sheets</a></td>
+<td>Sheet phục vụ tác vụ có phạm vi; nonmodal giữ tương tác với nền; tránh chồng sheet</td>
+<td>Home drawer ảnh hưởng selection trên map; form/editor dài có màn riêng</td>
+</tr>
+<tr>
+<td>Apple <a href="https://developer.apple.com/design/human-interface-guidelines/accessibility">Accessibility</a></td>
+<td>Chữ lớn, text thay audio, controls rõ và cách thay gesture</td>
+<td>Transcript, text scale, Expand/Collapse và move buttons</td>
+</tr>
+<tr>
+<td>Apple <a href="https://developer.apple.com/design/human-interface-guidelines/playing-audio">Playing audio</a></td>
+<td>Controls nhất quán, tôn trọng output/interruptions</td>
+<td>Play có chủ ý; mini-player cùng state với player đầy đủ</td>
+</tr>
+<tr>
+<td>Apple <a href="https://developer.apple.com/help/app-store-connect/manage-app-accessibility/reduced-motion-evaluation-criteria">Reduced Motion evaluation</a></td>
+<td>Giảm motion gây khó chịu, giữ cách truyền trạng thái thay thế</td>
+<td>Orb tĩnh/fade khi reduced motion; stage label vẫn còn</td>
+</tr>
+<tr>
+<td>W3C <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">Contrast minimum</a></td>
+<td>Text thường ≥4.5:1, large text ≥3:1 theo định nghĩa SC</td>
+<td>Đo từng cặp text/background thật; không suy từ palette</td>
+</tr>
+<tr>
+<td>W3C <a href="https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html">Dragging movements</a></td>
+<td>Action dùng drag cần single-pointer alternative khi áp dụng</td>
+<td>Drawer có nút đổi mức; pin/list và reorder có nút</td>
+</tr>
+</tbody></table>
+<p>Apple HIG Motion được mở nhưng nội dung trực tiếp yêu cầu JavaScript; bản Markdown không tải được trong công cụ. Các quy tắc motion ở đây dựa trên hai nguồn Apple đã đọc ở trên, không trích giả nội dung trang chưa đọc.</p>
+<h2>Quyết định có lý do, chưa được người dùng xác nhận</h2>
+<p><strong>Home map + persistent drawer</strong> giúp liên hệ POI và vị trí, nhưng dễ che pin, tạo cạnh tranh scroll/drag và khiến khách tưởng map đang live. Vì vậy map ghi rõ illustrative/demo; không marker “you are here” giả. Search luôn thấy; Explore list là lối vào ngang hàng. Chọn pin cập nhật selected card; chọn card/list cập nhật pin. Không nhảy current trip stop.</p>
+<p>Ba mức drawer là giả thuyết: peek để thấy địa điểm đang chọn; half để thấy Create AI/tour/resume; expanded để đọc danh sách. Có nút Expand/Collapse mang label và state; không bắt phải đoán gesture. Drawer không phải modal, map phần còn thấy vẫn dùng được; modal xác nhận mới khóa nền. Không mở một sheet mới lên sheet cũ. Tỷ lệ/cao độ cần thích nghi khi chữ lớn/keyboard, không cố giữ ba mức nếu làm mất CTA.</p>
+<p><strong>Navigation tập trung</strong> cho active leg: map/sơ đồ + current instruction mẫu + mini-player + I&#39;m here; Steps mở sheet, Maps ngoài mở directions thật. Back về Home/Trips giữ trip/index/player, không ngầm arrival/finish. Route preview có pin/list selection; đây là đọc lịch, không chứng minh SDK navigation/GPS live.</p>
+<p>Welcome hai bước nói giá trị và quyền chủ động; Skip đi Home, không lặp mỗi lần mở. AI orb là cue thị giác; semantic stages mô tả local demo, không tạo phần trăm hoặc lời hứa model đang suy nghĩ thật. Audio synthetic có label; transcript/Info/Ask mở theo POI, độc lập trip.</p>
+<h2>Review cần thực hiện</h2>
+<p>So cùng task trên Home map và Explore list: tìm đúng POI, mở story, tạo plan, resume trip. Ghi wrong turns, thời gian và trợ giúp; chưa tự kết luận map nhanh hơn. Kiểm cả ba mức drawer bằng tap/keyboard, chữ lớn và reduced motion; map controls không bị che. Kiểm trở lại từ focused leg vẫn đúng progress và player.</p>
+<p>Ảnh export và browser checks chứng minh layout/interaction trong môi trường ghi nhận, không thay native safe-area, VoiceOver, interruption hoặc field/UAT. Hướng “chuyên nghiệp” được bảo vệ bằng hierarchy, consistency và trạng thái đúng; hiệu quả với khách cần evidence sau này.</p>
+<p class="muted"><a href="docs/06-Mobile-UX-Research.md">Markdown source ↗</a></p></section><section id="doc-7"><h1>GoNarra V7 — Design system</h1>
+<p>Ngày 22/10/2026. Hợp đồng thiết kế mobile; cơ sở phương pháp và giới hạn ở <a href="#doc-6">06-Mobile-UX-Research.md</a>. UI English, docs Vietnamese; các quy tắc dưới đây là lựa chọn dự án, không tự là chứng nhận HIG/WCAG.</p>
+<h2>Frame, layout và type</h2>
+<p>Frame review theo yêu cầu <strong>402×874 logical px</strong>, export <strong>1206×2622 ở 3×</strong>. Status bar/safe-area trong ảnh prototype là chrome minh họa, không là OS thật. Native dùng safe-area thực theo thiết bị/orientation; không hardcode phần inset từ ảnh vào mọi máy. Browser rộng/hẹp vẫn responsive, form/list cuộn được.</p>
+<p>Một font system hỗ trợ Vietnamese: <code>-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif</code>. Body 16 CSS px, line-height khoảng 1.5; heading theo hierarchy, không dùng font thứ hai để trang trí. 16 CSS px là baseline prototype, không tuyên bố bằng default 17 pt iOS. Chữ quan trọng không truncate. Control mục tiêu tối thiểu <strong>44×44 logical px</strong>; spacing đủ tránh chạm nhầm. Gutter 20, compact 16; spacing 4/8/12/16/20/24/32. Native đo/tune lại theo platform.</p>
+<h2>Màu theo vai trò</h2>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Màu</th>
+<th>Vai trò</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ink</td>
+<td><code>#021024</code></td>
+<td>Text chính/navy sâu</td>
+</tr>
+<tr>
+<td>Brand navy</td>
+<td><code>#052659</code></td>
+<td>Heading, selected emphasis</td>
+</tr>
+<tr>
+<td>Brand mid</td>
+<td><code>#5483B3</code></td>
+<td>Đồ họa/phụ trợ; chưa mặc định làm body text</td>
+</tr>
+<tr>
+<td>Brand light</td>
+<td><code>#7DA0CA</code></td>
+<td>Highlight/tint/icon decoration</td>
+</tr>
+<tr>
+<td>Sky</td>
+<td><code>#C1E8FF</code></td>
+<td>Background map/card nhẹ</td>
+</tr>
+<tr>
+<td>Slate</td>
+<td><code>#4A5C6A</code></td>
+<td>Secondary text trên nền phù hợp</td>
+</tr>
+<tr>
+<td>Neutral</td>
+<td><code>#CCD0CF</code></td>
+<td>Border/surface phụ; không mặc định dùng làm chữ nhỏ</td>
+</tr>
+<tr>
+<td>Action/route</td>
+<td><code>#2D6AFF</code></td>
+<td>Primary CTA, selected pin, route</td>
+</tr>
+<tr>
+<td>Canvas</td>
+<td><code>#FFFFFF</code></td>
+<td>Card, form, đọc nội dung</td>
+</tr>
+</tbody></table>
+<p>White/light-blue/navy tạo hierarchy; ảnh giữ aspect ratio, không đặt text quan trọng trực tiếp lên ảnh/map nhiều chi tiết. Tinted status phải có text/icon, không chỉ màu. Contrast từng cặp cần được tính và ghi evidence riêng; chưa gọi cả palette đạt AA. Error/success/warning dùng semantic role riêng, không đổi nghĩa theo màn.</p>
+<h2>Components và hành vi</h2>
+<ul>
+<li><strong>Welcome:</strong> hai bước có Skip/Back/Continue; không auth hoặc permission.</li>
+<li><strong>Home map/drawer:</strong> search trên; selected pin/card đồng bộ; ba mức peek/half/expanded bằng drag nếu có và nút; Create AI, curated tour, resume rõ. Explore list giữ riêng.</li>
+<li><strong>Primary tabs:</strong> Home · Explore · Plan · Trips. Ask là action theo POI, không tab AI thứ năm.</li>
+<li><strong>Route preview:</strong> numbered pins, stop list, selected state; chọn pin không ghi arrival. <strong>Active leg:</strong> top instruction demo, map, mini-player, I&#39;m here; Steps/itinerary sheet và external Maps.</li>
+<li><strong>Detail/Arrival:</strong> ảnh + nội dung trắng/light blue; Listen/Transcript/Info/Ask thống nhất context. Full player và mini-player dùng cùng audio state; thiếu file có transcript/error thật.</li>
+<li><strong>Forms/editor:</strong> một cột, validation cạnh field, move buttons thay drag, Cancel giữ accepted state. CTA cố định không che keyboard/safe area; long content cuộn được.</li>
+<li><strong>Sheet/modal:</strong> Home drawer persistent/nonmodal; task confirmation modal có Close/Cancel. Không chồng modal; focus trở lại trigger sau dismiss.</li>
+</ul>
+<p>Radius vừa phải theo component: controls 12–16, cards 20–24, drawer 28; border/shadow nhẹ để phân lớp. Không phối nhiều hiệu ứng mạnh cho một card. Line icons thống nhất; icon-only có accessible name.</p>
+<h2>Motion và verification</h2>
+<p>Orb dùng blue gradient chuyển động chậm, không nhấp nháy/parallax lớn; loading không giả live LLM. Action feedback ngắn, chuyển trạng thái khoảng 120–240 ms là target thiết kế. <code>prefers-reduced-motion</code> dừng lặp orb và giảm transition, vẫn giữ stage text/status. Không dùng animation để cản Cancel hoặc giấu lỗi.</p>
+<p>Review ở frame gốc, compact width, chữ lớn, keyboard và reduced motion. Đo contrast/touch targets, kiểm pin/list/drawer/focus/player và regression trip state. Chỉ ghi đạt phần đã đo; design tokens không thay native accessibility testing.</p>
+<p class="muted"><a href="docs/07-Design-System.md">Markdown source ↗</a></p></section><section id="doc-8"><h1>Kết quả review và bàn giao</h1>
+<h2>Bản giao diện đã cập nhật</h2>
+<ul>
+<li>Welcome hai bước: collage nền sáng → ảnh biển tràn nền, navy overlay, có Skip/Back và nhớ đã hoàn thành.</li>
+<li>Home map minh họa + photo pins; selected card đồng bộ; discovery drawer có compact/medium/full và nút đổi mức. Explore giữ view danh sách.</li>
+<li>Tour preview và Route Overview dùng chung stop/order; nguồn lịch/tổng/return time là <code>core.js</code>.</li>
+<li>Focused leg có sample instruction, Steps, mini-player, itinerary và arrival thủ công. Audio và progress không bị gộp thành cùng một trạng thái.</li>
+<li>Arrival đã rút gọn ảnh và player để Play thấy trong viewport đầu; Listen/Transcript/Info/Ask và +15 preview theo đúng POI.</li>
+<li>Màu navy/ice/slate, controls đồng bộ, reduced-motion fallback và khung review iPhone17 402×874 logic.</li>
+</ul>
+<h2>Kiểm tra đã thực hiện</h2>
+<table>
+<thead>
+<tr>
+<th>Loại</th>
+<th>Kết quả</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Domain/core</td>
+<td>22/22</td>
+<td>Tính lịch, must-visits, giới hạn, protected prefix, unknown intent</td>
+</tr>
+<tr>
+<td>App state</td>
+<td>28/28</td>
+<td>Action/mutation guards trong NodeVM, không là browser test</td>
+</tr>
+<tr>
+<td>Asset/static</td>
+<td>32/32</td>
+<td>WAV có nội dung, reference hợp lệ,9solidcolorpairs đạt4.5:1</td>
+</tr>
+<tr>
+<td>Browser UI</td>
+<td>24 observed-pass,2inconclusive</td>
+<td>Flow thực đã quan sát; không coi2caseinconclusive làpass</td>
+</tr>
+<tr>
+<td>Origin unreachable</td>
+<td>Shell reload + audio played to end</td>
+<td>Sau cache đủ, tắt serverlocal rồi mởlại và nghe cathedralWAV</td>
+</tr>
+</tbody></table>
+<p>Xem <a href="../evidence/README.md">evidence README</a>, <a href="../evidence/browser-review.json">browser review</a>, <a href="../evidence/app-state-tests.json">app state</a> và <a href="../evidence/assets-and-contrast.json">asset/contrast</a>. Dữ liệu/ảnh trong <code>screens/</code> minh họa đúng một trạng thái review, không tự tạo kết quả UAT.</p>
+<h2>Giới hạn còn lại</h2>
+<p>Chưa chạy trên iPhone vật lý/VoiceOver/background interruptions; chưa live LLM/RAG, map SDK/GPS hoặc street-route calculation. Hai assertions browser được ghi inconclusive do view đổi giữa các bước. Phần lớn các cặp màu rất dễ đọc, nhưng hai cặp được đo chỉ vừa vượt4.5:1; ảnh/gradient và accessibility toàn app cần audit tiếp.</p>
+<p>Mục tiêu export physical3× là1206×2622; bundle hiện chứa browser review captures ở kích thước browser, không giả thành ảnh3×. Dùng prototype để inspect flow và docs để triển khai; field-test/nghiên cứu khách cần thực hiện riêng theo handoff.</p>
+<p class="muted"><a href="docs/08-Review-Results.md">Markdown source ↗</a></p></section></main></div></html>
