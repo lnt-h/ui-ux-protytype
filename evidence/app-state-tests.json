@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-23T13:18:32.639Z",
+  "generatedAt": "2026-10-23T13:26:11.651Z",
   "suite": "V7 app action/state guards in Node VM",
   "environment": "v24.22.0",
   "scope": "Minimal DOM and fake Audio; real app.js, core.js, data.js, content.js, weather.js and experience.js are evaluated. Weather failure paths use absent/failing fetch only. No browser rendering, service worker, real audio, GPS, live provider or live AI verified.",
-  "appSha256": "ecc1a6ffab30af74edcb4b05b3af02dcc093839f9e1388601d1345d63d500170",
+  "appSha256": "a52508e983de795ca3f786d25923ec5f20e5a8f3db400c2c44ffdbf5f33663a9",
   "passed": 74,
   "total": 74,
   "results": [

@@ -16,7 +16,7 @@ function emptyDB(){return {version:7,trips:[],favorites:[],packages:{},req:copy(
 let db;try{db=JSON.parse(localStorage.getItem(KEY))||emptyDB();if(db.version!==7||!Array.isArray(db.trips))db=emptyDB()}catch(e){db=emptyDB()}
 db.audioPositions=db.audioPositions||{};db.aiConversations=db.aiConversations||{};
 db.settings=db.settings||{speed:1,reducedMotion:false};
-const ui={route:db.onboarded?'home':'welcome',welcomeStep:1,homeSnap:'medium',selectedMapPlace:null,navStep:0,history:[],placeId:'cathedral',templateId:'river-coast',tripId:null,tab:'upcoming',stopTab:'listen',search:'',filter:'all',proposal:null,edit:null,pending:null,adjustText:'More beach time',adjustLocks:[],adjustContext:null,review:null,modal:null,toast:'',error:'',askMessages:{},askBusy:false,generation:0,generationToken:0,downloadProgress:0,downloadBusy:false,sim:{offline:false,generationFail:false,downloadFail:false,location:'manual',closed:false},tools:false};
+const ui={route:'welcome',welcomeStep:1,homeSnap:'medium',selectedMapPlace:null,navStep:0,history:[],placeId:'cathedral',templateId:'river-coast',tripId:null,tab:'upcoming',stopTab:'listen',search:'',filter:'all',proposal:null,edit:null,pending:null,adjustText:'More beach time',adjustLocks:[],adjustContext:null,review:null,modal:null,toast:'',error:'',askMessages:{},askBusy:false,generation:0,generationToken:0,downloadProgress:0,downloadBusy:false,sim:{offline:false,generationFail:false,downloadFail:false,location:'manual',closed:false},tools:false};
 let persistError=false,audio=new Audio(),audioPlace=null,audioError='',audioLoading=false,audioPlaying=false,toastTimer;
 audio.preload='metadata';
 audio.playbackRate=db.settings.speed||1;
