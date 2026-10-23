@@ -1,0 +1,62 @@
+{
+  "name": "Gonarra",
+  "version": "1.1",
+  "colors": {
+    "deepOcean": {
+      "value": "#0B3045",
+      "rgb": [
+        11,
+        48,
+        69
+      ],
+      "role": "Primary brand and text"
+    },
+    "teal": {
+      "value": "#0B8EA8",
+      "rgb": [
+        11,
+        142,
+        168
+      ],
+      "role": "Large type and accent"
+    },
+    "sun": {
+      "value": "#F6A623",
+      "rgb": [
+        246,
+        166,
+        35
+      ],
+      "role": "Identity dot only in full-color marks"
+    },
+    "sky": {
+      "value": "#F0F9FF",
+      "rgb": [
+        240,
+        249,
+        255
+      ],
+      "role": "Light brand surface"
+    }
+  },
+  "geometry": {
+    "wordmarkViewBox": [
+      0,
+      0,
+      800,
+      190
+    ],
+    "minimumDigitalWidth": 60,
+    "taglineMinimumDigitalWidth": 200,
+    "iconMinimumDigitalSize": 16,
+    "clearSpace": "1x visual o-height",
+    "strokeWidth": 26,
+    "opticalGaps": {
+      "o/n": 15,
+      "n/a": 14,
+      "a/r": 14,
+      "r/r": 14,
+      "r/a": 14
+    }
+  }
+}

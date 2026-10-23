@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0B3045">
+  <title>Gonarra · Brand assets</title>
+  <link rel="icon" href="prototype/assets/brand/gonarra-mark-color.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="brand-assets.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="back-link" href="index.html" aria-label="Quay lại tổng quan dự án">← Tổng quan</a>
+    <span>Brand assets · v1.1</span>
+  </header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Gonarra identity system</p>
+      <h1>Logo sẵn sàng<br>để dùng trong Figma.</h1>
+      <p class="lead">Wordmark đã được cân lại khoảng cách quang học giữa từng cặp chữ. Mỗi asset dùng chung một master hình học, không phụ thuộc font và có thể copy trực tiếp.</p>
+      <div class="hero-actions">
+        <button class="primary" type="button" data-copy-master>Copy logo chính</button>
+        <a class="secondary" href="prototype/assets/brand/gonarra-logo-master.svg" download>Tải master SVG</a>
+      </div>
+      <div class="spec-strip" aria-label="Thông số logo">
+        <span><b>60 px</b> wordmark tối thiểu</span>
+        <span><b>200 px</b> logo có tagline</span>
+        <span><b>1× o</b> clear space</span>
+        <span><b>26 u</b> hệ nét</span>
+      </div>
+    </section>
+
+    <section class="section-heading">
+      <div><p class="eyebrow">Production assets</p><h2>Copy đúng phiên bản, đúng nền.</h2></div>
+      <p>Nút Copy SVG đưa vector vào clipboard để paste vào Figma hoặc trình biên tập vector. Download luôn trỏ tới file nguồn tương ứng.</p>
+    </section>
+    <section class="asset-grid" id="asset-grid" aria-live="polite"></section>
+
+    <section class="system-grid">
+      <article class="system-card kerning-card">
+        <p class="eyebrow">Optical kerning</p>
+        <h2>Khoảng trắng được cân theo hình, không theo box.</h2>
+        <div class="kerning-row" aria-label="Khoảng cách quang học theo unit">
+          <span>o/n <b>15</b></span><span>n/a <b>14</b></span><span>a/r <b>14</b></span><span>r/r <b>14</b></span><span>r/a <b>14</b></span>
+        </div>
+        <p>Ở chiều rộng tối thiểu 60 px, mỗi khe quan trọng vẫn còn xấp xỉ một pixel hiển thị, giúp <i>n · a · r · r · a</i> không nhập thành một dải liên tục.</p>
+      </article>
+      <article class="system-card color-card">
+        <p class="eyebrow">Color styles</p>
+        <h2>Bốn token cốt lõi.</h2>
+        <div class="swatches">
+          <div><span style="--swatch:#0B3045"></span><b>Deep Ocean</b><code>#0B3045</code></div>
+          <div><span style="--swatch:#0B8EA8"></span><b>Teal</b><code>#0B8EA8</code></div>
+          <div><span style="--swatch:#F6A623"></span><b>Sun</b><code>#F6A623</code></div>
+          <div><span style="--swatch:#F0F9FF"></span><b>Sky</b><code>#F0F9FF</code></div>
+        </div>
+      </article>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="prototype/assets/brand/brand-assets-data.js"></script>
+  <script src="brand-assets.js"></script>
+</body>
+</html>

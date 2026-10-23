@@ -14,7 +14,7 @@ Kết quả dưới đây thuộc bản V7 trước đợt thay tab/welcome/Deta
 |---|---|---|
 | Domain/core | 22/22 | Tính lịch, must-visits, giới hạn, protected prefix, unknown intent |
 | App state | 28/28 | Action/mutation guards trong NodeVM, không là browser test |
-| Asset/static | 32/32 | WAV có nội dung, reference hợp lệ, 9 solid-color pairs đạt 4.5:1 |
+| Asset/static | 34/34 | WAV có nội dung, reference hợp lệ, production logo SVG/Brand Assets và 9 solid-color pairs đạt 4.5:1 |
 | Browser UI | 24 observed-pass, 2 inconclusive | Flow cũ đã quan sát; không coi 2 case inconclusive là pass |
 | Origin unreachable | Shell reload + audio played to end | Sau cache đủ, tắt server local rồi mở lại và nghe Cathedral WAV |
 
@@ -26,9 +26,9 @@ Xem [evidence README](../evidence/README.md), [browser review](../evidence/brows
 |---|---|---|
 | Core/domain | 22/22 | [core-tests.txt](../evidence/core-tests.txt); engine fixture và constraints; không live route/model/GPS |
 | App state mở rộng | 63/63 | [app-state-tests.json](../evidence/app-state-tests.json), run 23/10/2026; app hash nằm trong JSON. DOM/Audio giả trong Node VM; không layout, media hoặc service worker thật. |
-| Asset/static | 32/32 | `assets-and-contrast.json`, snapshot 23/10/2026; 5 WAV có data, local refs/shell dependencies và 9 cặp màu được chỉ định. Không đo toàn bộ CSS/ảnh/gradient mới. |
+| Asset/static | 34/34 | `assets-and-contrast.json`, snapshot 23/10/2026; 5 WAV có data, local refs/shell dependencies, production logo SVG/Brand Assets và 9 cặp màu được chỉ định. Không đo toàn bộ CSS/ảnh/gradient mới. |
 
-App-state run hiện ghi `appSha256: 4d5b82dbe5e1b18fc25b083879fbacf676162818dbd4a5bb9a77d1feb5863b18`. 63 cases gồm các guard cũ và Start/dedup, một player/positions, AI context, welcome, optional guest/login/signup/recovery/profile/signout, actual speed/motion preferences và modal form behavior. Password test kiểm giá trị đã nhập không xuất hiện trong localStorage; đây không là security audit hoặc server authentication test.
+App-state run hiện ghi `appSha256: 33215db74c93db683662f539662e84d5feed1a239f9f027f6b4c9036b2370dbf`. 63 cases gồm các guard cũ và Start/dedup, một player/positions, AI context, welcome, optional guest/login/signup/recovery/profile/signout, actual speed/motion preferences và modal form behavior. Password test kiểm giá trị đã nhập không xuất hiện trong localStorage; đây không là security audit hoặc server authentication test.
 
 Không cộng 28 app baseline với 63 app refresh: suite mới chứa lại các guard cũ. App đổi sau timestamp/hash phải rerun phù hợp; các con số là kết quả snapshot, không cam kết cho mọi chỉnh sửa tiếp. VM pass không được quy thành browser/media/SW pass.
 

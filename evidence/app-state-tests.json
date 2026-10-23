@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-23T03:59:00.184Z",
+  "generatedAt": "2026-10-23T08:31:53.989Z",
   "suite": "V7 app action/state guards in Node VM",
   "environment": "v24.22.0",
   "scope": "Minimal DOM and fake Audio; real app.js, core.js and data.js are evaluated. No browser rendering, service worker, real audio, GPS, provider or live AI verified.",
-  "appSha256": "4d5b82dbe5e1b18fc25b083879fbacf676162818dbd4a5bb9a77d1feb5863b18",
+  "appSha256": "d3ac1d7fbe1bdce9156d64e02d9f09fed0d5766e11e1185c8c2f17886f0cec73",
   "passed": 63,
   "total": 63,
   "results": [

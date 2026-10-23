@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-23T03:58:31.596Z",
+  "generatedAt": "2026-10-23T08:33:08.596Z",
   "tool": "GoNarra V7 static assets and finite contrast-pair audit",
   "node": "v24.22.0",
   "counts": {
-    "passed": 32,
-    "total": 32,
+    "passed": 34,
+    "total": 34,
     "failed": 0,
     "realWavFiles": 5,
     "localImages": 6,
@@ -175,6 +175,23 @@
       "status": "PASS"
     },
     {
+      "name": "Production logo assets share the refined master geometry and have no live text",
+      "status": "PASS",
+      "detail": {
+        "productionSvgFiles": 7,
+        "master": "prototype/assets/brand/gonarra-logo-master.svg",
+        "kerning": "o/n 15; n/a, a/r, r/r, r/a 14 units"
+      }
+    },
+    {
+      "name": "Brand asset library is local, copy-enabled and linked from the prototype review panel",
+      "status": "PASS",
+      "detail": {
+        "copyMethod": "ClipboardItem HTML/SVG with rich-selection fallback",
+        "runtimeLogo": "prototype/assets/brand/gonarra-wordmark-color.svg"
+      }
+    },
+    {
       "name": "Stylesheet imports and file URLs have no missing or remote runtime dependencies",
       "status": "PASS"
     },
@@ -190,7 +207,9 @@
           "data.js",
           "core.js",
           "visuals.js",
-          "app.js"
+          "app.js",
+          "assets/brand/gonarra-wordmark-color.svg",
+          "assets/brand/gonarra-mark-color.svg"
         ],
         "limit": "File existence only; install/fetch/cache behavior must be tested in a browser."
       }
@@ -587,6 +606,16 @@
       "from": "prototype/sw.js",
       "ref": "app.js",
       "file": "prototype/app.js"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "assets/brand/gonarra-wordmark-color.svg",
+      "file": "prototype/assets/brand/gonarra-wordmark-color.svg"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "assets/brand/gonarra-mark-color.svg",
+      "file": "prototype/assets/brand/gonarra-mark-color.svg"
     }
   ],
   "networkDependencies": [],
@@ -682,7 +711,7 @@
   ],
   "inputs": {
     "dataSha256": "02812d3bdd92d47f6d31d9a133fd37191cf2c2426f0bdd3c921e7cd5ab648d4b",
-    "htmlSha256": "2143fa9cde2b79f5f699f8f375e8271774240df6f5af1a5867f8e13f60e6e103",
-    "swSha256": "c03cbe7c33d88c6081d21000191b265fdae29d972ca7b21e4be624c2530ae503"
+    "htmlSha256": "5533ce0f1b505232f4cd004d221a6bec379cb9a83a4310df15c2eca59d700cee",
+    "swSha256": "b5ea6e4445934ffdc72b6ccbb8044165642b74c59e560d92fa4f38dd61d8e4ec"
   }
 }

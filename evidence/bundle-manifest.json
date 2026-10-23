@@ -3,6 +3,18 @@
     "bytes": 47,
     "sha256": "0aa5275d879b8a9d716184f17bea1fe7e0de8f5d6ff08fe1708b51bab298739b"
   },
+  "brand-assets.css": {
+    "bytes": 6764,
+    "sha256": "c12e4a1e276c4cdff4048eef6572064678fd773ce97cde7a0beab6ad267be4ff"
+  },
+  "brand-assets.html": {
+    "bytes": 3343,
+    "sha256": "3525f19f77416102aeafe33c90be36d8b131e1bba1dda2b76e3e0fe413682660"
+  },
+  "brand-assets.js": {
+    "bytes": 2927,
+    "sha256": "82300eca373939108dbaa3e3e54d07e0e50772bab52d55cd3c47c1ed982d79ad"
+  },
   "docs/01-Product-UX.md": {
     "bytes": 16165,
     "sha256": "631b86856fbe30b8ef9d9e8d7ae6ced70232fac8bf185488db823f660b5ff886"
@@ -28,20 +40,20 @@
     "sha256": "2bb1a5459d2300776a7ef9a29486df5860fe106a54a94b2f4b0ff48af7ef069b"
   },
   "docs/07-Design-System.md": {
-    "bytes": 7234,
-    "sha256": "757005d17f9fc9d0cd8b857ca02a8018fe2c4ea746bab17106b4e117d7223df0"
+    "bytes": 8430,
+    "sha256": "3bf42f1ba85416144fb418803856b0d21588922acdd748f5b3ca0bb12c891c9b"
   },
   "docs/08-Review-Results.md": {
-    "bytes": 7077,
-    "sha256": "039999547f8d818c34877a4b3d82c7c7efc6d83f835eb136100bf10662dff9d8"
+    "bytes": 7148,
+    "sha256": "a76f1070ed2210739d19b90efdc9e0a7da7509f9964327991aab0c8f573ea202"
   },
   "evidence/app-state-tests.json": {
     "bytes": 8945,
-    "sha256": "af43b69158f92d1bbe2234bd54663f75a08583f0d6b43d7bfbb31b72b67264e7"
+    "sha256": "cdc1c33daff27fa0294e96cd23c20c07a1e954733f15ac4963977ef270c9ac59"
   },
   "evidence/assets-and-contrast.json": {
-    "bytes": 18172,
-    "sha256": "32c7f07e7a74aad8b40f06c949b312c19ed5ab6f99a1ca0b58b624c1baf5e7a9"
+    "bytes": 19237,
+    "sha256": "f33674a2083167959c001a7edbb1264fb2829a2000ba2ec28be8a95eec2b9d2d"
   },
   "evidence/browser-refresh.json": {
     "bytes": 2426,
@@ -56,24 +68,24 @@
     "sha256": "b3302ce71e2041bdefcb6ac602706a5eba79f679a88ddbbee2fe7adbe3374a26"
   },
   "evidence/README.md": {
-    "bytes": 1360,
-    "sha256": "2c404bea530fb29445cf502813c326a595de58156c6ee0b2a718d380f53c8143"
+    "bytes": 1394,
+    "sha256": "c5c7615b8cbb1bd8d4fd9a8b8bf595bc0116dbc1bfb7a52f690ffa32edd18955"
   },
   "index.html": {
-    "bytes": 12540,
-    "sha256": "19f5503f74e2fe4b19d1b2dd9a5e4ccc6424489d5228967f721fe95f4cff7d2b"
+    "bytes": 12679,
+    "sha256": "9cbaa8155f3cc0632f4ee31e7c263bac29fccadfbf70d9d6d044c34a37edd2f6"
   },
   "Open-GoNarra.command": {
     "bytes": 109,
     "sha256": "ed51c7cc609b733fd849dfe34613d97a824dd4982dd642e320a403016474eb02"
   },
   "Product-Handbook.html": {
-    "bytes": 129859,
-    "sha256": "e5f110208b0053d200ac288fc43dd9877dff392b122dc013d8c0b00c9225bd14"
+    "bytes": 131345,
+    "sha256": "50bc8223bc61ad8cd74dde453e7b32ec131b25f188dde2fc988945be0ea42cfb"
   },
   "prototype/app.js": {
-    "bytes": 154226,
-    "sha256": "4d5b82dbe5e1b18fc25b083879fbacf676162818dbd4a5bb9a77d1feb5863b18"
+    "bytes": 154391,
+    "sha256": "d3ac1d7fbe1bdce9156d64e02d9f09fed0d5766e11e1185c8c2f17886f0cec73"
   },
   "prototype/assets/audio/beach.wav": {
     "bytes": 1655990,
@@ -98,6 +110,50 @@
   "prototype/assets/beach.png": {
     "bytes": 2344949,
     "sha256": "ce76a85d3c3f846016ba47dd6773d2c81385147fe82c88a3d2a131f660fecf5a"
+  },
+  "prototype/assets/brand/brand-assets-data.js": {
+    "bytes": 13763,
+    "sha256": "556896868a0d26a9ed605ac0c306e384c58c1b7f34ac839dba7dd45a3157ef34"
+  },
+  "prototype/assets/brand/brand-tokens.json": {
+    "bytes": 1033,
+    "sha256": "3a1885f2ec929c3c4a77da7879368bf7d4bd490d23a98b7ab1d6f521534fadc5"
+  },
+  "prototype/assets/brand/gonarra-app-icon.svg": {
+    "bytes": 615,
+    "sha256": "fdcd5282c10a4bdb437646a4577732601ff609a41dd4d60be3c27b09bba345da"
+  },
+  "prototype/assets/brand/gonarra-logo-master.svg": {
+    "bytes": 4285,
+    "sha256": "e3ab4ae581975faf56eba9913de73b6681e3889de61c87981371c80a85f918c5"
+  },
+  "prototype/assets/brand/gonarra-mark-color.svg": {
+    "bytes": 562,
+    "sha256": "c56bbe8570ad3c4e65b44e065b0a3e73cd3c926b9a2c5adf411f09b3d9198bfa"
+  },
+  "prototype/assets/brand/gonarra-mark-reverse.svg": {
+    "bytes": 562,
+    "sha256": "2493cf816e00973699de3513046f5fa3fd2c9a137f222bcd02747995a83ba270"
+  },
+  "prototype/assets/brand/gonarra-wordmark-color.svg": {
+    "bytes": 1535,
+    "sha256": "c6c6f8fe2273f8e4039350459cb901472747bfcc94e170a1e780556117bb8490"
+  },
+  "prototype/assets/brand/gonarra-wordmark-mono.svg": {
+    "bytes": 1520,
+    "sha256": "f5a9578b0de554c4a6f5ba7919160cad1f3f9f9b3e1d03c25b3f55fdfa745319"
+  },
+  "prototype/assets/brand/gonarra-wordmark-reverse.svg": {
+    "bytes": 1520,
+    "sha256": "5cd3a3f1d4ef0ba4643d994fc1a657a25fdffbd9be5f2c477d09bbb48c6f284d"
+  },
+  "prototype/assets/brand/gonarra-wordmark-tagline-color.svg": {
+    "bytes": 5227,
+    "sha256": "2dd6c83559a90f9d4dab70b86bf1bc8d6d5262aec7dc92d8ff673728abcbeaf9"
+  },
+  "prototype/assets/brand/README.md": {
+    "bytes": 1067,
+    "sha256": "dbd353b1d3051afd2568d676fd950fa059f65ac88783ed8b4e06b5b794b28dfd"
   },
   "prototype/assets/cathedral.png": {
     "bytes": 2612953,
@@ -124,28 +180,28 @@
     "sha256": "02812d3bdd92d47f6d31d9a133fd37191cf2c2426f0bdd3c921e7cd5ab648d4b"
   },
   "prototype/index.html": {
-    "bytes": 754,
-    "sha256": "2143fa9cde2b79f5f699f8f375e8271774240df6f5af1a5867f8e13f60e6e103"
+    "bytes": 838,
+    "sha256": "5533ce0f1b505232f4cd004d221a6bec379cb9a83a4310df15c2eca59d700cee"
   },
   "prototype/styles.css": {
     "bytes": 17567,
     "sha256": "2180418e6b6aa49b4c510d3c470d0b64e92798395be0bf9cd5764e7196f0b694"
   },
   "prototype/sw.js": {
-    "bytes": 2220,
-    "sha256": "c03cbe7c33d88c6081d21000191b265fdae29d972ca7b21e4be624c2530ae503"
+    "bytes": 2300,
+    "sha256": "b5ea6e4445934ffdc72b6ccbb8044165642b74c59e560d92fa4f38dd61d8e4ec"
   },
   "prototype/theme.css": {
-    "bytes": 67582,
-    "sha256": "bab5f42a74abe5aa5114bc064a0f81fdc95314717856f66a6309a5b8eef18e2b"
+    "bytes": 68271,
+    "sha256": "2d66ce11c06d443e1584db33087988902fa0a82640d5b58300fe3852585d7da1"
   },
   "prototype/visuals.js": {
     "bytes": 15206,
     "sha256": "e05466dd8eb2404f515a1881e39b9c190893a1f579bcaa390c9cd746f6c8fd70"
   },
   "README.md": {
-    "bytes": 7878,
-    "sha256": "338875eb3bf1c49917ab6b4fedc9c24ea6324df40cd72215fd2bce5235145313"
+    "bytes": 8374,
+    "sha256": "cb52d0601e5a756f7f5f6895e4fba6263675676c805569653b0b0a94e98062a4"
   },
   "screens/arrival.png": {
     "bytes": 45115,
@@ -251,17 +307,21 @@
     "bytes": 39389,
     "sha256": "62ec3893f6cd162a0a30459a50e5ca07d97cef4c0d59fc05ff39f1719150cf18"
   },
+  "scripts/build-brand-assets.cjs": {
+    "bytes": 11081,
+    "sha256": "157f38a2bbd92d5e2817a7d7121f75b2a3cff256a6659802121c2145c6b0f3a0"
+  },
   "scripts/build-handbook.mjs": {
-    "bytes": 14768,
-    "sha256": "69488e60a353f48d6edaff310834ffbdd4380060143051b82f017b63e229afcc"
+    "bytes": 15013,
+    "sha256": "4be3dbab893e5b8ec9fb41cf91cfc3a14f816933972f63b30b6cf84c25faafc3"
   },
   "scripts/build-manifest.cjs": {
     "bytes": 1075,
     "sha256": "2d9fb6d4b86a9a5455fcc6e06743379824e7277a6f496a0e868d02863f5d78e2"
   },
   "scripts/check-assets.cjs": {
-    "bytes": 14048,
-    "sha256": "cdd702afa2e09c396ff539169a1ff505d5340accb8f09f0e200934eef435dd40"
+    "bytes": 16716,
+    "sha256": "e7c59f64ba359706d92c79e453598547e46ee8a6865199258fc774b9a77fe2a3"
   },
   "scripts/serve.py": {
     "bytes": 689,

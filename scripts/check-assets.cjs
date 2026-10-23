@@ -117,6 +117,30 @@ check('Prototype HTML JS/CSS dependencies exist locally, including visuals and t
   assert.ok(scriptRefs.indexOf('data.js')<scriptRefs.indexOf('core.js'),'Data must load before the engine.');
   assert.ok(scriptRefs.indexOf('visuals.js')<scriptRefs.indexOf('app.js'),'Visual helpers must load before app.js.');
 });
+check('Production logo assets share the refined master geometry and have no live text',()=>{
+  const brandDir=path.join(prototype,'assets','brand');
+  const expected=['gonarra-wordmark-color.svg','gonarra-wordmark-tagline-color.svg','gonarra-wordmark-reverse.svg','gonarra-wordmark-mono.svg','gonarra-mark-color.svg','gonarra-mark-reverse.svg','gonarra-app-icon.svg'];
+  for(const name of expected){
+    const file=path.join(brandDir,name);assert.ok(fs.existsSync(file),'Missing brand asset '+name);
+    const svg=fs.readFileSync(file,'utf8');assert.match(svg,/^<svg\b/,'Brand asset is not standalone SVG: '+name);assert.ok(!/<text\b/i.test(svg),'Production logo contains live text: '+name);
+    assert.match(svg,/#0B3045|#FFFFFF|#000000/,'Brand asset has no approved base color: '+name);
+  }
+  const primary=fs.readFileSync(path.join(brandDir,'gonarra-wordmark-color.svg'),'utf8');
+  for(const id of ['letter-g','letter-o','letter-n','letter-a-1','letter-r-1','letter-r-2','letter-a-2'])assert.ok(primary.includes(`id="${id}"`),'Primary wordmark misses '+id);
+  assert.match(primary,/#0B8EA8/);assert.match(primary,/#F6A623/);assert.match(primary,/stroke-width="26"/);
+  const mark=fs.readFileSync(path.join(brandDir,'gonarra-mark-color.svg'),'utf8');
+  assert.match(mark,/id="gonarra-g"/);assert.match(mark,/id="gonarra-sun"/);
+  return {productionSvgFiles:expected.length,master:'prototype/assets/brand/gonarra-logo-master.svg',kerning:'o/n 15; n/a, a/r, r/r, r/a 14 units'};
+});
+check('Brand asset library is local, copy-enabled and linked from the prototype review panel',()=>{
+  const page=fs.readFileSync(path.join(base,'brand-assets.html'),'utf8'),app=fs.readFileSync(path.join(prototype,'app.js'),'utf8'),sw=fs.readFileSync(path.join(prototype,'sw.js'),'utf8');
+  for(const ref of ['brand-assets.css','brand-assets.js','prototype/assets/brand/brand-assets-data.js','prototype/assets/brand/gonarra-logo-master.svg'])assert.ok(fs.existsSync(path.join(base,ref)),'Missing brand library dependency '+ref);
+  assert.match(page,/data-copy-master/);assert.match(page,/id="asset-grid"/);assert.match(app,/brand-assets\.html/);assert.match(app,/gonarra-wordmark-color\.svg/);
+  assert.ok(!app.includes('<span class="brand-mark"'),'Legacy headphone/text logo is still rendered by the prototype.');
+  assert.match(sw,/assets\/brand\/gonarra-wordmark-color\.svg/);assert.match(sw,/assets\/brand\/gonarra-mark-color\.svg/);
+  assert.ok(!/<script[^>]+src=["']https?:/i.test(page),'Brand library must not load remote scripts.');
+  return {copyMethod:'ClipboardItem HTML/SVG with rich-selection fallback',runtimeLogo:'prototype/assets/brand/gonarra-wordmark-color.svg'};
+});
 check('Stylesheet imports and file URLs have no missing or remote runtime dependencies',()=>{
   for(const ref of styleRefs){
     if(/^(?:https?:)?\/\//i.test(ref))continue;

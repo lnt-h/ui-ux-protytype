@@ -8,6 +8,14 @@ Frame review theo yêu cầu **402×874 logical px**, export **1206×2622 ở 3�
 
 Một font system hỗ trợ Vietnamese: `-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`. Body 16 CSS px, line-height khoảng 1.5; heading theo hierarchy, không dùng font thứ hai để trang trí. 16 CSS px là baseline prototype, không tuyên bố bằng default 17 pt iOS. Chữ quan trọng không truncate. Control mục tiêu tối thiểu **44×44 logical px**; spacing đủ tránh chạm nhầm. Gutter 20, compact 16; spacing 4/8/12/16/20/24/32. Native đo/tune lại theo platform.
 
+## Logo và handoff Figma
+
+Logo trong prototype lấy trực tiếp từ `prototype/assets/brand/`, không dựng lại bằng text/CSS và không dùng icon tai nghe thay thế. `gonarra-wordmark-color.svg` là production wordmark mặc định; `gonarra-logo-master.svg` là sheet trình bày để import vào Figma. Trang `brand-assets.html` cho phép copy SVG hoặc tải từng file mà không cần thư viện ngoài.
+
+Wordmark dùng hệ nét bo tròn 26 unit và kerning quang học đã cân lại: o/n 15, n/a 14, a/r 14, r/r 14, r/a 14 unit. Không áp thêm `letter-spacing` trong code hoặc Figma. Minimum: wordmark 60 px, logo có tagline 200 px, g mark 16 px; clear space tối thiểu bằng một chiều cao thị giác của chữ o. Chữ g của icon và wordmark dùng đúng một master hình học. Tagline trong asset production đã outline và không phụ thuộc font.
+
+Token thương hiệu: Deep Ocean `#0B3045`, Teal `#0B8EA8`, Sun `#F6A623`, Sky `#F0F9FF`. Chấm Sun giữ màu cam ở bản full-color/reverse; bản đơn sắc đổi đồng bộ. Không kéo giãn, không xoay, không outline, không đổ bóng và không đổi riêng màu chấm.
+
 ## Màu theo vai trò
 
 | Token | Màu | Vai trò |

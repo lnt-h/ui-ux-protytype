@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="190" viewBox="0 0 800 190" role="img"><title>Gonarra wordmark</title><desc>Hand-authored Gonarra vector wordmark with optically balanced character spacing.</desc><defs><linearGradient id="gonarra-gradient" x1="385" y1="0" x2="790" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0B3045"/><stop offset="1" stop-color="#0B8EA8"/></linearGradient></defs>
+  <g id="letter-g" transform="translate(8 0)"><g id="gonarra-g" fill="none" stroke="#0B3045" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="72" cy="73" r="39"/>
+    <path d="M110 49V122C110 151 93 171 67 171C48 171 34 165 22 154"/>
+  </g><circle id="gonarra-sun" cx="139" cy="17" r="11.5" fill="#0B3045"/></g>
+  <g id="letters-go-n" fill="none" stroke="#0B3045" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <circle id="letter-o" cx="212" cy="82" r="38"/>
+    <path id="letter-n" d="M291 128V54M291 84C291 61 307 49 329 49C348 49 359 63 359 85V128"/>
+  </g>
+  <g id="letters-arra" fill="none" stroke="#0B3045" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <circle id="letter-a-1" cx="437" cy="84" r="38"/><path d="M475 51V128"/>
+    <path id="letter-r-1" d="M516 128V54M516 83C516 61 532 49 550 49C558 49 564 51 568 54"/>
+    <path id="letter-r-2" d="M609 128V54M609 83C609 61 625 49 643 49C651 49 657 51 661 54"/>
+    <circle id="letter-a-2" cx="738" cy="84" r="38"/><path d="M776 51V128"/>
+  </g></svg>

@@ -8,6 +8,7 @@ Repo này là bản standalone để mở trực tiếp trong VS Code. Toàn b�
 
 - Mở `index.html` để đọc handbook và xem prototype nhúng.
 - Mở `prototype/index.html` trực tiếp để thử welcome, tạo/sửa tour, nghe audio và lưu tiến độ.
+- Mở `brand-assets.html` để xem, copy SVG trực tiếp sang Figma hoặc tải từng phiên bản logo.
 - Để kiểm tra download/offline: chạy `python3 scripts/serve.py`, rồi mở **http://127.0.0.1:8767/prototype/**. Trên macOS có thể chạy `Open-GoNarra.command`.
 - Offline cần localhost/HTTPS và browser hỗ trợ Service Worker/Cache API. Mở bằng `file://` không hỗ trợ tính năng này.
 - Không cài thư viện, không cần API key. Python chỉ phục vụ file local; prototype không có backend.
@@ -43,6 +44,8 @@ Chế độ người dùng mặc định có Profile và Settings riêng. Thêm 
 ## Tài liệu
 
 - `Product-Handbook.html`: toàn bộ 8 tài liệu, có mục lục.
+- `brand-assets.html`: thư viện logo có Copy SVG/Download; dùng chung source với logo trong prototype.
+- `prototype/assets/brand/`: master SVG, production variants, token JSON và hướng dẫn import Figma.
 - `docs/01-Product-UX.md`: phạm vi và inventory.
 - `docs/02-Flow-State-Contract.md`: dữ liệu, trạng thái và thay đổi.
 - `docs/03-AI-Offline-Contract.md`: AI, audio, cache và tích hợp tương lai.
@@ -55,7 +58,7 @@ Chế độ người dùng mặc định có Profile và Settings riêng. Thêm 
 
 ## Kiểm tra lại
 
-Chạy `node scripts/test-core.cjs`, `node scripts/test-app.cjs` và `node scripts/check-assets.cjs`. Các bài kiểm tra dùng Node sẵn có, không dependency install. Run refresh ghi **22/22 core, 63/63 app-state trong Node VM và 32/32 asset/static checks**; app hash/timestamp trong evidence. VM không kiểm rendering/media/service worker thật, static contrast chỉ 9 cặp được chỉ định.
+Chạy `node scripts/test-core.cjs`, `node scripts/test-app.cjs` và `node scripts/check-assets.cjs`. Các bài kiểm tra dùng Node sẵn có, không dependency install. Run hiện tại ghi **22/22 core, 63/63 app-state trong Node VM và 34/34 asset/static checks**; app hash/timestamp trong evidence. Hai kiểm tra asset mới xác nhận bộ SVG production không có live text, dùng chung hình học g và trang Brand Assets hoạt động hoàn toàn local. VM không kiểm rendering/media/service worker thật, static contrast chỉ 9 cặp được chỉ định.
 
 Browser refresh ở localhost:8770 đã quan sát welcome, Home/Detail, quick-plan 4h → proposal 3 stops → Start trực tiếp, focused Ask, WAV Play/Pause/progress, optional demo login/Profile, Settings và one-tap download/đúng package. Xem `evidence/browser-refresh.json`; `evidence/browser-review.json` là baseline trước refresh. Bản refresh này chưa lặp lại test ngắt mạng/tắt server rồi reload; không nhận Ready badge là bằng chứng offline playback mới.
 

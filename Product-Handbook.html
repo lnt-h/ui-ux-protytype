@@ -13,7 +13,7 @@ code{font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:#ed
 blockquote{margin:20px 0;padding:13px 18px;border-left:4px solid #5483b3;background:#edf4fa}blockquote p:last-child{margin-bottom:0}img{display:block;max-width:100%;border-radius:15px}
 li+li{margin-top:7px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;background:#052659;color:#fff;border-radius:13px;padding:11px 18px;text-decoration:none;font-weight:700;font-size:14px}
 .button.secondary{color:#052659;background:#e9f1f9;border:1px solid #d4e2ed}.pill{display:inline-block;background:#dceffc;color:#244d72;border-radius:8px;padding:6px 10px;font-size:10px;font-weight:750;letter-spacing:1px;text-transform:uppercase}
-.top{max-width:1160px;margin:auto;padding:45px 30px 35px}.projectbar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-bottom:32px}.wordmark{font-size:24px;font-weight:800;letter-spacing:-1px;color:#052659;text-decoration:none}
+.top{max-width:1160px;margin:auto;padding:45px 30px 35px}.projectbar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-bottom:32px}.wordmark{display:inline-flex;color:#052659;text-decoration:none}.wordmark img{display:block;width:146px;height:auto;border-radius:0}
 .intro-grid{display:grid;grid-template-columns:minmax(0,1fr) 416px;gap:50px;align-items:start}.intro-grid h1{font-size:53px;line-height:1.07;letter-spacing:-1.9px;margin:20px 0}.intro-grid .lead{font-size:16px;line-height:1.8;max-width:520px;color:#4a5c6a}
 .link-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:21px 0}.swatches{display:flex;gap:8px;margin:27px 0}.swatches span{width:38px;height:38px;border-radius:13px;border:1px solid #02102409}
 .callout{padding:16px 18px;border-radius:15px;background:#e9f1f8;color:#3a5970;font-size:13px;line-height:1.7}.preview-label{text-align:center;color:#4a6478;font-size:12px;margin:0 0 12px}
@@ -28,7 +28,7 @@ iframe{display:block;border:0;width:402px;height:874px;background:#fff}.toc-grid
 @media(max-width:440px){.iframewrap{display:none}.preview-label{display:none}.intro-grid>div:last-child{display:none}}
 @media print{aside,.button,.iframewrap,.preview-label,.projectbar{display:none}.shell,.intro-grid{display:block;padding:0}.top{padding:0}section{border:0;break-before:page;padding:0}table{display:table;font-size:10px}h1{font-size:26pt}a{color:inherit}.toc-grid,.feature-grid{display:block}}
 </style>
-<div class="shell"><aside><span class="pill">GoNarra V7 · cập nhật tại chỗ</span><h2>Product & design</h2><a href="index.html">← Tổng quan dự án</a><a class="button" href="prototype/index.html">Mở prototype ↗</a><hr><a href="#doc-1">GoNarra V7 — Sản phẩm và UX</a><a href="#doc-2">GoNarra V7 — Flow, state và bảo toàn dữ liệu</a><a href="#doc-3">GoNarra V7 — Hợp đồng AI, audio và offline</a><a href="#doc-4">GoNarra V7 — Kiểm chứng và bàn giao</a><a href="#doc-5">GoNarra V7 — Nội dung, nguồn và quyền sử dụng</a><a href="#doc-6">Nghiên cứu thực hành mobile UX</a><a href="#doc-7">GoNarra V7 — Design system</a><a href="#doc-8">Kết quả review và bàn giao</a><hr><a href="evidence/README.md">Cách đọc evidence</a><a href="evidence/browser-review.json">Quan sát browser</a></aside>
+<div class="shell"><aside><span class="pill">GoNarra V7 · cập nhật tại chỗ</span><h2>Product & design</h2><a href="index.html">← Tổng quan dự án</a><a class="button" href="prototype/index.html">Mở prototype ↗</a><a href="brand-assets.html">Copy logo / Brand assets ↗</a><hr><a href="#doc-1">GoNarra V7 — Sản phẩm và UX</a><a href="#doc-2">GoNarra V7 — Flow, state và bảo toàn dữ liệu</a><a href="#doc-3">GoNarra V7 — Hợp đồng AI, audio và offline</a><a href="#doc-4">GoNarra V7 — Kiểm chứng và bàn giao</a><a href="#doc-5">GoNarra V7 — Nội dung, nguồn và quyền sử dụng</a><a href="#doc-6">Nghiên cứu thực hành mobile UX</a><a href="#doc-7">GoNarra V7 — Design system</a><a href="#doc-8">Kết quả review và bàn giao</a><hr><a href="evidence/README.md">Cách đọc evidence</a><a href="evidence/browser-review.json">Quan sát browser</a></aside>
 <main><header><p class="eyebrow">Hear stories. Discover your day.</p><h1>Một trải nghiệm liền mạch.<br>Mọi thay đổi có chủ đích.</h1><p class="muted">8 tài liệu về sản phẩm, luồng trạng thái, UI/UX mobile, AI, audio và offline. Thiết kế welcome ba bước, Home · Explore · AI Guide · Trips, nghe ngay tại Detail và Start trực tiếp trên source V7 hiện có.</p><p class="callout">Các quy tắc thiết kế và acceptance không tự là kết quả đã kiểm thử. Đọc thời điểm, phạm vi và hash trong evidence để phân biệt baseline với lần chạy trên source hiện tại.</p></header><section id="doc-1"><h1>GoNarra V7 — Sản phẩm và UX</h1>
 <p>Cập nhật ngày <strong>23/10/2026</strong>, trực tiếp trên source V7 hiện có. Tài liệu mô tả thiết kế được chốt và các hành vi cần kiểm; chưa phải bằng chứng sản phẩm native, kết quả UAT hay xác nhận thị trường. UI dùng English; bộ tài liệu dùng tiếng Việt. Kết quả thực nằm trong <code>evidence/</code> và được giải thích ở <a href="#doc-4">04-Validation-Handoff.md</a>. Các kết quả trước đợt chỉnh UI không tự áp dụng cho source mới. Cơ sở UX ở <a href="#doc-6">06-Mobile-UX-Research.md</a>, tokens/layout ở <a href="#doc-7">07-Design-System.md</a>.</p>
 <h2>1. Sản phẩm được chốt</h2>
@@ -1244,6 +1244,10 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 <h2>Frame, layout và type</h2>
 <p>Frame review theo yêu cầu <strong>402×874 logical px</strong>, export <strong>1206×2622 ở 3×</strong>. Status bar/safe-area trong ảnh prototype là chrome minh họa, không là OS thật. Native dùng safe-area thực theo thiết bị/orientation; không hardcode phần inset từ ảnh vào mọi máy. Browser rộng/hẹp vẫn responsive, form/list cuộn được.</p>
 <p>Một font system hỗ trợ Vietnamese: <code>-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif</code>. Body 16 CSS px, line-height khoảng 1.5; heading theo hierarchy, không dùng font thứ hai để trang trí. 16 CSS px là baseline prototype, không tuyên bố bằng default 17 pt iOS. Chữ quan trọng không truncate. Control mục tiêu tối thiểu <strong>44×44 logical px</strong>; spacing đủ tránh chạm nhầm. Gutter 20, compact 16; spacing 4/8/12/16/20/24/32. Native đo/tune lại theo platform.</p>
+<h2>Logo và handoff Figma</h2>
+<p>Logo trong prototype lấy trực tiếp từ <code>prototype/assets/brand/</code>, không dựng lại bằng text/CSS và không dùng icon tai nghe thay thế. <code>gonarra-wordmark-color.svg</code> là production wordmark mặc định; <code>gonarra-logo-master.svg</code> là sheet trình bày để import vào Figma. Trang <code>brand-assets.html</code> cho phép copy SVG hoặc tải từng file mà không cần thư viện ngoài.</p>
+<p>Wordmark dùng hệ nét bo tròn 26 unit và kerning quang học đã cân lại: o/n 15, n/a 14, a/r 14, r/r 14, r/a 14 unit. Không áp thêm <code>letter-spacing</code> trong code hoặc Figma. Minimum: wordmark 60 px, logo có tagline 200 px, g mark 16 px; clear space tối thiểu bằng một chiều cao thị giác của chữ o. Chữ g của icon và wordmark dùng đúng một master hình học. Tagline trong asset production đã outline và không phụ thuộc font.</p>
+<p>Token thương hiệu: Deep Ocean <code>#0B3045</code>, Teal <code>#0B8EA8</code>, Sun <code>#F6A623</code>, Sky <code>#F0F9FF</code>. Chấm Sun giữ màu cam ở bản full-color/reverse; bản đơn sắc đổi đồng bộ. Không kéo giãn, không xoay, không outline, không đổ bóng và không đổi riêng màu chấm.</p>
 <h2>Màu theo vai trò</h2>
 <table>
 <thead>
@@ -1345,8 +1349,8 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 </tr>
 <tr>
 <td>Asset/static</td>
-<td>32/32</td>
-<td>WAV có nội dung, reference hợp lệ, 9 solid-color pairs đạt 4.5:1</td>
+<td>34/34</td>
+<td>WAV có nội dung, reference hợp lệ, production logo SVG/Brand Assets và 9 solid-color pairs đạt 4.5:1</td>
 </tr>
 <tr>
 <td>Browser UI</td>
@@ -1381,11 +1385,11 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 </tr>
 <tr>
 <td>Asset/static</td>
-<td>32/32</td>
-<td><code>assets-and-contrast.json</code>, snapshot 23/10/2026; 5 WAV có data, local refs/shell dependencies và 9 cặp màu được chỉ định. Không đo toàn bộ CSS/ảnh/gradient mới.</td>
+<td>34/34</td>
+<td><code>assets-and-contrast.json</code>, snapshot 23/10/2026; 5 WAV có data, local refs/shell dependencies, production logo SVG/Brand Assets và 9 cặp màu được chỉ định. Không đo toàn bộ CSS/ảnh/gradient mới.</td>
 </tr>
 </tbody></table>
-<p>App-state run hiện ghi <code>appSha256: 4d5b82dbe5e1b18fc25b083879fbacf676162818dbd4a5bb9a77d1feb5863b18</code>. 63 cases gồm các guard cũ và Start/dedup, một player/positions, AI context, welcome, optional guest/login/signup/recovery/profile/signout, actual speed/motion preferences và modal form behavior. Password test kiểm giá trị đã nhập không xuất hiện trong localStorage; đây không là security audit hoặc server authentication test.</p>
+<p>App-state run hiện ghi <code>appSha256: 33215db74c93db683662f539662e84d5feed1a239f9f027f6b4c9036b2370dbf</code>. 63 cases gồm các guard cũ và Start/dedup, một player/positions, AI context, welcome, optional guest/login/signup/recovery/profile/signout, actual speed/motion preferences và modal form behavior. Password test kiểm giá trị đã nhập không xuất hiện trong localStorage; đây không là security audit hoặc server authentication test.</p>
 <p>Không cộng 28 app baseline với 63 app refresh: suite mới chứa lại các guard cũ. App đổi sau timestamp/hash phải rerun phù hợp; các con số là kết quả snapshot, không cam kết cho mọi chỉnh sửa tiếp. VM pass không được quy thành browser/media/SW pass.</p>
 <h2>Browser refresh đã quan sát</h2>
 <p>Môi trường: browser desktop, prototype phục vụ tại <strong>localhost:8770</strong>, khung review iPhone 17. Các thao tác thực và phạm vi ghi ở <a href="evidence/browser-refresh.json">browser-refresh.json</a>; ledger này độc lập với <code>browser-review.json</code> baseline.</p>
