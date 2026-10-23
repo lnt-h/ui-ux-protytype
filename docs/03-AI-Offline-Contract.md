@@ -1,6 +1,6 @@
 # GoNarra V7 — Hợp đồng AI, audio và offline
 
-Ngày: 22/10/2026. Phân biệt **hành vi browser thực**, **thuật toán demo** và **tích hợp sản phẩm sau này**. V7 không gọi LLM, không có navigation SDK, không AI chạy offline và không tài khoản/cloud sync. Không đổi các nhãn này chỉ vì UI có nút AI.
+Cập nhật ngày **23/10/2026** trên V7 hiện có. Phân biệt **hành vi browser thực**, **thuật toán demo** và **tích hợp sản phẩm sau này**. Tab AI Guide/sheet mới không làm engine thành LLM: V7 chưa gọi model, không navigation SDK hoặc AI chạy offline. Profile/login/reset là UI demo local, chưa server authentication/tài khoản thật/cloud sync.
 
 ## 1. Một thư viện, ba tác vụ trợ giúp
 
@@ -10,7 +10,7 @@ Template và personal trip cùng dùng Place/Story/Source IDs. AI không sáng t
 |---|---|---|
 | Create with AI | Local demo ranking/selection và scheduler trên fixture; có loading/error states | Đã gọi model, hiểu mọi yêu cầu hay tìm web thật |
 | Adjust remaining tour | Local supported requests → pending proposal → before/after → apply/keep | Tự tối ưu mọi constraint hoặc tự sửa accepted trip |
-| Ask about this place | Exact-question lookup từ các câu mẫu có source IDs; fallback cho câu không khớp | Semantic retrieval/live RAG, hiểu mọi hiện vật, nhớ conversation hoặc truy cập thông tin mới |
+| AI Guide / Ask | City/POI/current-trip context rõ; POI question dùng exact sample lookup có source IDs; city/trip hỗ trợ demo actions/giới hạn được công bố | Semantic retrieval/live RAG, hiểu mọi hiện vật, provider conversation memory hoặc thông tin mới |
 
 Manual editor, +15, skip/finish, tính tổng và mode comparison là quy tắc/chức năng phần mềm. Gọi route provider trong sản phẩm thật cũng không biến phép cộng thời gian thành LLM.
 
@@ -20,7 +20,7 @@ Orb gradient/stage labels ở màn generating là visual feedback cho workflow d
 
 ### Đầu vào có thể xử lý
 
-Start/end lựa chọn, ngày/giờ dự kiến, time budget, mode fixture, interests/pace, must-keep/locked IDs và plan revision. Free text chỉ được hiểu trong các request demo công bố. Tag “ít bậc thang” hoặc mode fixture không phải xác nhận đường đi/accessibility thật.
+Start/end lựa chọn, ngày/giờ dự kiến, time budget, mode fixture, interests/pace, must-keep/locked IDs và plan revision. Home có shortcut 2h/4h/6h đưa vào quick form; AI Guide có cùng cửa tạo lịch, không ép hội thoại để đổi mọi field. Free text chỉ được hiểu trong request demo công bố. Tag “ít bậc thang” hoặc mode fixture không phải xác nhận đường đi/accessibility thật.
 
 `core.adjust` hiện hỗ trợ bốn intent **More beach time**, **Less walking**, **Only culture**, **Make it 3 hours**, cùng các alias/cặp kết hợp được parser cho phép. “Less walking” không tự đổi car thành walking/taxi: trong fixture nó tránh tagged stairs venue hoặc rút bớt hành trình đi bộ khi được phép. Các yêu cầu mâu thuẫn hoặc câu ngoài supported intents bị từ chối; không dùng keyword nằm trong một câu bất kỳ để tự suy rằng đã hiểu cả câu.
 
@@ -28,13 +28,15 @@ Start/end lựa chọn, ngày/giờ dự kiến, time budget, mode fixture, inte
 
 Output phải dùng ID tồn tại, không duplicate, có ordered stops/durations/reasons và schedule từ core. Travel/visit/start/end legs và total phải có chung nguồn tính; fixture luôn có nhãn estimate/simulation. Nếu không đủ pool hoặc vượt constraint, giữ input/trip cũ và giải thích; không dùng địa điểm mới do model đoán để làm đầy kết quả.
 
-Đối với Adjust, proposal giữ base trip revision và phần được phép đổi. Locked/must-keep không tự bị bỏ; khi active, giữ past/current và chỉ đổi upcoming. Thay một điểm không cho phép tự thay cả ngày. Request không được hỗ trợ → nói phạm vi và giữ tour, không áp một output mặc định vô can với yêu cầu.
+Đối với Adjust, proposal giữ base trip revision và phần được phép đổi. Locked/must-keep không tự bị bỏ; khi active, giữ past/current và **chỉ đổi upcoming chưa khóa**. Review chỉ rõ protected prefix và locked upcoming. Yêu cầu không khả thi nhận lý do cụ thể (budget/pool/lock/demo scope), không âm thầm bỏ điểm. Thay một điểm không cho phép tự thay cả ngày. Request không được hỗ trợ → nói phạm vi và giữ tour, không áp output mặc định vô can.
 
 Preview phải cho biết stop bỏ/thêm/giữ, duration đổi, transfer đổi và total/end time. Apply là action duy nhất ghi accepted trip. Stale proposal hoặc trip đã chuyển current stop cần revalidate; không im lặng ghi state cũ. Keep current/Cancel không ghi gì. +15 dùng pending plan được mô tả riêng ở [02-Flow-State-Contract.md](02-Flow-State-Contract.md).
 
-## 3. Ask khác Adjust
+## 3. AI Guide và contextual Ask khác Adjust
 
-Ask nhận **selected POI**; nếu mở từ trip thì có thể lấy current stop làm mặc định, nhưng UI vẫn nói rõ “About [place]”. Hỏi một POI khác không sửa trip và không khẳng định khách đã tới POI đó. Không có camera/heading nên “chi tiết này” cần tên/đối tượng rõ trước khi trả lời.
+AI Guide là tab thay Plan, không là tab thứ năm. Ba scope **Da Nang / POI / Current trip** hiển thị bằng context chip. City scope có gợi ý khám phá/lập ngày và giới hạn demo; POI scope gắn ID thật trong corpus; trip scope đọc plan hiện tại và mở đề xuất Adjust khi được yêu cầu. Scope không biến một query thành mutation tự động; tạo/chỉnh lịch vẫn qua preview và xác nhận.
+
+Ask từ Detail mở sheet **selected POI** trên màn đang đọc; Ask từ focused navigation mở sheet current stop dù bottom tabs ẩn. Dismiss/Back trở về đúng màn, selection và context; nếu mở rộng toàn màn vẫn giữ đường về. Sheet và tab dùng chung engine/context rules, không hai bộ answer trái nhau. Hỏi POI khác không sửa trip và không khẳng định khách đã tới. Không camera/heading nên “chi tiết này” cần tên/đối tượng rõ trước khi trả lời. Mở sheet không tự Pause/Play audio.
 
 | Case | Hành vi bắt buộc |
 |---|---|
@@ -43,7 +45,7 @@ Ask nhận **selected POI**; nếu mở từ trip thì có thể lấy current s
 | Hỏi giờ/giá/entrance chưa xác minh | Nêu chưa xác minh và nguồn/cách kiểm; không nói đang mở/miễn phí/đúng cửa vào |
 | Nguồn mâu thuẫn/claim không có support | Không biến một URL liên quan thành chứng cứ cho claim; nêu giới hạn |
 | Lỗi provider trong sản phẩm tương lai | Phải khác insufficient evidence; V7 hiện không có provider thật hoặc Ask-specific failure injection, không nhận là nhánh đã kiểm |
-| Offline | Không tạo câu trả lời mới. Exact question đã lưu được mở với nhãn Saved answer/source IDs; hiện chưa lưu timestamp/revision riêng cho answer; sources link ngoài có thể cần mạng |
+| Offline | Không tạo POI answer/Adjust mới. Exact POI question đã lưu mở với nhãn Saved answer/source IDs; static city/help và lịch sử local đọc được, không AI inference. Chưa lưu timestamp/revision riêng; external source cần mạng |
 
 Suggested questions cho phép người review thấy đúng phạm vi có hỗ trợ. Free text vẫn có đường gửi, nhưng ngoài exact sample sẽ nhận fallback không bịa; không hứa hiểu paraphrase. Các câu mô tả giới hạn prototype có thể không có source bên ngoài và phải giữ cách diễn đạt đó. Source IDs thuộc POI/corpus đang dùng; answer-level source card là cue kiểm chứng, chưa chứng minh từng claim đúng. V7 không có embeddings/vector/semantic retrieval; không dùng từ “đã triển khai RAG” cho lookup local này.
 
@@ -57,6 +59,14 @@ Quy trình nội dung tối thiểu: claim → nguồn mở được → script 
 
 Player có Play/Pause/seek/resume khi file thật có; duration đọc từ metadata/media, không chỉ từ text fixture. File thiếu/lỗi → thông báo và transcript vẫn đọc. Không hiển thị progress giả như audio đang chạy. Download thiếu audio không trở thành “full audio package ready”.
 
+### Quy tắc một player và nghe ngoài trip
+
+- Detail có About/Story, hero ảnh hiện có và Listen phát ngay tại trang; transcript nằm cùng Story. Gallery ngang chỉ bổ sung khi có nhiều ảnh phù hợp; hiện không bịa thêm góc chụp. Không cần qua một màn player khác mới nhấn Play.
+- Full player, Detail và mini-player dùng **một Audio object**. Chủ động Play B khi A đang phát → lưu vị trí A, pause A, phát/resume B; không hỏi modal lặp cho một thao tác có thể đảo ngược.
+- Player luôn ghi đúng story đang nghe. Nếu đang nghe POI ngoài current stop, có Return to current stop; action chỉ trở lại context, không tự Play A. Người dùng chọn Continue listening nếu muốn resume A.
+- Đổi POI/audio không sửa current pointer/arrival/finished/skipped. Audio ended không advance và không tự resume bài trước. Không tự phát lại do Back hoặc đóng AI sheet.
+- Vị trí nghe từng bài được giữ trong phạm vi trạng thái app hỗ trợ; chưa là đồng bộ cross-device hay cam kết tiếp tục qua storage reset. Native interruptions/background/audio focus vẫn cần device test riêng.
+
 Audio theo địa điểm/đối tượng, không yêu cầu trip/arrival/GPS. Không autoplay theo location trong V7; không microphone/STT, spoken Ask answer hoặc runtime TTS. Tải/remux/script revision đổi phải nhận diện file mới; đổi duration của itinerary không tự thay nội dung audio.
 
 ## 5. Offline có điều kiện thật
@@ -67,7 +77,7 @@ Service worker/Cache API cần chạy trong origin phù hợp, ở đây là **l
 
 ### Nội dung và entry gói
 
-Download hiện theo **personal trip đã save**, không có package action riêng cho một POI/template chưa save. Template → Use this tour → Ready → Download là đường tới gói; story được cache trong một trip có thể mở độc lập ở Library. JSON export là snapshot để đọc/backup, **không** chứa audio bytes hay một file offline app độc lập.
+Download theo **personal trip**. Tour card/detail hiển thị badge và action một chạm; template action chuẩn bị/tái dùng personal copy rồi tải, không cần Start và không có Ready gate. Start có nudge tải trước, vẫn bấm được khi online mà chưa tải. Trips → Downloads quản lý dung lượng/cập nhật/xóa. Chưa có package riêng cho một POI; story cache qua trip mở độc lập trong Explore/Detail. JSON export là snapshot để đọc/backup, **không** chứa audio bytes hoặc một offline app độc lập.
 
 - App shell cần thiết để mở lại giao diện offline khi service worker/cache đã được chuẩn bị.
 - Saved itinerary/local text/transcript và metadata nguồn.
@@ -77,6 +87,8 @@ Không gồm map tiles/offline navigation, route computation/rerouting, live ETA
 
 Home/route/leg map là SVG minh họa trong bundle; việc nó vẫn render offline không làm nó thành bản đồ đường phố offline. Ba step mẫu trong Steps cũng không phải navigation service. Open Google Maps tạo HTTPS directions link thật tới destination fixture; Google Maps có availability riêng và điểm đến chưa field-verified. V7 không gọi geolocation hoặc tự phát hiện đã rẽ/đã tới.
 
+Đợt chỉnh UI không thêm weather provider: Home không hiển thị weather mẫu như forecast hiện tại. Nếu cần case Sample trong review sau này, phải ghi Sample ngay giá trị và không dùng nó để tự đổi itinerary. GPS thật, routes và weather là các integration riêng, không được suy ra từ map hoặc visual gradient.
+
 ### State download
 
 | State | Điều kiện | UX/hành động |
@@ -84,7 +96,7 @@ Home/route/leg map là SVG minh họa trong bundle; việc nó vẫn render offl
 | Not downloaded | Chưa có manifest/cache đầy đủ | Download; trip đã save vẫn là trip đã save |
 | Downloading | Đang fetch/cache item thật | Bytes/items dựa response; không phần trăm giả |
 | Ready | Download run đã fetch/cache xong các required files và commit manifest | Badge hiện theo manifest revision, không cache-probe từng item ở mỗi render; browser vẫn có thể evict |
-| Error | Có request/injection fail | Không commit gói mới; rollback newly-created entries, giữ manifest complete cũ; Retry/refresh cả run |
+| Error | Có request/injection fail | Hiện error/toast trong phiên; không commit gói mới; rollback newly-created entries, giữ manifest complete cũ; Retry/refresh cả run. Badge vẫn theo manifest, không persisted error flag. |
 | Needs update | Trip plan revision khác saved package revision | Package cũ còn; Update refresh manifest/files. V7 chưa có content-revision invalidator độc lập. |
 | Unavailable | Context/API/browser không hỗ trợ | Hướng dẫn môi trường phù hợp; vẫn đọc local plan nếu có |
 | Removed | User xóa gói/cache theo scope | Không tự xóa personal trip hoặc template gốc |
@@ -100,6 +112,10 @@ Progress actions không tăng plan revision nên Finish/skip/arrival không làm
 ## 6. Local state khi offline
 
 V7 là guest/local-only: save/edit/arrival/finish/skip ghi dữ liệu local theo state contract, không là thao tác server chờ sync. UI không báo “synced to your account”. Không tự đưa lại kiến trúc offline mutation queue của tài liệu DaNavi cũ vào prototype này.
+
+Profile/session local không làm các trips thành dữ liệu account đã được bảo vệ. Password không persist/truyền đi; Forgot/Reset không gửi email hoặc thay credential server. Sign out giữ trips/progress/cache và settings; Reset demo data là action khác có xác nhận. Profile name/email có thể nằm localStorage để minh họa UI; không gửi vào Ask/model hoặc dùng làm bằng chứng xác minh danh tính. Không có social OAuth giả.
+
+Settings là preference browser thực: playback speed điều khiển một Audio object; reduced motion điều khiển CSS và nhớ local. Cài đặt này không phải native audio focus, background playback hoặc device accessibility certification. Guest cũng dùng các cài đặt, Replay welcome, Downloads và About/privacy.
 
 Khi mất mạng: mở saved plan và transcript đã có; media dùng cache; Google Maps/nguồn web/live route vẫn có thể không dùng. Đổi route khi offline chỉ có fixture estimate nếu hợp lệ, không có live ETA. Mở story khác không làm mất progression. Xóa site storage/browser khác có thể mất personal data; chưa có cross-device restore.
 

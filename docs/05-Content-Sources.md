@@ -1,6 +1,6 @@
 # GoNarra V7 — Nội dung, nguồn và quyền sử dụng
 
-Ngày đối chiếu nguồn: **22/10/2026**, múi giờ Việt Nam. Dữ liệu ở `prototype/data.js`, revision `2026-10-22-draft-1`, dùng cho **prototype đánh giá nội bộ**. Đã đọc nguồn công khai dưới đây; chưa có bilingual reviewer, narrator hoặc đánh giá thực địa. Có nguồn không đồng nghĩa đã được biên tập viên độc lập phê duyệt.
+Ngày đối chiếu nguồn: **22/10/2026**, múi giờ Việt Nam; cập nhật mô tả bundle ngày **23/10/2026**. Dữ liệu ở `prototype/data.js`, revision `2026-10-22-draft-1`, dùng cho **prototype review/demo**. Đã đọc nguồn công khai dưới đây; chưa có bilingual reviewer, narrator hoặc đánh giá thực địa. Deploy một prototype không tự xác nhận media rights hoặc biên tập độc lập.
 
 ## Phạm vi nội dung
 
@@ -24,13 +24,15 @@ Ba script English gốc dài khoảng 100–140 từ cho Cathedral, Museum, Beac
 
 Chủ dự án xác nhận **không có người đọc English hoặc reviewer hỗ trợ**, nên hướng mới là **TTS tạo trước từ script biên tập có nguồn**, thay cho baseline human narration. Không sinh chuyện lịch sử theo thời gian thực và không clone giọng của người khác.
 
-Khi tạo file dữ liệu, `story.audio` đều là `null`. Bản đóng gói có thể được root bổ sung file preview từ giọng tổng hợp của hệ điều hành tại `assets/audio/<placeid>.m4a` cho năm POI có script; lunch không có audio. Các file này là **synthetic preview để review**, không có nghĩa đã qua nghe kiểm tra, được narrator đọc, hoặc có giấy phép public/commercial đã xác minh. Nhãn dùng trong sản phẩm: “Synthetic narration preview — not reviewed for public release.” Không giả claim “recorded by a local guide”.
+Bundle hiện có **năm WAV thực** tại `prototype/assets/audio/<placeid>.wav` cho Cathedral/Museum/Beach/Mountain/Bridge; lunch không audio. Giọng hệ điều hành Samantha được tạo trước từ script gốc, không runtime TTS hoặc human narration. Đây là **synthetic preview để review**; file có nội dung và player đọc metadata thật nhưng chưa là review English/phát âm, narrator approval hoặc giấy phép public/commercial đã xác minh. Nhãn sản phẩm nêu synthetic narration/review pending; không giả claim “recorded by a local guide”.
 
 Nếu có spike ElevenLabs sau này: [hướng dẫn quyền xuất bản chính thức](https://help.elevenlabs.io/hc/en-us/articles/13313564601361-Can-I-publish-the-content-I-generate-on-the-platform), kiểm tra **22/10/2026**, phân biệt Free noncommercial có attribution với generation trong paid plan có commercial license theo điều khoản; Beta có giới hạn riêng. Audio tạo khi Free không tự có quyền thương mại khi mua gói sau đó. Chỉ thử preset hợp lệ, kiểm tra plan/model/voice cụ thể và lưu bằng chứng; chưa tạo tài khoản, mua gói hay dùng provider này. [Use Policy](https://elevenlabs.io/use-policy), cập nhật **09/10/2026**, quy định quyền/consent đối với giọng và nội dung. Đây là kiểm tra điều kiện provider, không phải tư vấn pháp lý hoặc xác nhận đã đủ quyền.
 
 ## Ảnh kế thừa
 
 Các file `cathedral.png`, `museum.png`, `mountain.png`, `beach.png`, `coast.png` được **copy nguyên trạng** từ `/Users/lengoctanhien/Downloads/GoNarra-V6 2/prototype/assets/`. Không chỉnh bản V6. Đã xem `coast.png`: ảnh thể hiện Cầu Rồng, vì vậy dùng cho bridge và thumbnail tour river-coast. Lunch dùng ảnh này chỉ như minh họa nhịp nghỉ trong tour, **không phải ảnh nhà hàng**. Chưa nhận diện tác giả/stock provider, nguồn gốc chụp hay AI, giấy phép, attribution hoặc quyền thương mại của cả năm ảnh. **Không coi là đã cleared để phát hành public/commercial**. Cần thay bằng ảnh tự sở hữu hoặc có license được lưu trước phát hành.
+
+Ảnh UI reference do người dùng gửi dùng để định hướng collage welcome, map/white sheet, gallery và AI conversation; không là nguồn facts, rating/giá, forecast hoặc ảnh địa điểm Đà Nẵng. Không đưa ảnh mockup/reference vào catalog POI như ảnh chụp venue thật. Gallery chỉ dùng asset hiện có phù hợp; không bịa thêm các góc chụp.
 
 ## Fixture hành trình và vị trí
 

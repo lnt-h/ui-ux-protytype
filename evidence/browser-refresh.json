@@ -1,0 +1,25 @@
+{
+  "reviewDate": "2026-10-23",
+  "method": "CUA interaction through rendered UI, accessibility observations and screenshots",
+  "origin": "http://127.0.0.1:8770/prototype/",
+  "deviceScope": "Desktop browser with iPhone 17 review frame; not a physical iPhone",
+  "screenshots": "../screenshots/refresh/",
+  "observations": [
+    {"id":"R01","result":"observed-pass","task":"Replay welcome shows Story, Discover and AI/day in three optional steps","image":"welcome-3.jpg"},
+    {"id":"R02","result":"observed-pass","task":"Home shows map behind a medium discovery panel and four labeled destinations","image":"home.jpg"},
+    {"id":"R03","result":"observed-pass","task":"Place Detail opens a single hero, About/Story tabs, inline listening and contextual Ask","image":"detail.jpg"},
+    {"id":"R04","result":"observed-pass","task":"4-hour quick form submits, generates a three-stop proposal and Start opens the active leg directly","image":"proposal.jpg"},
+    {"id":"R05","result":"observed-pass","task":"Focused navigation opens a current-POI AI sheet; a sample answer includes a source; Close restores Ask focus","image":"ai-context.jpg"},
+    {"id":"R06","result":"observed-pass","task":"Bundled Cathedral WAV starts playback with Pause, actual progress and duration observed near 0:09 / 0:34","image":"story-player.jpg"},
+    {"id":"R07","result":"observed-pass","task":"Guest Profile opens Login; sample credentials open a clearly labeled local demo profile","image":"login.jpg"},
+    {"id":"R08","result":"observed-pass","task":"Settings accepts 1.25 playback speed and Reduce animation; Downloads entry opens package management","image":"settings.jpg"},
+    {"id":"R09","result":"observed-pass","task":"Prepared tour Download is one tap; Ready offline appears after caching; Manage opens the correct dated From river to coast package of approximately 12 MB","image":"download-ready.jpg"}
+  ],
+  "notVerified": [
+    "Physical iPhone, VoiceOver, keyboard appearance and native background/interruption behavior",
+    "Network-disconnected reload/playback on this refresh; the previous baseline contains a separate server-off observation",
+    "Full browser journeys for signup, recovery and signout; these have Node VM state coverage",
+    "Live GPS, street routing, LLM, weather, server authentication or recovery email",
+    "All acceptance cases, all screen sizes and comprehensive accessibility certification"
+  ]
+}

@@ -1,6 +1,6 @@
 # GoNarra V7 — iPhone 17 interactive prototype
 
-Bản prototype local cho tour Đà Nẵng: tour sẵn, workflow AI tạo/chỉnh lịch, câu chuyện audio và hỏi theo địa điểm. Visual update theo hướng map sáng + thẻ nổi navy/ice; frame review iPhone 17 **402 × 874**, kích thước xuất mục tiêu @3× **1206 × 2622** (ảnh hiện tại là browser review captures).
+Bản prototype tour Đà Nẵng: tour sẵn, workflow AI tạo/chỉnh lịch, câu chuyện audio và hỏi theo địa điểm. Cập nhật **trực tiếp trên V7** theo hướng map sáng + white sheet, collage du lịch và thẻ navy/ice; frame review iPhone 17 **402 × 874**, kích thước xuất mục tiêu @3× **1206 × 2622**. Ảnh review là browser captures, không physical iPhone hoặc bản export 3×.
 
 Repo này là bản standalone để mở trực tiếp trong VS Code. Toàn bộ prototype, tài liệu sản phẩm/UX, ảnh review, test và bằng chứng kiểm tra đều nằm trong cùng một thư mục; không phụ thuộc thư mục GoNarra V6 ban đầu.
 
@@ -14,15 +14,19 @@ Repo này là bản standalone để mở trực tiếp trong VS Code. Toàn b�
 
 ## Nên thử theo thứ tự
 
-1. Welcome 2 bước → Home. Chọn pin, mở/thu discovery panel, tìm một địa điểm, nghe story.
-2. Create with AI → thời gian/phương tiện → sở thích/must-visits → proposal → review → save.
-3. Customize: đổi duration, move, remove/Undo, add, lock/unlock; Cancel giữ tour cũ.
-4. Adjust with AI: dùng 4 shortcut được hỗ trợ; review trước/sau rồi Apply hoặc Keep current.
-5. Start → bản đồ/chỉ dẫn mẫu → Steps → I'm here → Listen/Transcript/Info/Ask → +15 preview → Finish stop.
-6. Pause/resume, skip, end early hoặc finish tour; kiểm đếm và tải lại trang.
-7. Tour saved → Download → đợi Ready offline → tắt mạng rồi reload/nghe nội dung đã tải. Thử fault switch trong Settings để xem recovery.
+1. Welcome 3 bước **Hear stories → Discover → AI plan**; Skip/Back được, Home → Profile → Settings có Replay.
+2. Home: compact có search + Continue hoặc Plan my day 2h/4h/6h; medium thêm card; full thêm tours. Search chuyển sang Explore cùng query.
+3. Detail: hero ảnh lớn, About/Story; Listen ngay tại trang, transcript và Ask sheet đúng POI. Hiện mỗi POI có một ảnh phù hợp; chưa dựng gallery nhiều góc giả. Nghe riêng không đổi trip.
+4. Bốn tab **Home · Explore · AI Guide · Trips**. AI Guide có context Da Nang/POI/current trip; các shortcut lập ngày/chỉnh lịch vẫn là local demo và preview trước Apply.
+5. Tour detail/proposal → Start trực tiếp, không màn Ready bắt buộc. Save for later là phụ; bản chưa bắt đầu phù hợp được tái dùng. Có active trip khác cần chọn Pause current & Start hoặc Keep current.
+6. Edit: đổi duration, move, remove/Undo, add, lock/unlock; Cancel giữ tour cũ. Adjust dùng shortcut hỗ trợ; chỉ upcoming chưa khóa được đổi khi active.
+7. Focused leg → sample Steps/mini-player/Ask sheet → I'm here → Story/About/+15 preview → Finish stop. Pause/resume/skip/end dùng progress thật lưu local.
+8. Tour card/detail → Download một chạm → ready theo cache/manifest → tắt mạng rồi reload/nghe nội dung đã tải. Download tùy chọn, không chặn Start; quản lý tại Trips → Downloads.
+9. Home profile icon → Profile/Settings; thử Guest, Login/Sign up, Forgot/Reset và Sign out. Đây là **UI demo local**, không server authentication/email thật; password không lưu/truyền. Sign out giữ trips/downloads. Playback speed và reduced motion trong Settings tác động player/CSS thật và nhớ local.
 
-Review panel ở desktop và Settings trên điện thoại có thể tạo tình huống. **Scenario controls thay dữ liệu V7 local**, có thể tạo review tour hoặc pause tour đang active. Dùng profile test riêng nếu cần. Reset chỉ xóa khóa/cache GoNarra V7; không sửa V6.
+Một Audio object phát từng bài; Play POI khác pause/nhớ vị trí bài cũ. Return to current stop và Back không tự phát lại hoặc advance trip. Không có weather mẫu trên Home; chưa thêm provider thời tiết/GPS hoặc routes trong lần chỉnh UI này.
+
+Chế độ người dùng mặc định có Profile và Settings riêng. Thêm **`?review=1`** vào URL prototype để hiện Review panel và fault/scenario tools; các công cụ không bày cạnh tác vụ du lịch thông thường. **Scenario controls thay dữ liệu V7 local**, có thể tạo review tour hoặc pause tour đang active. Dùng browser profile test riêng nếu cần. Reset chỉ xóa khóa/cache GoNarra V7; không sửa V6. Reset khác Sign out: Sign out chỉ đóng demo session.
 
 ## Phần chạy thật và phần mô phỏng
 
@@ -32,8 +36,9 @@ Review panel ở desktop và Settings trên điện thoại có thể tạo tìn
 | Tính lịch từ cùng một travel fixture; preview/apply/cancel | Travel/arrival estimates, GPS location và step navigation |
 | Nhiều trip, một active, progress/favorites/answers lưu local | Native background GPS, audio interruptions và cloud sync |
 | Cache asset thật qua localhost/HTTPS; manifest theo revision | Venue closures, live hours/fees/accessibility và real-time rerouting |
+| Profile/session/form validation local; speed/reduced-motion preferences thật | Server authentication, xác minh email, email recovery, social OAuth hoặc bảo mật dữ liệu theo account |
 
-**Ask** khớp các câu mẫu theo đúng POI và hiện nguồn; ngoài phạm vi có fallback. **AI Generate/Adjust** dùng quy tắc local. Story audio là giọng hệ thống Samantha tạo trước từ script gốc, chưa có review phát âm/English/thực địa hoặc quyền xuất bản thương mại. Ảnh kế thừa V6 chưa có provenance đầy đủ. Map là vector minh họa, không là bản đồ đường phố đã được tính route.
+**Ask** khớp câu mẫu theo đúng POI và hiện nguồn; city/trip scope chỉ có demo actions/giới hạn được công bố, ngoài phạm vi fallback. **AI Generate/Adjust** dùng quy tắc local; tab/sheet mới không là LLM. Story audio là giọng hệ thống Samantha tạo trước từ script gốc, chưa có review phát âm/English/thực địa hoặc quyền xuất bản thương mại. Ảnh kế thừa V6 chưa có provenance đầy đủ. Map là vector minh họa; Google Maps là lựa chọn phụ cho directions thật, không SDK chỉ đường bên trong app.
 
 ## Tài liệu
 
@@ -50,6 +55,12 @@ Review panel ở desktop và Settings trên điện thoại có thể tạo tìn
 
 ## Kiểm tra lại
 
-Chạy `node scripts/test-core.cjs`, `node scripts/test-app.cjs` và `node scripts/check-assets.cjs`. Các bài kiểm tra này dùng Node sẵn có, không có dependency install. Browser observations được ghi riêng trong `evidence/browser-review.json` khi đã thực hiện, không tự suy từ Node tests.
+Chạy `node scripts/test-core.cjs`, `node scripts/test-app.cjs` và `node scripts/check-assets.cjs`. Các bài kiểm tra dùng Node sẵn có, không dependency install. Run refresh ghi **22/22 core, 63/63 app-state trong Node VM và 32/32 asset/static checks**; app hash/timestamp trong evidence. VM không kiểm rendering/media/service worker thật, static contrast chỉ 9 cặp được chỉ định.
+
+Browser refresh ở localhost:8770 đã quan sát welcome, Home/Detail, quick-plan 4h → proposal 3 stops → Start trực tiếp, focused Ask, WAV Play/Pause/progress, optional demo login/Profile, Settings và one-tap download/đúng package. Xem `evidence/browser-refresh.json`; `evidence/browser-review.json` là baseline trước refresh. Bản refresh này chưa lặp lại test ngắt mạng/tắt server rồi reload; không nhận Ready badge là bằng chứng offline playback mới.
+
+Sau khi sửa tài liệu, chạy `node scripts/build-handbook.mjs` để tạo lại `index.html` và `Product-Handbook.html`; script dùng bộ Markdown renderer được bundle trong repo, không cần cài thêm package.
+
+Kết quả/screenshot baseline trước đợt UI refresh không tự là pass cho source mới. Đọc timestamp/hash, current run và giới hạn tại `docs/08-Review-Results.md`; các acceptance case mới nằm trong tài liệu 04.
 
 Dữ liệu lưu trên browser/origin hiện tại. Mở bằng file và localhost tạo kho lưu khác nhau. Browser có thể xóa cache; JSON export giữ itinerary/nguồn/text, không chứa audio bytes và không tự import vào ứng dụng.

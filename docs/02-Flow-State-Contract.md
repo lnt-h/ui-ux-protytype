@@ -1,6 +1,6 @@
 # GoNarra V7 — Flow, state và bảo toàn dữ liệu
 
-Baseline hợp đồng ngày 22/10/2026. Tên dưới đây mô tả ý nghĩa dữ liệu; tên property thực trong `prototype/core.js`/`app.js` là nguồn để debug. Sau thay đổi code phải giữ các invariant và acceptance ở đây; không gọi kết quả kiểm thử là đã đạt chỉ vì có mô tả.
+Hợp đồng cập nhật ngày **23/10/2026**, cùng source V7. Tên dưới đây mô tả ý nghĩa dữ liệu; property thực trong `prototype/core.js`/`app.js` là nguồn để debug. Giữ các invariant và acceptance dưới đây; không gọi kết quả kiểm thử là đã đạt chỉ vì có mô tả.
 
 ## 1. Các đối tượng không được gộp
 
@@ -15,6 +15,10 @@ Baseline hợp đồng ngày 22/10/2026. Tên dưới đây mô tả ý nghĩa d
 | App selection | Trip đang xem, active trip, selected POI/story/tab. Selection để đọc không phải progression. |
 | Download manifest | Trip reference/plan snapshot, plan/content revision, required asset URLs, total bytes và thời điểm save. Không chỉ một boolean downloaded; badge hiện dựa revision metadata. |
 | Ask result | Selected POI, normalized exact question, response/source IDs và demo/fallback label. Saved answer có nhãn Saved answer; hiện chưa lưu timestamp/content revision cho từng answer. |
+| AI entry context | Scope city/POI/current trip, ID tương ứng, màn mở sheet và state cần trở lại. Mở hội thoại không đổi trip/current hoặc tự apply. |
+| Audio session | Một Audio object; POI/story đang nghe, vị trí nghe của từng story và playback status. Độc lập với trip progression; navigation/back không phải lệnh Play. |
+| Demo identity/session | Profile/name/email và trạng thái session local; không mật khẩu, credential verifier, server token hoặc quyền sở hữu cloud. Guest và demo signed-in dùng cùng local trips. |
+| User settings | Playback speed và reduced-motion preference local; tác động audio/CSS thực, không gọi API ngoài. Replay/about/privacy/downloads là entry riêng. |
 
 V7 giữ nhiều personal trips. Template/library dùng chung, nhưng sửa một trip không lan sang trip khác. Chỉ một trip active toàn app; bắt đầu trip khác cần dialog xác nhận pause trip cũ. Cancel dialog giữ nguyên cả hai.
 
@@ -40,28 +44,36 @@ Core giới hạn bốn stops, tính cả break nếu được chọn; generatio
 
 ### Mapping app storage hiện tại
 
-`localStorage['gonarra-v7-review']` chứa `{ version: 7, trips, favorites, packages, req, answers, onboarded }`. Trip là `{ id, plan, status, progress: { index, phase, visited, skipped }, createdAt, completedAt? }`; status trong code là `upcoming/active/paused/completed/ended` (tương ứng planned/active/paused/completed/ended early trong tài liệu). Phase `leg/stop` tách hành trình tới nơi với giai đoạn đã xác nhận.
+`localStorage['gonarra-v7-review']` chứa `{ version: 7, trips, favorites, packages, req, answers, onboarded }`, bổ sung `audioPositions`, `aiConversations`, `settings` và `account/session` demo khi sử dụng tính năng mới. `settings` mặc định speed 1/reducedMotion false; thiếu field mới không reset trip cũ. `account` chỉ name/email; `session` active/demo, không password hoặc server token. Trip là `{ id, plan, status, progress: { index, phase, visited, skipped }, createdAt, completedAt? }`; status code là `upcoming/active/paused/completed/ended` (planned/active/paused/completed/ended early trong docs). Phase `leg/stop` tách tới nơi với đã xác nhận.
 
-`ui.edit` có `source/tripId/basePlan/plan/undo`, plan/progress stamps và unlock/extension guards; `ui.pending` là plan +15 chưa áp; `ui.review` có before/plan/kind/context/request/changes và guard data. `ui.route/placeId/tripId/stopTab`, `homeSnap/selectedMapPlace/selectedRoutePlace/navStep/welcomeStep` là context trong bộ nhớ. Refresh mở Welcome nếu chưa onboarded, hoặc Home để Resume; không hứa khôi phục mọi màn draft đang mở. `db.answers` lưu global theo POI + normalized exact question, không gắn lịch sử chat vào trip hoặc gửi memory tới provider.
+`ui.edit` có `source/tripId/basePlan/plan/undo`, plan/progress stamps và unlock/extension guards; `ui.pending` là plan +15 chưa áp; `ui.review` có before/plan/kind/context/request/changes và guard data. `ui.route/placeId/tripId/stopTab`, `homeSnap/selectedMapPlace/selectedRoutePlace/navStep/welcomeStep` là context trong bộ nhớ; AI sheet thêm origin/context riêng. Refresh mở Welcome nếu chưa onboarded, hoặc Home để Resume; không hứa khôi phục mọi màn draft đang mở. `db.answers` lưu theo POI + normalized exact question; AI UI không đồng nghĩa có provider conversation memory. Vị trí nghe được giữ theo story trong phạm vi app hỗ trợ; không hứa cloud sync hoặc khôi phục qua reset storage.
 
 ## 2. Luồng các cửa vào
 
-**Welcome:** lần đầu → bước 1 → Next → bước 2 → Let's explore → Home; Skip ở mỗi bước đi thẳng Home, Back ở bước 2 về bước 1. Hoàn thành/Skip lưu `db.onboarded`; không permission/account/download. Replay từ review/settings không xóa trips.
+**Welcome:** lần đầu → 1 Hear stories at each stop → 2 Discover your Da Nang → 3 A day that fits you → Start → Home. Skip đi thẳng Home; Back trở về bước trước. Hoàn thành/Skip lưu `db.onboarded`; không permission/account/download. Home header → Settings → Replay welcome không xóa trips hoặc tiến độ.
 
-**Ready-made:** Home/Explore → tours → tour detail → Use this tour → saved Ready, hoặc Customize copy trước Save. Copy giữ template reference, nhận ID riêng. Download hiện mở từ saved trip; Download không Start và Save không đồng nghĩa có media trên máy.
+**Ready-made:** Home/Explore → tour detail → Start tour. Action chuẩn bị/tái dùng personal trip thích hợp, xử lý active guard rồi vào leg, không đi qua màn Ready bắt buộc. Save for later lưu bản chưa bắt đầu; một Edit cho customize. Copy giữ template reference, không sửa template. Download một chạm ở card/detail chuẩn bị/tái dùng personal copy trước khi cache; Download không Start và Save không đồng nghĩa media đã ở trên máy.
 
-**AI custom:** Requirements → Preferences/must-keep → generating demo → proposal/reasons → manual editor hoặc Adjust → preview → accept/save → Ready → Start. Inputs giữ khi hủy/lỗi; chưa accept không thay trip cũ. Những field thiếu/invalid bị chặn trước generate.
+**AI custom:** Home Plan my day 2h/4h/6h hoặc AI Guide → quick form/defaults và các lựa chọn chi tiết khi cần → generating demo → proposal có reasons inline → Edit/Adjust hoặc Start tour/Save for later. Inputs giữ khi hủy/lỗi; chưa accept không thay trip cũ. Missing/invalid known fields bị chặn trước generate. Start nhận đúng proposal người dùng đã review, không mở Ready và không bỏ bước preview/apply khi đang chỉnh một accepted trip.
 
-**Nghe riêng:** Search/Library/Detail → player/transcript/Info/Ask → back. Không tạo active trip, không ghi arrival và không đổi current pointer. Quay lại chuyến cũ vẫn đúng stop/player context.
+Quick form dùng lại `req.endMode` và `req.mustVisit`, không reset chúng khi chọn chip thời gian hay Submit. Hint phải nói đúng final stop/return-to-start và số must-visits đang giữ; More options là cửa xem/chỉnh chúng. Đây không phải AI tự đoán các ràng buộc ẩn.
+
+**Nghe riêng:** Explore/Detail → About hoặc Story/player/transcript; Listen phát tại Detail. Chủ động Play story B khi A đang phát → lưu vị trí A, Pause A, phát/resume B. Không cần confirmation cho thao tác nghe có thể đảo ngược; không tạo active trip, không ghi arrival và không đổi current pointer. Return to current stop đưa về đúng current context và không auto-play. Ended B không tự resume A hoặc chuyển stop.
+
+**AI Guide / Ask:** tab AI Guide có city scope mặc định; người dùng đổi POI hoặc current-trip scope với context chip rõ. Detail Ask mở sheet đúng POI trên Detail; focused leg Ask mở sheet current stop. Dismiss giữ nguyên origin/selection/scroll và audio intent; mở rộng full screen rồi Back trở lại đúng origin. Sheet và tab dùng chung engine. Unsupported request nói phạm vi demo; câu hỏi không tự trở thành Adjust hoặc mutation.
+
+**Profile / Settings:** Home profile icon → Profile → Settings riêng. Guest có lối Login/Sign up nhưng vẫn dùng app đầy đủ; profile local edit và Settings không buộc đăng nhập. Playback speed đổi `Audio.playbackRate` và control player; reduced motion đổi CSS behavior và được nhớ local cùng preference. Replay welcome, Downloads, About/privacy có entry rõ.
+
+**Auth UI demo:** Login/Sign up kiểm format/required/confirm field theo form, mở session local nếu hợp lệ; không gửi network authentication. Forgot/Reset mô phỏng recovery UI và nói rõ **không gửi email, không đổi mật khẩu tài khoản thật**. Password chỉ tồn tại tạm trong input/validation; không đưa vào localStorage, transcript/AI context, query string, log hoặc network. Không dùng social sign-in giả. Sign out đóng session/ẩn profile cá nhân thích hợp nhưng giữ trips, progress, downloads, favorites và user settings; không tự pause/end/delete vì signout. Cloud ownership chưa có nên demo session không được coi là ranh giới bảo mật giữa những người cùng browser.
 
 **Chỉnh đã có:** My Trips → trip → manual draft hoặc Adjust → kiểm trước/sau → update. Nếu đang active chỉ được tác động phần upcoming; past/current được giữ, trừ +15 current duration và closure replacement trước arrival theo hai flow riêng, có xác nhận rõ.
 
 ### Home map, drawer và focused navigation
 
-- `homeSnap` là `compact/medium/full`; CSS hiện đặt khoảng 24%/48%/82% phần map-content. Đây là preset prototype, không native detent cố định cho mọi máy. Grip button cycle hoặc pointer drag đổi mức; đổi mức không tạo/sửa trip. Explore giữ list độc lập.
+- `homeSnap` là `compact/medium/full`; kích thước theo viewport/chữ, không native detent cố định. Compact có search + Continue hoặc Plan my day; medium thêm selected/place cards; full thêm curated tours. Grip button cycle hoặc pointer drag đổi mức; đổi mức không tạo/sửa trip. Search Home chuyển sang Explore cùng query thay vì tạo search state thứ hai; Explore giữ list/filter đầy đủ.
 - Home pin → `selectedMapPlace` và selected card. Route map/list → `selectedRoutePlace` của itinerary đang xem. Cả hai chỉ selection; không ghi arrival. Route overview dùng cùng stops/timing và cho mở Detail của selected POI.
 - Active leg giữ progress pointer; top instruction và Steps modal có **ba step mẫu**. `navStep` đổi theo người review chọn, không theo GPS, khoảng cách live hoặc nhận biết đã rẽ. Số phút/km là schedule fixture, không tự cập nhật từ vị trí thật.
-- Mini-player dùng cùng `Audio` object với full player, không tạo một stream khác. I'm here vẫn cần xác nhận thủ công. Về Home/Trips từ focused view giữ plan/progress/audio state trong phiên; không auto Pause/Finish chỉ do điều hướng.
+- Mini-player dùng cùng `Audio` object với full player, không tạo stream khác. I'm here xác nhận thủ công. Về Home/Trips giữ plan/progress/audio state trong phiên; không auto Pause/Finish chỉ vì điều hướng. Focused leg ẩn bottom tabs để tập trung nhưng có Ask current-stop dạng sheet.
 - Modal đóng bằng Close/Cancel/Escape khi phù hợp; thao tác xem step không thay accepted plan. Home drawer là nonmodal, không dùng cùng state với confirmation dialog.
 
 Thiết kế và phép kiểm gesture/focus/reduced motion chi tiết ở [06-Mobile-UX-Research.md](06-Mobile-UX-Research.md) và [07-Design-System.md](07-Design-System.md).
@@ -71,6 +83,7 @@ Thiết kế và phép kiểm gesture/focus/reduced motion chi tiết ở [06-Mo
 | Từ state | Action | Kết quả |
 |---|---|---|
 | Chưa có trip | Accept proposal/template copy | Planned trip lưu local; không tự Start |
+| Template/proposal | Start tour trực tiếp | Tạo/tái dùng personal trip, active guard rồi bắt đầu; không Ready gate |
 | Planned | Start hợp lệ | Active, current là stop đầu chưa xử lý |
 | Active | I'm here | Ghi xác nhận arrival cho current stop, đếm confirmed/visited; **không** chuyển next |
 | Active, đã arrival | Finish stop | Ghi hoàn tất stop; chuyển current tới stop chưa xử lý kế tiếp |
@@ -85,6 +98,14 @@ Thiết kế và phép kiểm gesture/focus/reduced motion chi tiết ở [06-Mo
 
 Start chặn empty/invalid known constraints và giải thích lý do. Fixture unknown không biến thành guarantee thực địa; cảnh báo demo vẫn hiện. Kết thúc sớm và completed là hai outcome riêng; Resume card chỉ dành cho trip còn active/paused phù hợp, không hiện một trip đã kết thúc như chưa xong.
 
+### Start, chống trùng và chuyến đang active
+
+1. Target là trip hiện tại còn active/paused → Continue/Resume chính bản đó, không clone/reset current pointer.
+2. Target từ template → tìm bản cùng template và ngày, chưa bắt đầu và chưa customize. Nếu có thì tái dùng; không ghi đè bản đã chỉnh hoặc đã đi. Không có candidate phù hợp mới tạo ID; tên mặc định có ngày để nhận diện.
+3. Có active trip khác → dialog nêu hai trip, **Pause current & Start / Keep current**. Không tự End chuyến cũ. Cancel không đổi trạng thái/tiến độ hoặc lưu thêm bản rác; xác nhận thực hiện target/pause một lần.
+4. Nhấn Start lặp/replay action không tạo thêm trip. Bản customized chỉ dùng lại khi người dùng chủ động chọn nó từ Trips; không coi là pristine template copy.
+5. Download nudge/badge ở card/detail là tùy chọn, Start online vẫn dùng được. Không mở sheet chỉ để lặp lại title/Start/download như màn Ready cũ.
+
 ## 4. State chỉnh tay và proposal
 
 Manual editor mở một bản draft của trip, không ghi trực tiếp từng gesture vào accepted trip. V7 dùng **Move up/down**, chưa triển khai drag; duration picker, add, remove và Undo lần remove cuối cùng cập nhật draft/schedule. Cancel phục hồi toàn bộ thứ tự/duration ban đầu. Update đi qua Review; Apply cần validation và base revision còn đúng. Nếu conflict/stale thì giữ draft và cho re-open/review, không overwrite âm thầm. Đây là invariant cần evidence, không phải pass claim.
@@ -98,7 +119,7 @@ Manual editor mở một bản draft của trip, không ghi trực tiếp từng
 | Applying | Khóa lệnh apply lặp; sau thành công cập nhật một lần |
 | Base stale | Nêu bản nguồn đã đổi; không ghi đè state mới; giữ lựa chọn để xem lại |
 
-AI Adjust có request, must-keep/locked IDs và phần được phép đổi. Những request ngoài demo-supported set nhận thông báo phạm vi, không sinh kết quả giả. Review changes phải có trước/sau: stop nào giữ/bỏ/thêm, duration nào đổi, transfer và total. Apply phải recheck locked/active prefix/base revision ngay trước ghi. Keep current không thay dữ liệu.
+AI Adjust có request, must-keep/locked IDs và phần được phép đổi. Chỉ đổi **upcoming chưa khóa** khi active: past/current giữ, locked upcoming cũng giữ. UI review hiển thị riêng phần protected/locked và lý do từ chối nếu yêu cầu không khả thi. Request ngoài demo-supported set nhận thông báo phạm vi, không sinh kết quả giả. Review có trước/sau: stop giữ/bỏ/thêm, duration đổi, transfer và total. Apply recheck locks/active prefix/base revision ngay trước ghi. Keep current không thay dữ liệu.
 
 ## 5. +15 và xử lý thời gian
 
@@ -126,8 +147,9 @@ Selected POI dùng cho Detail/Ask/player; current trip stop dùng cho progressio
 - Accepted trips, progress và selection cần thiết lưu localStorage với schema version; refresh khôi phục ID/state, không tạo trip trùng.
 - Draft/input giữ qua điều hướng/lỗi đúng scope; không hứa draft chưa save sống qua mọi storage reset nếu chưa kiểm.
 - Local-only nghĩa là dữ liệu trên trình duyệt/thiết bị này; xóa site data hoặc đổi browser không có cloud backup. Không dùng nút reset không xác nhận; chỉ reset khóa của prototype.
+- Profile/session cũng local-only. Sign out không phải Reset; login email khác không chuyển sang một account library được server bảo vệ. Không có password/token server trong storage hoặc audio/AI metadata. Validation pass không xác nhận người dùng sở hữu email.
 - Save/arrival/finish/skip của V7 là **local mutations**, không chờ server xác nhận và không được gắn nhãn “synced”. Đây khác bản thiết kế DaNavi có offline server queue.
-- Offline có saved local plan/text và các media đã được cache thật. New Generate/Adjust/Ask bị chặn theo offline state dù thuật toán demo là local; đây là mô phỏng giới hạn sản phẩm tương lai, không phải LLM offline. Ask chỉ mở lại exact question đã lưu, nhãn Saved answer và source IDs cũ; hiện chưa có expiration/revision check riêng cho cached answer.
+- Offline có saved local plan/text và media đã cache thật. New Generate/Adjust và POI answer chưa lưu bị chặn theo offline state dù thuật toán demo là local; đây là mô phỏng giới hạn sản phẩm tương lai, không LLM offline. POI Ask chỉ mở exact question đã lưu, nhãn Saved answer/source IDs cũ; chưa có expiration/revision check riêng. Static city/help text hoặc lịch sử hội thoại đã ở local có thể đọc offline, không là câu trả lời AI mới.
 - Download thất bại không xóa trip đã lưu. Trip edit đổi manifest dependency; giữ asset bytes không đổi, cho retry/update phần thiếu, không nhận cả gói ready chỉ vì metadata đã ghi.
 
 ### Closure review case
@@ -146,5 +168,10 @@ Closure trong Review panel là **mô phỏng**, không là tin venue thật. Nh�
 6. Mọi total/diff/time warning có cùng input/revision và core tính lịch.
 7. Story context và trip progression độc lập.
 8. Saved trip, cached assets và readiness của package là ba trạng thái riêng.
+9. Start trực tiếp không sinh bản trùng khi nhấn lại; không tự kết thúc active trip khác hoặc ghi đè customized copy.
+10. Một Audio object phát tối đa một story; đổi bài có chủ ý giữ vị trí cũ, Back/Return/Ended không tự phát bài khác hoặc ghi progress.
+11. Ask sheet giữ origin; scope hiển thị và scope dùng để lookup/adjust phải khớp. Tab AI không tạo một accepted plan thứ hai ngầm.
+12. Guest không bị auth gate; Sign out giữ dữ liệu chuyến đi. Password không persist/truyền; Forgot không claim email đã gửi và Reset không claim đổi tài khoản thật.
+13. Settings có effect thực: speed khớp audio/player, reduced motion khớp CSS; Reload giữ preference local trong phạm vi browser hỗ trợ.
 
 Kịch bản xác minh và cách đọc kết quả ở [04-Validation-Handoff.md](04-Validation-Handoff.md).
