@@ -37,7 +37,7 @@ li+li{margin-top:7px}.button{display:inline-flex;align-items:center;justify-cont
 iframe{display:block;border:0;width:402px;height:874px;background:#fff}.toc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.toccard{display:flex;gap:12px;align-items:flex-start;padding:17px;background:#fff;border:1px solid #dce5ef;border-radius:16px;color:#052659;text-decoration:none;font-size:14px;font-weight:650;line-height:1.5}
 .toccard .num{display:grid;place-items:center;width:29px;height:29px;flex:none;background:#e9f1f9;border-radius:9px;font-size:12px}.toccard small{display:block;color:#526b7f;font-size:11px;font-weight:400;line-height:1.6;margin-top:4px}
 .feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:23px 0 7px}.feature{padding:18px;border-radius:18px;background:#f0f5fa;border:1px solid #e1e9f1}.feature .num{font-size:11px;letter-spacing:1px;color:#4c7190;font-weight:750}.feature h3{margin:9px 0;font-size:18px}.feature p{font-size:13px;color:#4a6478;line-height:1.7;margin:0}
-.tabrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:7px;border:1px solid #dce7ef;background:#fff;border-radius:17px;margin:24px 0}.tabrow span{text-align:center;padding:9px 5px;border-radius:11px;font-weight:650;color:#395b77;font-size:12px}.tabrow span:first-child{background:#e9f1f9;color:#052659}
+.tabrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:7px;border:1px solid #dce7ef;background:#fff;border-radius:17px;margin:24px 0}.tabrow button{border:0;background:transparent;text-align:center;padding:9px 5px;border-radius:11px;font-weight:650;color:#395b77;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s ease}.tabrow button:hover{background:#f0f5fa;color:#052659}.tabrow button.active{background:#e9f1f9;color:#052659;font-weight:750}
 .research{background:#052659;color:#fff;border-color:#052659}.research h2{color:#fff}.research a{color:#c1e8ff}.research p{color:#e0ecf7}.section-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#4b6c85;font-weight:750}.section-title{margin-top:9px}.foot{font-size:12px;color:#4a6478;padding-top:4px}
 @media(max-width:900px){.intro-grid{gap:25px}.intro-grid h1{font-size:42px}.top{padding:28px 20px}.shell{gap:24px;padding:25px 20px;grid-template-columns:210px minmax(0,1fr)}}
 @media(max-width:760px){.intro-grid{display:block}.intro-grid>div:last-child{margin-top:30px}.iframewrap{margin:auto}.top{padding:23px 16px}.intro-grid h1{font-size:40px;letter-spacing:-1.3px}.projectbar{padding-bottom:20px}.feature-grid{grid-template-columns:1fr}.toc-grid{grid-template-columns:1fr}.shell{display:block;padding:22px 16px}aside{position:relative;top:0;max-height:none;margin-bottom:25px}section{padding:20px}.projectbar .pill{font-size:9px;letter-spacing:.5px}}
@@ -72,7 +72,7 @@ const overview = `<!doctype html><html lang="vi"><meta charset="utf-8"><meta nam
 <main class="top"><div class="projectbar"><a class="wordmark" href="index.html" aria-label="Gonarra"><img src="prototype/assets/brand/gonarra-wordmark-color.svg" alt="Gonarra"></a><span class="pill">V7 · iPhone 17 · source hiện có</span></div>
 <div class="intro-grid"><div><p class="eyebrow">Your personal Da Nang guide</p><h1>Hear the stories.<br>Find your day.</h1><p class="lead">Khám phá Đà Nẵng bằng câu chuyện, bản đồ và một lịch trình vừa với bạn. Welcome ba bước; Home theo ngữ cảnh; AI Guide riêng; nghe ngay tại Detail và bắt đầu tour trực tiếp.</p>
 <div class="link-row"><a class="button" href="prototype/index.html">Mở prototype ↗</a><a class="button secondary" href="brand-assets.html">Copy logo / Figma</a><a class="button secondary" href="Product-Handbook.html">Đọc ${documents.length} tài liệu</a></div>
-<div class="tabrow" aria-label="Bốn khu vực chính"><span>Home</span><span>Explore</span><span>AI Guide</span><span>Trips</span></div>
+<div class="tabrow" role="tablist" aria-label="Bốn khu vực chính"><button type="button" role="tab" class="active" data-route="home">Home</button><button type="button" role="tab" data-route="explore">Explore</button><button type="button" role="tab" data-route="ai">AI Guide</button><button type="button" role="tab" data-route="trips">Trips</button></div>
 <p class="callout">Prototype tương tác trên browser. AI và vị trí/chỉ dẫn sử dụng dữ liệu mẫu; audio đọc WAV thật. Download/offline cần HTTPS hoặc localhost. Thời tiết chưa tích hợp nên được ẩn khỏi Home mặc định.</p>
 <p class="muted" style="font-size:13px">Profile và Settings truy cập từ Home. Có thể tiếp tục với Guest; đăng nhập/đăng ký/khôi phục chỉ mô phỏng tương tác tại browser, không gửi email hoặc tạo tài khoản trên máy chủ.</p>
 <div class="swatches" aria-label="Palette Gonarra">${['#0b3045','#0b8ea8','#f6a623','#f0f9ff','#ffffff'].map(color => `<span style="background:${color}" title="${color}"></span>`).join('')}</div>
@@ -82,6 +82,33 @@ const overview = `<!doctype html><html lang="vi"><meta charset="utf-8"><meta nam
 <section><p class="section-label">Tài liệu sản phẩm & bàn giao</p><h2 class="section-title">Thiết kế, logic và bằng chứng đi cùng nhau.</h2><div class="toc-grid">${cards}</div></section>
 <section class="research"><h2>Vibe du lịch, tương tác có lý do.</h2><p>Photo collage cho welcome, map và thẻ ảnh cho Home, hero/gallery ngang cho Detail, navy–ice và chuyển động nhẹ cho AI. Các lựa chọn drawer, thứ tự nội dung và cách hỏi theo ngữ cảnh cần được thử với người dùng thực.</p><a href="Product-Handbook.html#doc-6">Đọc cơ sở UX và các giả thuyết →</a></section>
 <section><h2>Đọc đúng phạm vi kiểm chứng.</h2><p class="muted">Domain/state tests, asset/contrast checks và quan sát browser có phạm vi riêng. Kết quả cũ hoặc screenshots trước refresh không tự chứng minh giao diện hiện tại. Prototype chưa tích hợp live GPS, route SDK, LLM/RAG hoặc native background audio.</p><div class="link-row"><a href="evidence/README.md">Hướng dẫn evidence</a><a href="evidence/app-state-tests.json">App state</a><a href="evidence/assets-and-contrast.json">Assets & contrast</a><a href="evidence/browser-review.json">Browser review</a><a href="README.md">Chạy & review</a></div></section>
-<p class="foot">GoNarra V7 · tài liệu và prototype được cập nhật trong cùng repo. Không cần cài thư viện để mở prototype hoặc tạo lại handbook.</p></main></html>`;
+<p class="foot">GoNarra V7 · tài liệu và prototype được cập nhật trong cùng repo. Không cần cài thư viện để mở prototype hoặc tạo lại handbook.</p></main><script>
+(function(){
+  const frame = document.querySelector('iframe');
+  const tabs = document.querySelectorAll('.tabrow button');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const r = btn.dataset.route;
+      try {
+        if (frame && frame.contentWindow) {
+          frame.contentWindow.postMessage({ route: r }, '*');
+          if (typeof frame.contentWindow.GN_NAV === 'function') {
+            frame.contentWindow.GN_NAV(r);
+          }
+        }
+      } catch (err) {
+        if (frame) frame.src = 'prototype/index.html#' + r;
+      }
+    });
+  });
+  window.addEventListener('message', e => {
+    if (e.data && e.data.route) {
+      tabs.forEach(b => b.classList.toggle('active', b.dataset.route === e.data.route));
+    }
+  });
+})();
+</script></html>`;
 fs.writeFileSync(path.join(root,'index.html'),overview);
 console.log(`Built index.html and Product-Handbook.html from ${documents.length} documents in ${root}`);
