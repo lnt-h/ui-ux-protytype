@@ -154,19 +154,26 @@
       +'<span class="geo-map-caption">Demo map · illustrative route'+(options.showPosition?' · simulated position':'')+'</span></div>';
   }
   function onboardArtwork(step) {
-    if (Number(step) === 2) return '<div class="onboard-art onboard-art-2" aria-hidden="true">'
+    if (Number(step) === 3) return '<div class="onboard-art onboard-art-3" aria-hidden="true">'
       +'<img class="onboard-beach-backdrop" src="assets/beach.png" alt=""/>'
       +'<div class="onboard-art-shade"></div>'
-      +'<svg class="onboard-route onboard-route-2" viewBox="0 0 400 460" fill="none"><path d="M72 342C7 300 58 176 166 202S361 161 318 74" stroke="white" stroke-width="1.8" stroke-dasharray="3 7" opacity=".8"/><circle cx="72" cy="342" r="5" fill="white"/><circle cx="318" cy="74" r="5" fill="white"/></svg>'
-      +'<div class="onboard-mini-card onboard-mini-card-1"><span class="onboard-mini-num">1</span><img src="assets/cathedral.png" alt=""/><span><b>A little culture</b><small>Da Nang Cathedral</small></span><span class="onboard-mini-check">✓</span></div>'
-      +'<div class="onboard-mini-card onboard-mini-card-2"><span class="onboard-mini-num">2</span><img src="assets/beach.png" alt=""/><span><b>More time by the sea</b><small>My Khe Beach</small></span><span class="onboard-mini-check">✓</span></div>'
-      +'<div class="onboard-floating-note"><span>✦</span> Your day, your pace</div></div>';
+      +'<svg class="onboard-route onboard-route-3" viewBox="0 0 400 460" fill="none"><path d="M59 261C12 209 86 119 160 151S342 153 323 64" stroke="white" stroke-width="1.6" stroke-dasharray="3 7" opacity=".8"/><circle cx="59" cy="261" r="5" fill="white"/><circle cx="323" cy="64" r="5" fill="white"/></svg>'
+      +'<div class="onboard-plan-label">✦ A day that feels like you</div>'
+      +'<div class="onboard-mini-card onboard-mini-card-1"><span class="onboard-mini-num">1</span><img src="assets/cathedral.png" alt=""/><span><b>A little culture</b><small>Da Nang Cathedral · 40 min</small></span><span class="onboard-mini-check">✓</span></div>'
+      +'<div class="onboard-mini-card onboard-mini-card-2"><span class="onboard-mini-num">2</span><img src="assets/beach.png" alt=""/><span><b>More time by the sea</b><small>My Khe Beach · 75 min</small></span><span class="onboard-mini-check">✓</span></div>'
+      +'<div class="onboard-floating-note"><span>✦</span> Your choices. Your final say.</div></div>';
+    if (Number(step) === 2) return '<div class="onboard-art onboard-art-2" aria-hidden="true">'
+      +'<div class="onboard-discovery-map"><svg viewBox="0 0 400 350" fill="none"><defs><pattern id="welcome-streets" width="58" height="47" patternUnits="userSpaceOnUse" patternTransform="rotate(-11)"><rect x="5" y="5" width="48" height="37" rx="6" fill="#e3eae7"/><path d="M0 0H58M0 0V47" stroke="#fff" stroke-width="6"/></pattern></defs><rect width="400" height="350" fill="#f0f3ef"/><rect width="400" height="350" fill="url(#welcome-streets)"/><path d="M216 -15C252 91 198 130 229 217S286 296 269 366" stroke="#bddae4" stroke-width="30"/><path d="M350 -15C320 133 349 224 404 299V0Z" fill="#d6eaf1"/><path d="M106 237L144 237L144 149L231 149L264 106" stroke="#fff" stroke-width="11" stroke-linejoin="round"/><path d="M106 237L144 237L144 149L231 149L264 106" stroke="#2d6aff" stroke-width="4" stroke-linejoin="round"/><circle cx="106" cy="237" r="8" fill="#2d6aff" stroke="#fff" stroke-width="4"/><circle cx="106" cy="237" r="20" fill="#2d6aff" opacity=".1"/></svg>'
+      +'<div class="onboard-map-photo"><img src="assets/cathedral.png" alt=""/><span>1</span></div>'
+      +'<div class="onboard-map-chip">Da Nang · made for a little wandering</div></div>'
+      +'<div class="onboard-discovery-card"><img src="assets/museum.png" alt=""/><span><small>A place worth a pause</small><b>Cham Museum</b><span>Culture · stories to discover</span></span></div>'
+      +'<span class="onboard-spark onboard-spark-1">✧</span></div>';
     return '<div class="onboard-art onboard-art-1" aria-hidden="true"><div class="onboard-collage">'
       +'<svg class="onboard-route onboard-route-1" viewBox="0 0 400 460" fill="none"><path d="M31 251C-8 144 121 20 200 86S395 188 336 344C303 435 157 440 146 360" stroke="#a6b9b4" stroke-width="1.5" stroke-dasharray="3 7"/><circle cx="31" cy="251" r="5" fill="#5c7d72"/><circle cx="146" cy="360" r="5" fill="#5c7d72"/></svg>'
-      +'<div class="onboard-photo onboard-photo-bridge"><img src="assets/coast.png" alt=""/><span>Da Nang</span></div>'
+      +'<div class="onboard-photo onboard-photo-bridge"><img src="assets/coast.png" alt=""/><span>Your Da Nang</span></div>'
       +'<div class="onboard-photo onboard-photo-cathedral"><img src="assets/cathedral.png" alt=""/></div>'
       +'<div class="onboard-photo onboard-photo-museum"><img src="assets/museum.png" alt=""/></div>'
-      +'<div class="onboard-story-tag"><span>♫</span> A story at every stop</div>'
+      +'<div class="onboard-story-tag"><span>♫</span><span class="onboard-story-copy"><b>A story at every stop</b><small>Pause. Listen. Discover.</small></span><i class="onboard-audio-lines"><i></i><i></i><i></i><i></i><i></i></i></div>'
       +'<span class="onboard-spark onboard-spark-1">✦</span><span class="onboard-spark onboard-spark-2">✧</span></div></div>';
   }
   var api = { mapScene:mapScene, onboardArtwork:onboardArtwork };

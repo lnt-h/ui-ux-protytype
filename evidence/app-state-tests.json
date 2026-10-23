@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-22T17:31:15.147Z",
+  "generatedAt": "2026-10-23T03:59:00.184Z",
   "suite": "V7 app action/state guards in Node VM",
   "environment": "v24.22.0",
   "scope": "Minimal DOM and fake Audio; real app.js, core.js and data.js are evaluated. No browser rendering, service worker, real audio, GPS, provider or live AI verified.",
-  "appSha256": "0fb5e60cd89fbc132b7c8c2e3ebd1c5fac57c7a595cf6870526c0186525a9ced",
-  "passed": 28,
-  "total": 28,
+  "appSha256": "4d5b82dbe5e1b18fc25b083879fbacf676162818dbd4a5bb9a77d1feb5863b18",
+  "passed": 63,
+  "total": 63,
   "results": [
     {
       "name": "finishing before arrival and double-finishing cannot advance an unconfirmed next stop",
@@ -117,6 +117,146 @@
     },
     {
       "name": "keeping current tour after pending adjustment clears the unapplied extension",
+      "status": "PASS"
+    },
+    {
+      "name": "an unsupported AI adjustment explains its refusal without changing active progress or a locked visit",
+      "status": "PASS"
+    },
+    {
+      "name": "cycling Home sheet visibility never creates or mutates a journey",
+      "status": "PASS"
+    },
+    {
+      "name": "welcome completion needs three steps and replay never resets saved trips",
+      "status": "PASS"
+    },
+    {
+      "name": "welcome Skip is available before completion and does not create a tour",
+      "status": "PASS"
+    },
+    {
+      "name": "direct template Start saves and activates once without an intermediate Ready route",
+      "status": "PASS"
+    },
+    {
+      "name": "Save for later and Start reuse one unchanged unstarted template copy for the same date",
+      "status": "PASS"
+    },
+    {
+      "name": "Start never overwrites a customized saved copy when opening the source template",
+      "status": "PASS"
+    },
+    {
+      "name": "another active trip must be explicitly paused before direct Start creates a new journey",
+      "status": "PASS"
+    },
+    {
+      "name": "canceling direct Start creates no copy and a canceled confirmation cannot switch another selected trip",
+      "status": "PASS"
+    },
+    {
+      "name": "Start switch confirmation becomes stale if the active stop changes while it waits",
+      "status": "PASS"
+    },
+    {
+      "name": "starting an AI proposal is one explicit acceptance and repeat events cannot create another copy",
+      "status": "PASS"
+    },
+    {
+      "name": "Home Search uses Explore and preserves the query across a place detail round trip",
+      "status": "PASS"
+    },
+    {
+      "name": "Home quick-plan time chips open one short form without saving or altering an existing trip",
+      "status": "PASS"
+    },
+    {
+      "name": "quick-plan generates an unsaved proposal and retains must-visits without touching the active tour",
+      "status": "PASS"
+    },
+    {
+      "name": "Ask from Detail opens a contextual sheet and closing it preserves the detail and active pointer",
+      "status": "PASS"
+    },
+    {
+      "name": "expanding contextual Ask to AI Guide retains its POI and Back returns to that same Detail",
+      "status": "PASS"
+    },
+    {
+      "name": "focused navigation can Ask about its current stop without leaving the leg or advancing progress",
+      "status": "PASS"
+    },
+    {
+      "name": "AI Guide handles city, POI and current-trip context while keeping their conversations separate",
+      "status": "PASS"
+    },
+    {
+      "name": "AI chat adjustment is a preview that preserves current/past and locked future visits until Apply",
+      "status": "PASS"
+    },
+    {
+      "name": "AI chat preview cannot overwrite a newer accepted revision",
+      "status": "PASS"
+    },
+    {
+      "name": "AI chat refuses unavailable or protected changes explicitly and never mutates the itinerary",
+      "status": "PASS"
+    },
+    {
+      "name": "switching standalone stories saves independent playback positions without changing trip progress",
+      "status": "PASS"
+    },
+    {
+      "name": "Back to current stop pauses separate listening and never autoplays the previous story",
+      "status": "PASS"
+    },
+    {
+      "name": "guest Profile and Settings stay optional and preserve an active journey",
+      "status": "PASS"
+    },
+    {
+      "name": "signup validates email, password, name and demo acknowledgement before creating a session",
+      "status": "PASS"
+    },
+    {
+      "name": "signup saves only a local demo profile and session, never its entered password",
+      "status": "PASS"
+    },
+    {
+      "name": "login rejects invalid input and opens an explicitly local session without storing a password",
+      "status": "PASS"
+    },
+    {
+      "name": "profile name editing requires a session, keeps the account email and leaves journeys unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "sign out requires its confirmation and clears only the local session",
+      "status": "PASS"
+    },
+    {
+      "name": "password recovery validates inputs but never changes a stored password, session or journey",
+      "status": "PASS"
+    },
+    {
+      "name": "signing back into the same local demo profile keeps its edited name and saved progress",
+      "status": "PASS"
+    },
+    {
+      "name": "Settings speed and motion persist across reload and reject unsupported playback speeds",
+      "status": "PASS"
+    },
+    {
+      "name": "changing playback speed in the story player updates Settings and survives reload",
+      "status": "PASS"
+    },
+    {
+      "name": "Settings exposes replay, downloads, privacy and capabilities without requiring sign-in",
+      "status": "PASS"
+    },
+    {
+      "name": "plain form controls inside a sheet retain native click defaults and do not trigger the backdrop",
       "status": "PASS"
     }
   ]

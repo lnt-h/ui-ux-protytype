@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T17:31:15.129Z",
+  "generatedAt": "2026-10-23T03:58:31.596Z",
   "tool": "GoNarra V7 static assets and finite contrast-pair audit",
   "node": "v24.22.0",
   "counts": {
@@ -682,7 +682,7 @@
   ],
   "inputs": {
     "dataSha256": "02812d3bdd92d47f6d31d9a133fd37191cf2c2426f0bdd3c921e7cd5ab648d4b",
-    "htmlSha256": "4e8f19aeb4ad99834e4dedc8a55efa95c6aaebac11ed63390c86eb65c998f935",
-    "swSha256": "a8d1f4d63c755a30b3073a32b63694865946057c7838d96490eae211f54e836d"
+    "htmlSha256": "2143fa9cde2b79f5f699f8f375e8271774240df6f5af1a5867f8e13f60e6e103",
+    "swSha256": "c03cbe7c33d88c6081d21000191b265fdae29d972ca7b21e4be624c2530ae503"
   }
 }
