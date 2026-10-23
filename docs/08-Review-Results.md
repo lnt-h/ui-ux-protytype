@@ -4,7 +4,15 @@
 
 Phạm vi được chốt: bốn tab Home/Explore/AI Guide/Trips; welcome ba bước Story → Discover → AI/day; Home phân nội dung theo ba snap; Detail About/Story nghe tại chỗ; contextual Ask sheet và tab AI dùng chung context engine. Start trực tiếp, reuse bản chưa bắt đầu phù hợp và xác nhận pause chuyến khác; download vẫn có badge/action trên card/detail. Một audio session giữ vị trí nghe từng story, không đổi trip progress. Profile từ Home, Settings riêng và optional login/signup/forgot/reset demo local được bổ sung, giữ guest và trips khi Sign out; chưa server auth/email/cloud.
 
-Acceptance cases V01–V58 ở [04-Validation-Handoff.md](04-Validation-Handoff.md) là kế hoạch kiểm, không toàn bộ đã được kiểm trên browser. Các runs và quan sát thực hiện trong đợt refresh được tách dưới đây. Profile/auth/Settings có state checks riêng; browser chỉ có các journey được ghi cụ thể. Các thay đổi không thêm GPS thật, route SDK, weather provider, LLM/RAG, server auth hoặc native background audio. Detail hiện dùng một hero ảnh phù hợp mỗi POI, không gallery nhiều ảnh giả.
+Acceptance cases V01–V75 ở [04-Validation-Handoff.md](04-Validation-Handoff.md) là kế hoạch kiểm, không toàn bộ đã được kiểm trên browser. Các runs và quan sát thực hiện trong đợt refresh được tách dưới đây. Profile/auth/Settings có state checks riêng; browser chỉ có các journey được ghi cụ thể. Đợt refresh đầu không thêm weather; lượt enrich tiếp theo bổ sung adapter weather riêng như phần dưới. GPS/route SDK/LLM/RAG/server auth/native background vẫn chưa tích hợp. Detail hiện một hero ảnh phù hợp mỗi POI, không gallery giả.
+
+## Lượt tăng chiều sâu nội dung trên cùng V7
+
+Review tiếp yêu cầu thêm thông tin, rồi chốt **chỉ giữ phần cần cho quyết định**, tránh kéo dài mọi màn. Home medium/full cùng feed: weather inline trong city context, next action, hai stories/hai collection previews, compact tour strip và một Essentials entry; full chỉ tăng chiều cao. Bỏ story spotlight/tips/footer trang trí lặp. Detail giữ hai highlights/practical facts, rhythm/tips/etiquette ở disclosure. AI bỏ task grid trùng; Trips/Profile dùng counts/state thực. Root Explore/AI Guide/Trips bỏ top bar lặp tên tab, giữ bốn label bottom và heading nội dung.
+
+Weather bổ sung nguồn Open-Meteo cho Đà Nẵng cố định với nguồn/time/units và state lỗi/cũ; không là GPS, sensor tại POI, marine assessment hoặc automatic trip rewrite. Nguồn UX/điều kiện provider được ghi tại docs 03/05/06. Logo production/master/brand assets giữ cùng hợp đồng.
+
+Các kết quả 22/63/34 và browser journey bên dưới là **snapshot trước lượt enrich này**, chưa tự thành pass cho weather hoặc layout mới. V59–V75 bổ sung phạm vi cần kiểm. Chỉ thay đoạn này bằng kết quả/current evidence khi thực chạy và nhận được outcome; chưa có con số mới được công bố trong tài liệu này.
 
 ## Baseline trước lần chỉnh UI này
 
@@ -51,6 +59,6 @@ Không gọi các quan sát chọn lọc trên là tất cả V01–V58 đã pas
 
 ## Giới hạn còn lại
 
-Chưa chạy trên iPhone vật lý/VoiceOver/background interruptions; chưa live LLM/RAG, map SDK/GPS, weather provider, server auth/email hoặc street-route calculation. Browser refresh chưa kiểm mạng thật bị ngắt; server-off reload/playback là evidence baseline riêng. Hai assertions baseline inconclusive do view đổi giữa các bước. Hai cặp màu chỉ vừa vượt 4.5:1; ảnh/gradient/component mới và accessibility toàn app cần audit theo source hiện tại.
+Chưa chạy trên iPhone vật lý/VoiceOver/background interruptions; chưa live LLM/RAG, map SDK/GPS, server auth/email hoặc street-route calculation. Weather provider là adapter riêng của lượt enrich, cần đọc evidence network/render hiện tại thay vì kết quả browser refresh đầu. Browser refresh đầu chưa kiểm mạng thật bị ngắt; server-off reload/playback là evidence baseline riêng. Hai assertions baseline inconclusive do view đổi giữa các bước. Hai cặp màu chỉ vừa vượt 4.5:1; ảnh/gradient/component mới và accessibility toàn app cần audit theo source hiện tại.
 
 Mục tiêu export physical 3× là 1206×2622; bundle chứa browser review captures, không giả thành ảnh 3× hoặc iPhone thật. Dùng prototype để inspect flow và docs để triển khai; field-test/nghiên cứu khách thực hiện riêng theo handoff.

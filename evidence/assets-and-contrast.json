@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T08:33:08.596Z",
+  "generatedAt": "2026-10-23T13:18:32.719Z",
   "tool": "GoNarra V7 static assets and finite contrast-pair audit",
   "node": "v24.22.0",
   "counts": {
@@ -204,9 +204,13 @@
           "index.html",
           "styles.css",
           "theme.css",
+          "experience.css",
           "data.js",
+          "content.js",
           "core.js",
           "visuals.js",
+          "weather.js",
+          "experience.js",
           "app.js",
           "assets/brand/gonarra-wordmark-color.svg",
           "assets/brand/gonarra-mark-color.svg"
@@ -544,6 +548,11 @@
     },
     {
       "from": "prototype/index.html",
+      "ref": "content.js",
+      "file": "prototype/content.js"
+    },
+    {
+      "from": "prototype/index.html",
       "ref": "core.js",
       "file": "prototype/core.js"
     },
@@ -551,6 +560,16 @@
       "from": "prototype/index.html",
       "ref": "visuals.js",
       "file": "prototype/visuals.js"
+    },
+    {
+      "from": "prototype/index.html",
+      "ref": "weather.js",
+      "file": "prototype/weather.js"
+    },
+    {
+      "from": "prototype/index.html",
+      "ref": "experience.js",
+      "file": "prototype/experience.js"
     },
     {
       "from": "prototype/index.html",
@@ -566,6 +585,11 @@
       "from": "prototype/index.html",
       "ref": "theme.css",
       "file": "prototype/theme.css"
+    },
+    {
+      "from": "prototype/index.html",
+      "ref": "experience.css",
+      "file": "prototype/experience.css"
     },
     {
       "from": "prototype/sw.js",
@@ -589,8 +613,18 @@
     },
     {
       "from": "prototype/sw.js",
+      "ref": "experience.css",
+      "file": "prototype/experience.css"
+    },
+    {
+      "from": "prototype/sw.js",
       "ref": "data.js",
       "file": "prototype/data.js"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "content.js",
+      "file": "prototype/content.js"
     },
     {
       "from": "prototype/sw.js",
@@ -601,6 +635,16 @@
       "from": "prototype/sw.js",
       "ref": "visuals.js",
       "file": "prototype/visuals.js"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "weather.js",
+      "file": "prototype/weather.js"
+    },
+    {
+      "from": "prototype/sw.js",
+      "ref": "experience.js",
+      "file": "prototype/experience.js"
     },
     {
       "from": "prototype/sw.js",
@@ -711,7 +755,7 @@
   ],
   "inputs": {
     "dataSha256": "02812d3bdd92d47f6d31d9a133fd37191cf2c2426f0bdd3c921e7cd5ab648d4b",
-    "htmlSha256": "5533ce0f1b505232f4cd004d221a6bec379cb9a83a4310df15c2eca59d700cee",
-    "swSha256": "b5ea6e4445934ffdc72b6ccbb8044165642b74c59e560d92fa4f38dd61d8e4ec"
+    "htmlSha256": "beec82c5e76da08b784ac3891d2a757de73b26c1a814c1080c954d6d1c7d5623",
+    "swSha256": "66111c18818f53e6987915a98f15edf8894315090439f0efbf7efd705e8b6d85"
   }
 }

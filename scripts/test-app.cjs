@@ -7,8 +7,10 @@ const vm=require('node:vm');
 const assert=require('node:assert/strict');
 const data=require('../prototype/data.js');
 const core=require('../prototype/core.js');
+const content=require('../prototype/content.js');
 const source=fs.readFileSync(path.join(__dirname,'../prototype/app.js'),'utf8');
 const visualSource=fs.readFileSync(path.join(__dirname,'../prototype/visuals.js'),'utf8');
+const companionSources=['content.js','weather.js','experience.js'].map(file=>[file,fs.readFileSync(path.join(__dirname,'../prototype',file),'utf8')]);
 const clone=x=>JSON.parse(JSON.stringify(x));
 
 function environment(options={}){
@@ -41,8 +43,11 @@ function environment(options={}){
     isSecureContext:false,addEventListener(){},matchMedia(){return {matches:false,addEventListener(){}}},
     open(){},scrollTo(){},performance:{now:()=>0}
   };
+  if(Object.prototype.hasOwnProperty.call(options,'fetch'))sandbox.fetch=options.fetch;
   sandbox.window=sandbox;
-  vm.createContext(sandbox);vm.runInContext(visualSource,sandbox,{filename:'visuals.js'});vm.runInContext(source,sandbox,{filename:'app.js'});
+  vm.createContext(sandbox);vm.runInContext(visualSource,sandbox,{filename:'visuals.js'});
+  for(const [filename,text]of companionSources)vm.runInContext(text,sandbox,{filename});
+  vm.runInContext(source,sandbox,{filename:'app.js'});
   function click(action,params={}){
     const element={dataset:{action,...params},disabled:false,classList:{contains:name=>action==='backdrop'&&name==='modal-backdrop'}};element.closest=()=>element;
     for(const fn of listeners.click||[])fn({target:element,preventDefault(){}});
@@ -439,12 +444,135 @@ test('plain form controls inside a sheet retain native click defaults and do not
   e.click('backdrop');assert.equal(e.g.ui.modal,null);assertNoRenderError(e);
 });
 
+// These checks exercise the rendered information model and real action handlers.
+// They do not infer visibility from class names or claim CSS/layout coverage.
+const visibleText=html=>String(html).replace(/<[^>]*>/g,' ').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#0?39;/g,"'").replace(/\s+/g,' ').trim();
+const placeCardIds=html=>Array.from(html.matchAll(/class="discovery-card rich-place-card" data-action="place" data-id="([^"]+)"/g),m=>m[1]);
+
+test('medium Home keeps contextual weather, a focused collection preview, prepared tours and an essentials entry without marketing filler',()=>{
+  const e=environment();e.g.go('home');assert.equal(e.g.ui.homeSnap,'medium');const html=e.html(),text=visibleText(html);
+  assert.match(html,/aria-label="Da Nang weather"/);
+  assert.match(text,/A story worth a stop/);assert.match(text,/Find your kind of Da Nang/);
+  assert.match(text,/A day, already imagined/);assert.match(text,/Before you head out/);
+  for(const collection of content.collections.slice(0,2))assert.ok(text.includes(collection.title));
+  assert.doesNotMatch(html,/data-action="collection-open" data-id="shortbreak"/,'Home previews two collections; Explore holds the full catalogue');
+  for(const tour of data.templates)assert.ok(text.includes(tour.title));
+  assert.match(html,/city-weather-brief/);assert.doesNotMatch(html,/class="weather-card|story-spotlight|home-feed-end/,'Weather belongs in the city context, without another hero card or marketing footer');
+  assert.match(html,/class="home-tour-strip"/);assert.match(html,/data-action="essentials-open"/);
+  assert.ok(!html.includes('home-full-content'),'Medium feed must include its own information, not a full-snap-only container');
+  assert.equal(e.g.db.trips.length,0);assertNoRenderError(e);
+});
+test('compact Home keeps the next action concise and expanding reveals the full feed without changing journeys',()=>{
+  const e=environment(),t=e.addTrip({index:1}),before=clone(e.g.db.trips);e.g.go('home');e.g.ui.homeSnap='compact';e.g.render();
+  const compact=visibleText(e.html());assert.ok(compact.includes(data.places.museum.name));assert.match(compact,/Continue my trip/);
+  assert.doesNotMatch(compact,/Find your kind of Da Nang|A day, already imagined|Before you head out/);
+  e.click('home-expand');assert.equal(e.g.ui.homeSnap,'full');assert.match(visibleText(e.html()),/Find your kind of Da Nang/);
+  assert.deepEqual(clone(e.g.db.trips),before);assert.equal(t.progress.index,1);assertNoRenderError(e);
+});
+test('editorial collections scope actual Explore results and clear stale search and category state',()=>{
+  const e=environment(),t=e.addTrip({index:1}),before=clone(t);e.g.ui.search='impossible query';e.g.ui.filter='beach';
+  for(const collection of content.collections){
+    e.click('collection-open',{id:collection.id});assert.equal(e.g.ui.route,'explore');assert.equal(e.g.ui.search,'');assert.equal(e.g.ui.filter,'all');
+    assert.equal(e.g.ui.exploreTab,'places');assert.equal(e.g.ui.collectionId,collection.id);
+    assert.deepEqual(new Set(placeCardIds(e.html())),new Set(collection.placeIds));
+    e.click('collection-clear');assert.equal(e.g.ui.collectionId,null);assert.equal(placeCardIds(e.html()).length,5);
+  }
+  const route=e.g.ui.route;e.click('collection-open',{id:'forged-collection'});assert.equal(e.g.ui.route,route);assert.equal(e.g.ui.collectionId,null);
+  assert.deepEqual(clone(t),before);assertNoRenderError(e);
+});
+test('Explore sorting changes the displayed order while combined collection, query and category filters stay coherent',()=>{
+  const e=environment(),t=e.addTrip({index:1}),before=clone(t);e.g.go('explore');
+  const catalogue=Object.values(data.places).filter(p=>!p.isBreak);
+  e.change({},{id:'explore-sort',value:'short'});assert.deepEqual(placeCardIds(e.html()),catalogue.slice().sort((a,b)=>a.duration-b.duration).map(p=>p.id));
+  e.change({},{id:'explore-sort',value:'long'});assert.deepEqual(placeCardIds(e.html()),catalogue.slice().sort((a,b)=>b.duration-a.duration).map(p=>p.id));
+  e.change({},{id:'explore-sort',value:'unsupported'});assert.equal(e.g.ui.exploreSort,'long');
+  e.click('collection-open',{id:'culture'});e.submit('search',{q:'Chăm'});assert.deepEqual(placeCardIds(e.html()),['museum']);
+  e.click('filter',{value:'beach'});assert.deepEqual(placeCardIds(e.html()),[]);assert.match(visibleText(e.html()),/No matches this time/);
+  e.click('explore-clear');assert.equal(e.g.ui.search,'');assert.equal(e.g.ui.filter,'all');assert.equal(e.g.ui.collectionId,null);assert.equal(placeCardIds(e.html()).length,5);
+  e.change({},{id:'explore-sort',value:'curated'});assert.deepEqual(placeCardIds(e.html()),catalogue.map(p=>p.id));
+  assert.deepEqual(clone(t),before);assertNoRenderError(e);
+});
+test('place details keep two clear highlights, one visit fact and complete practical information behind appropriate disclosures',()=>{
+  const e=environment(),t=e.addTrip({index:1}),before=clone(t);
+  for(const [id,p]of Object.entries(data.places)){
+    e.click('place',{id});const c=content.places[id],html=e.html(),text=visibleText(html),outsideDisclosures=visibleText(html.replace(/<details\b[\s\S]*?<\/details>/g,''));assert.ok(text.includes(p.name));assert.ok(text.includes(p.localName));assert.ok(text.includes(c.shortHook));
+    for(const x of c.highlights.slice(0,2)){assert.ok(outsideDisclosures.includes(x.title),id+' default highlight title');assert.ok(outsideDisclosures.includes(x.text),id+' default highlight detail')}
+    const rhythmDisclosure=html.match(/<details class="rich-disclosure"><summary>A suggested way to spend your visit<\/summary>([\s\S]*?)<\/details>/);
+    assert.ok(rhythmDisclosure,id+' rhythm has an optional disclosure');
+    for(const x of c.visitRhythm){assert.ok(text.includes(x.title),id+' visit rhythm');assert.ok(text.includes(x.text),id+' rhythm detail')}
+    for(const x of c.practicalFacts.filter(x=>!/^Suggested stop$/i.test(x.label))){assert.ok(text.includes(x.label),id+' practical label');assert.ok(text.includes(x.value),id+' explicit practical value ('+x.status+')')}
+    assert.equal((html.match(/<dt>Suggested visit<\/dt>/g)||[]).length,1,id+' has one primary suggested visit row');
+    assert.ok(!html.includes('<dt>Suggested stop</dt>'),id+' does not repeat the same estimate');
+    for(const x of [...c.visitTips,...c.etiquette,...c.mobility])assert.ok(text.includes(x),id+' useful visitor note');
+    assert.doesNotMatch(e.html(),/data-rating=|4\.9\/5|4\.8\/5|Open now|Live crowd/i,'Unconnected reputation/access feeds must not be invented');
+    if(!p.isBreak){e.click('detail-tab',{value:'story'});for(const takeaway of c.audioTakeaways)assert.ok(visibleText(e.html()).includes(takeaway),id+' audio comprehension');}
+  }
+  assert.deepEqual(clone(t),before);assertNoRenderError(e);
+});
+test('Explore, AI Guide and Trips retain four labelled bottom destinations without repeating a top title bar',()=>{
+  const e=environment(),t=e.addTrip({index:1}),before=clone(t);
+  for(const route of ['explore','ai','trips']){
+    e.g.go(route);const html=e.html(),nav=html.match(/<nav class="bottom-nav"[^>]*>([\s\S]*?)<\/nav>/);
+    assert.ok(nav,route+' keeps the primary navigation');assert.doesNotMatch(html,/<header class="topbar"/,'No redundant top title bar on '+route);
+    assert.deepEqual(Array.from(nav[1].matchAll(/data-action="nav" data-value="([^"]+)"/g),m=>m[1]),['home','explore','ai','trips']);
+    for(const label of ['Home','Explore','AI Guide','Trips'])assert.ok(visibleText(nav[1]).includes(label));
+    assert.match(html,/<h1\b/,'The screen keeps its meaningful page heading');
+  }
+  assert.deepEqual(clone(t),before);assertNoRenderError(e);
+});
+test('prepared tour cards show per-tour story counts and engine totals, then Save preserves their stops and budget',()=>{
+  const e=environment();e.g.go('explore');e.click('explore-tab',{value:'tours'});const html=e.html();
+  const cards=Array.from(html.matchAll(/<article class="tour-card-wrapper">([\s\S]*?)<\/article>/g),m=>m[1]);
+  assert.equal(cards.length,data.templates.length);assert.equal(e.g.db.trips.length,0);
+  for(const template of data.templates){
+    const storyCount=template.stops.filter(s=>data.places[s.id].story.audio).length;
+    const card=cards.find(card=>card.includes('data-action="tour" data-id="'+template.id+'"'));assert.ok(card,template.id+' has its own card');
+    assert.ok(visibleText(card).includes(storyCount+' stories'));e.click('tour',{id:template.id});
+    const text=visibleText(e.html()),c=content.tours[template.id];
+    for(const item of [...c.suitedFor,...c.included,...c.notIncluded])assert.ok(text.includes(item),template.id+' tour brief: '+item);
+    const expected=core.schedule({startId:'river',startMinutes:510,budget:360,mode:'car',endMode:'last',stops:template.stops});
+    assert.ok(text.includes(core.formatDuration(expected.totalMinutes)));assert.ok(text.includes(core.formatTime(expected.finishMinutes)));
+    e.click('save-template',{id:template.id});const t=e.g.currentTrip,schedule=core.schedule(t.plan);
+    assert.equal(t.plan.budget,360);assert.equal(t.status,'upcoming');assert.equal(t.plan.stops.length,template.stops.length);
+    assert.ok(visibleText(e.html()).includes(core.formatDuration(schedule.totalMinutes)),template.id+' total must come from schedule');
+    assert.equal(schedule.visitMinutes,template.stops.reduce((sum,s)=>sum+s.duration,0));
+  }
+  assert.equal(e.g.db.trips.length,2);assertNoRenderError(e);
+});
+test('unsupported weather stays empty rather than supplying a decorative temperature and Back restores the active trip',async()=>{
+  const e=environment(),t=e.addTrip({index:1}),before=clone(t);e.g.go('leg');e.click('weather-open');assert.equal(e.g.ui.route,'weather');
+  await e.g.loadWeather(true);assert.equal(e.g.weather.status,'unsupported');assert.equal(e.g.weather.data,null);
+  assert.match(visibleText(e.html()),/Weather is unavailable/);assert.match(visibleText(e.html()),/Open-Meteo/);
+  assert.doesNotMatch(e.html(),/weather-main|hourly-weather|forecast-days/,'There must be no weather numbers without a usable provider response');
+  const snapshot=e.g.weather;snapshot.status='ready';assert.equal(e.g.weather.status,'unsupported','Public weather snapshots cannot mutate the client');
+  e.click('back');assert.equal(e.g.ui.route,'leg');assert.deepEqual(clone(t),before);assertNoRenderError(e);
+});
+test('a weather network failure shows retry information while keeping trip, audio and account state untouched',async()=>{
+  let calls=0;const e=environment({fetch:()=>{calls++;return Promise.reject(new Error('Simulated connection failure'))}}),t=e.addTrip({index:1}),before=clone(e.g.db);
+  await e.g.play('cathedral');e.g.audio.currentTime=17;const playing=e.g.audio.paused;e.g.go('weather');await e.g.loadWeather(true);
+  assert.ok(calls>0);assert.equal(e.g.weather.status,'error');assert.equal(e.g.weather.data,null);assert.match(visibleText(e.html()),/Could not connect|Weather is unavailable/);
+  assert.match(e.html(),/data-action="weather-refresh"/);assert.equal(e.g.audioPlace,'cathedral');assert.equal(e.g.audio.currentTime,17);assert.equal(e.g.audio.paused,playing);
+  assert.deepEqual(clone(t),before.trips[0]);assert.deepEqual(clone(e.g.db.favorites),before.favorites);assert.equal(e.g.db.session,before.session);assertNoRenderError(e);
+});
+test('trip essentials exposes the city guidance without signing in, saving a trip or changing the current visit',()=>{
+  const e=environment(),t=e.addTrip({index:1}),before=clone(t);e.g.go('home');e.click('essentials-open');assert.equal(e.g.ui.route,'essentials');
+  const text=visibleText(e.html());for(const tip of content.city.tips)assert.ok(text.includes(tip.text));
+  assert.match(text,/Open-Meteo/);assert.match(text,/Local demo profile/);assert.match(e.html(),/data-action="weather-open"/);assert.match(e.html(),/data-action="downloads"/);
+  e.click('back');assert.equal(e.g.ui.route,'home');assert.equal(e.g.db.trips.length,1);assert.ok(!e.g.db.session?.active);assert.deepEqual(clone(t),before);assertNoRenderError(e);
+});
+test('AI overview selects the real active trip even when a different saved trip is currently selected',()=>{
+  const e=environment(),active=e.addTrip({index:1}),saved=e.addTrip({active:false}),before=clone(e.g.db.trips);e.click('ai-open');
+  assert.match(e.html(),/data-action="ask-active-trip"/);e.click('ask-active-trip');assert.equal(e.g.ui.route,'ai');assert.equal(e.g.ui.modal.kind,'aiSheet');
+  assert.equal(e.g.ui.modal.context.scope,'trip');assert.equal(e.g.ui.modal.context.tripId,active.id);assert.notEqual(e.g.ui.modal.context.tripId,saved.id);
+  e.click('close-modal');assert.deepEqual(clone(e.g.db.trips),before);assertNoRenderError(e);
+});
+
 async function run(){
 const results=[];
 for(const [name,fn] of tests){try{await fn();results.push({name,status:'PASS'});process.stdout.write('PASS '+name+'\n')}catch(error){results.push({name,status:'FAIL',error:error.message,stack:error.stack});process.stderr.write('FAIL '+name+'\n'+error.stack+'\n')}}
 const passed=results.filter(r=>r.status==='PASS').length;
 const evidence={generatedAt:new Date().toISOString(),suite:'V7 app action/state guards in Node VM',environment:process.version,
-  scope:'Minimal DOM and fake Audio; real app.js, core.js and data.js are evaluated. No browser rendering, service worker, real audio, GPS, provider or live AI verified.',
+  scope:'Minimal DOM and fake Audio; real app.js, core.js, data.js, content.js, weather.js and experience.js are evaluated. Weather failure paths use absent/failing fetch only. No browser rendering, service worker, real audio, GPS, live provider or live AI verified.',
   appSha256:require('node:crypto').createHash('sha256').update(source).digest('hex'),passed,total:results.length,results};
 const out=path.join(__dirname,'../evidence/app-state-tests.json');fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,JSON.stringify(evidence,null,2)+'\n');
 process.stdout.write('\n'+passed+'/'+results.length+' action/state tests passed. Node VM only. Evidence: '+out+'\n');

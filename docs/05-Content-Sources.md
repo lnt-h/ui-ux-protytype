@@ -1,6 +1,6 @@
 # GoNarra V7 — Nội dung, nguồn và quyền sử dụng
 
-Ngày đối chiếu nguồn: **22/10/2026**, múi giờ Việt Nam; cập nhật mô tả bundle ngày **23/10/2026**. Dữ liệu ở `prototype/data.js`, revision `2026-10-22-draft-1`, dùng cho **prototype review/demo**. Đã đọc nguồn công khai dưới đây; chưa có bilingual reviewer, narrator hoặc đánh giá thực địa. Deploy một prototype không tự xác nhận media rights hoặc biên tập độc lập.
+Ngày đối chiếu nguồn ban đầu: **22/10/2026**, múi giờ Việt Nam; cập nhật mô tả bundle/nội dung ngày **23/10/2026**. Dữ liệu ở `prototype/data.js`, revision `2026-10-22-draft-1`; companion biên tập `prototype/content.js` revision `2026-10-23-rich-content-1` bổ sung chiều sâu các màn từ cùng corpus. Dùng cho **prototype review/demo**. Đã đọc nguồn công khai dưới đây; chưa có bilingual reviewer, narrator hoặc đánh giá thực địa. Deploy một prototype không tự xác nhận media rights hoặc biên tập độc lập.
 
 ## Phạm vi nội dung
 
@@ -33,6 +33,23 @@ Nếu có spike ElevenLabs sau này: [hướng dẫn quyền xuất bản chính
 Các file `cathedral.png`, `museum.png`, `mountain.png`, `beach.png`, `coast.png` được **copy nguyên trạng** từ `/Users/lengoctanhien/Downloads/GoNarra-V6 2/prototype/assets/`. Không chỉnh bản V6. Đã xem `coast.png`: ảnh thể hiện Cầu Rồng, vì vậy dùng cho bridge và thumbnail tour river-coast. Lunch dùng ảnh này chỉ như minh họa nhịp nghỉ trong tour, **không phải ảnh nhà hàng**. Chưa nhận diện tác giả/stock provider, nguồn gốc chụp hay AI, giấy phép, attribution hoặc quyền thương mại của cả năm ảnh. **Không coi là đã cleared để phát hành public/commercial**. Cần thay bằng ảnh tự sở hữu hoặc có license được lưu trước phát hành.
 
 Ảnh UI reference do người dùng gửi dùng để định hướng collage welcome, map/white sheet, gallery và AI conversation; không là nguồn facts, rating/giá, forecast hoặc ảnh địa điểm Đà Nẵng. Không đưa ảnh mockup/reference vào catalog POI như ảnh chụp venue thật. Gallery chỉ dùng asset hiện có phù hợp; không bịa thêm các góc chụp.
+
+## Nội dung bổ sung và day brief
+
+Home/Explore/Detail có thêm mô tả biên tập, collection, highlights và practical notes từ cùng POI/corpus. Mục đích là giúp hiểu vì sao ghé, điều nên chú ý và lượng thời gian thiết kế; không tạo POI mới để lấp card. Tên collection như văn hóa/sông/biển là taxonomy biên tập, không ranking, recommendation đã cá nhân hóa hoặc giải thưởng. Metadata story/transcript lấy từ library; counts về saved/confirmed/downloads lấy state thực. Không bịa review count, rating 4.8, ticket price, hours, distance from you hoặc travel ETA live.
+
+`GN_CONTENT` chứa `places` (hook, highlights có source IDs, visit rhythm, practical facts có status, tips/etiquette/mobility, audio takeaways), `tours` (độ phù hợp, journey highlights, included/not included, start/end/planning note), `collections` và `city` tips. Ba collection hiện tại là **Read the city**, **A little more open air**, **Start with one story**; chúng chỉ lọc các IDs đã có trong library. Các trường biên tập không được engine coi như operational facts hoặc dùng để validate route/accessibility.
+
+Practical notes phân biệt điều đã có nguồn với gợi ý trải nghiệm và điều cần hỏi venue. “Suggested visit” là thời lượng thiết kế đã nêu trong fixture; effort/environment là mô tả giới hạn, không xác nhận accessible entrance hoặc phù hợp mọi người. Source list và status đặt trong disclosure dễ mở, không lặp cả đoạn cảnh báo trên tất cả card. Nội dung city notes chưa field-tested và không thay hướng dẫn của venue hoặc cảnh báo địa phương.
+
+Weather là nguồn dữ liệu mới, tách khỏi corpus lịch sử/biên tập:
+
+| Nguồn | Phạm vi sử dụng | Cách trình bày |
+|---|---|---|
+| [Open-Meteo Weather Forecast API](https://open-meteo.com/en/docs), đối chiếu 23/10/2026 | Model forecast theo tọa độ Đà Nẵng cố định; các trường response hiện dùng trong weather adapter | City + units + condition text + forecast/update time + source; không GPS, sensor tại venue hoặc dự báo an toàn biển |
+| [Open-Meteo Terms](https://open-meteo.com/en/terms), đối chiếu 23/10/2026 | Điều kiện Free API noncommercial/attribution; production thương mại kiểm gói phù hợp | Link attribution gần weather; trạng thái stale/error không bị thay bằng số demo |
+
+Dữ liệu current của weather provider vẫn là model, không chứng minh thời tiết tại thời điểm/điểm người dùng đứng. Network response thực và việc parse/hiển thị là các phần cần evidence riêng; không gọi một fixture weather trong unit test là quan sát forecast live. Không nhét forecast vào tour package như thể tự cập nhật offline hoặc dùng nó để overwrite itinerary.
 
 ## Fixture hành trình và vị trí
 

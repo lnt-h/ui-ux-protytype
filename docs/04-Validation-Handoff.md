@@ -59,7 +59,7 @@ Các case dưới đây dùng fixture và app state sạch riêng của prototyp
 | V35 | Closure current chưa arrival → chọn replacement → Keep hoặc Apply | Closure là simulated; Keep không đổi, Apply chỉ thay current eligible và tính lại; locked cần unlock xác nhận trước |
 | V36 | Closure current đã confirmed hoặc stale proposal sau progress đổi | Không thay venue đã visited, không overwrite history; sửa upcoming hoặc báo stale |
 | V37 | Welcome 3 bước Story → Discover → AI/day → Back/Skip/complete → reload | Không auth/GPS; onboarded persistence; Settings Replay không reset trip; skip mỗi bước |
-| V38 | Home pin/card + compact/medium/full bằng button và grip | Compact search+Continue/Plan; medium thêm card; full tour; selection đồng bộ; không current mutation |
+| V38 | Home pin/card + compact/medium/full bằng button và grip | Compact summary có lối mở; medium/full cùng feed cuộn đủ stories/collections/tours/city notes; selection đồng bộ; không current mutation |
 | V39 | Route overview pin/list → selected card/Detail → back | Đúng selected POI; itinerary/progress không mutate; step/time là fixture |
 | V40 | Focused leg → Steps → mini-player → Ask current-stop sheet → đóng → Home/Resume | Tabs ẩn nhưng Ask còn; đúng context/return; sample step không advance; một Audio object; giữ current/progress |
 | V41 | Frame nội dung 402×874, compact browser, chữ lớn/reduced motion | Export 3× đúng vùng logical; simulated chrome khác native safe area; CTA/labels không che nhau |
@@ -69,7 +69,7 @@ Các case dưới đây dùng fixture và app state sạch riêng của prototyp
 | V45 | AI city/POI/current-trip scopes; sheet mở rộng rồi Back | Scope chip khớp engine/source; city không giả POI source; origin đúng; không ngầm tạo/apply trip |
 | V46 | Unsupported/conflicting AI query trong sheet/tab | Nêu demo scope/lock/budget phù hợp; không bịa hoặc biến câu hỏi thành mutation |
 | V47 | Listen B tự ended, đóng sheet/đi Back nhiều lần | Không resume A tự động, không đổi arrival/stop; Play A có chủ ý mới tiếp tục |
-| V48 | Home mặc định và Start chưa download | Không weather sample như thật; Start vẫn được; download nudge không bắt qua màn Ready mới |
+| V48 | Home mặc định, weather chưa về/lỗi và Start chưa download | Weather có nguồn/state hoặc unavailable, không số sample lấp lỗi; Start vẫn được; không Ready/download gate |
 | V49 | Tour cards/detail downloaded/error/stale badge; Trips Downloads | Badge/action đồng nhất manifest; một chạm tải/cập nhật; xóa media không xóa trip |
 | V50 | Home profile icon → Guest profile → Settings → Back | Profile/Settings là màn riêng, origin hợp lý; guest vẫn nghe/lập/lưu tour; không auth gate |
 | V51 | Login form trống/email sai/field thiếu rồi hợp lệ | Validation rõ; valid mở demo session local có nhãn; không network auth hoặc xác nhận email ownership |
@@ -80,6 +80,23 @@ Các case dưới đây dùng fixture và app state sạch riêng của prototyp
 | V56 | Reduced motion Settings → animation/CSS → reload | Motion preference được áp thật và nhớ local; stage/status vẫn đọc được; không native accessibility claim |
 | V57 | Settings Replay/Downloads/About/privacy và reset-data entry | Mở đúng mục; Replay không reset trips; reset data cần confirm và khác Sign out |
 | V58 | Inspect storage, URL và network sau login/signup/forgot/reset | Không password/credential token trong storage/query/network; local session không coi là security/account boundary |
+| V59 | Home medium → cuộn hết feed rồi đổi full/medium | Cùng feed inline weather/next action/hai stories/hai collection previews/tour strip/một Essentials entry; không gate tour, không tips/spotlight trang trí lặp hoặc cắt CTA cuối |
+| V60 | Weather response hợp lệ cho city cố định | Condition/temperature/units đúng response, nhãn Đà Nẵng/model/source/time rõ; không near-you/GPS hoặc trạm tại POI |
+| V61 | Weather loading, timeout/network fail, invalid schema | Không số mẫu; unavailable/retry rõ; các phần local và Start/Play/Explore vẫn dùng được |
+| V62 | Weather cache còn hạn/cũ, refresh thành công hoặc lỗi | Nhãn và timestamp đúng tuổi; lỗi không làm timestamp mới giả; stale không trình bày như current mới |
+| V63 | Đọc feed/form ở scroll vị trí khác → weather trả về/Retry | Không mất input/focus/trip/player hoặc bị cướp scroll về đầu tác vụ; response cũ không ghi đè state mới ngoài ý muốn |
+| V64 | Home inline weather → chi tiết/source; rain probability giờ ≥50% → Museum prompt | Home gọn hòa vào city context, forecast sâu chỉ màn chi tiết; source/time đúng; prompt chỉ mở nội dung, không auto-adjust/claim venue mở hoặc biển an toàn |
+| V65 | Home collection → Explore category/filter → Clear → search | Filter đúng tập POI, query/count/selection rõ; Clear phục hồi được; không tạo search/catalog state thứ hai |
+| V66 | Explore query không match hoặc kết hợp filter không kết quả | Empty state trung thực + Clear/change query; không fake match/nearby distance/rating/giờ mở cửa |
+| V67 | Place About → highlights/practical/source → Story/Listen | Hai highlights khác ý, practical facts chính; rhythm/tips/etiquette qua disclosure; không lặp duration/hero/name hoặc lẫn visit với WAV duration |
+| V68 | Tour detail/proposal → overview/stop list/time breakdown | Visit/transfer/total/budget khớp core, nội dung gói và chuẩn bị đúng; không Start gate/nút Edit trùng |
+| V69 | Trips planned/active/paused/completed/ended và empty | Counts/progress/next action theo record thực; active nổi bật, ended khác completed; downloads/favorites có đường vào |
+| V70 | AI Guide chưa chat và có current trip | Quick-plan/câu hỏi/context giúp bắt đầu, không task grid lặp; đúng scope, chỉnh lịch vẫn preview/Apply; weather entry phụ; không tab/FAB AI thừa |
+| V71 | Profile guest/demo → activity/favorites/downloads/Settings | Counts lấy dữ liệu thực, shortcuts tới đúng state; không stats/cloud sync giả; signout vẫn giữ dữ liệu |
+| V72 | Enriched screens ở 402×874 và browser hẹp/font lớn | Text không clip, rail không làm cả page ngang, footer/composer không che last item, targets/focus đọc được |
+| V73 | Thu gọn/mở practical/source disclosures rồi điều hướng Back | Secondary content tìm được, nút chính không lặp; Back giữ context phù hợp; không nested modal hoặc mất accepted plan |
+| V74 | Weather offline/route/AI package boundary | Cache trip không hứa weather mới/AI inference/street navigation; không request profile/trip/AI text tới weather endpoint |
+| V75 | Root Explore/AI Guide/Trips và màn con → Back | Không lặp tên ba tab trong top bar; bốn label bottom giữ nguyên, product heading có ích còn; màn con vẫn có Back/title phù hợp |
 
 Nếu UI/runner không hỗ trợ một nhánh trong gói hiện tại, ghi “not implemented/not run” thay vì gộp cùng một case pass rộng hơn. Core test không thay browser journey; browser journey không thay device field test.
 
@@ -100,6 +117,7 @@ Check cùng plan ở proposal/editor/review/tour detail/active không có tổng
 - Audio checks: file tồn tại/bytes/duration và playback events. OS synthetic file không phải người kể đã review; automated playback event không thay nghe chất lượng hoặc phát âm.
 - Location checks: explicit API call/permissions nếu có; simulated denial/GPS state ghi simulated. Browser geolocation không chứng minh native/background arrival.
 - Accessibility checks: semantic labels, keyboard/focus, scaling/contrast theo phần đã kiểm; không gọi một bảng contrast là chứng nhận toàn app.
+- Weather checks: capture request/response source/time/units, valid/error/stale rendering và no-plan-mutation. Fixture injection kiểm logic; chỉ network fetch thực mới được ghi provider observation. Không gọi weather model accuracy hoặc biển an toàn là đã kiểm từ HTTP 200.
 
 Không ghi pass date/model/reviewer giả. Failure/retest giữ trong ledger; report summary phải dùng đúng denominators và environment.
 
@@ -120,6 +138,8 @@ Nếu phần offline/audio/API browser chưa chạy được trong môi trườn
 ## 6. Lộ trình sau handoff trong 2–3 tháng
 
 Đồ án ưu tiên một vertical slice có chứng cứ. Giờ/tuần/rubric/budget còn phải chốt; bảng là thứ tự 8–12 tuần, không cam kết tiến độ. Giữ UI V7 có thể dùng lại; không thêm brand/module mới để thay bằng chứng còn thiếu.
+
+Ưu tiên phát triển ngay sau lần enrich: (1) đo khả năng tìm nội dung trong feed medium và hiểu weather/source/status; (2) biên tập POI và practical facts hiện hành có owner/review date; (3) test native audio/offline/permission trên thiết bị; (4) tích hợp planner/Ask và routing từng adapter sau khi guard/evaluation có bằng chứng. Không thêm booking/payment/social/account cloud chỉ để làm app trông đầy. Weather adapter là lát cắt dữ liệu thật đầu tiên, không rút ngắn các gate facts/routes/LLM còn lại.
 
 | Giai đoạn | Đầu ra | Gate để mở phần tiếp |
 |---|---|---|

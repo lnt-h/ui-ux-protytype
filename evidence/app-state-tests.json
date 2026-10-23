@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-23T08:31:53.989Z",
+  "generatedAt": "2026-10-23T13:18:32.639Z",
   "suite": "V7 app action/state guards in Node VM",
   "environment": "v24.22.0",
-  "scope": "Minimal DOM and fake Audio; real app.js, core.js and data.js are evaluated. No browser rendering, service worker, real audio, GPS, provider or live AI verified.",
-  "appSha256": "d3ac1d7fbe1bdce9156d64e02d9f09fed0d5766e11e1185c8c2f17886f0cec73",
-  "passed": 63,
-  "total": 63,
+  "scope": "Minimal DOM and fake Audio; real app.js, core.js, data.js, content.js, weather.js and experience.js are evaluated. Weather failure paths use absent/failing fetch only. No browser rendering, service worker, real audio, GPS, live provider or live AI verified.",
+  "appSha256": "ecc1a6ffab30af74edcb4b05b3af02dcc093839f9e1388601d1345d63d500170",
+  "passed": 74,
+  "total": 74,
   "results": [
     {
       "name": "finishing before arrival and double-finishing cannot advance an unconfirmed next stop",
@@ -257,6 +257,50 @@
     },
     {
       "name": "plain form controls inside a sheet retain native click defaults and do not trigger the backdrop",
+      "status": "PASS"
+    },
+    {
+      "name": "medium Home keeps contextual weather, a focused collection preview, prepared tours and an essentials entry without marketing filler",
+      "status": "PASS"
+    },
+    {
+      "name": "compact Home keeps the next action concise and expanding reveals the full feed without changing journeys",
+      "status": "PASS"
+    },
+    {
+      "name": "editorial collections scope actual Explore results and clear stale search and category state",
+      "status": "PASS"
+    },
+    {
+      "name": "Explore sorting changes the displayed order while combined collection, query and category filters stay coherent",
+      "status": "PASS"
+    },
+    {
+      "name": "place details keep two clear highlights, one visit fact and complete practical information behind appropriate disclosures",
+      "status": "PASS"
+    },
+    {
+      "name": "Explore, AI Guide and Trips retain four labelled bottom destinations without repeating a top title bar",
+      "status": "PASS"
+    },
+    {
+      "name": "prepared tour cards show per-tour story counts and engine totals, then Save preserves their stops and budget",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported weather stays empty rather than supplying a decorative temperature and Back restores the active trip",
+      "status": "PASS"
+    },
+    {
+      "name": "a weather network failure shows retry information while keeping trip, audio and account state untouched",
+      "status": "PASS"
+    },
+    {
+      "name": "trip essentials exposes the city guidance without signing in, saving a trip or changing the current visit",
+      "status": "PASS"
+    },
+    {
+      "name": "AI overview selects the real active trip even when a different saved trip is currently selected",
       "status": "PASS"
     }
   ]

@@ -103,14 +103,14 @@ iframe{display:block;border:0;width:402px;height:874px;background:#fff}.toc-grid
 <tbody><tr>
 <td>UX01</td>
 <td>Home map + persistent drawer</td>
-<td>Search chuyển Explore; Continue hoặc Plan my day</td>
-<td>Compact: search + Continue/Plan; medium thêm card; full thêm tour; không live location/thời tiết mẫu</td>
+<td>Xem city context; Continue hoặc Plan my day; khám phá nội dung</td>
+<td>Compact là tóm tắt; medium/full cùng feed cuộn đủ inline weather, next action, hai stories/hai collection previews và tour strip; snap chỉ đổi chiều cao; một entry Essentials</td>
 </tr>
 <tr>
 <td>UX02</td>
 <td>Explore list/search results</td>
-<td>Tìm và mở tour/POI/story</td>
-<td>Một search state dùng chung; nhận nguyên query từ Home; kết quả/rỗng/filter</td>
+<td>Tìm, lọc và mở tour/POI/story</td>
+<td>Một search state dùng chung; nhận query từ Home; số kết quả, active filter/clear, collection và empty state có đường phục hồi</td>
 </tr>
 <tr>
 <td>UX03</td>
@@ -121,14 +121,14 @@ iframe{display:block;border:0;width:402px;height:874px;background:#fff}.toc-grid
 <tr>
 <td>UX04</td>
 <td>Tour detail</td>
-<td>Start tour; Save for later; một Edit</td>
-<td>Template bất biến; tái dùng bản chưa bắt đầu phù hợp; download badge/one-tap; nudge không chặn Start</td>
+<td>Hiểu lịch/độ phù hợp rồi Start; Save for later; một Edit</td>
+<td>Overview, visit/transfer/time budget, stop sequence, điều đã gồm/chưa gồm, chuẩn bị và download status; template bất biến, Start không bị chặn bởi download</td>
 </tr>
 <tr>
 <td>UX05</td>
 <td>Place detail</td>
-<td>Listen tại chỗ; About/Story; Add to trip; Ask sheet</td>
-<td>Hero ảnh; source; transcript; gallery ngang khi có nhiều ảnh phù hợp; current trip và player context độc lập</td>
+<td>Hiểu điểm đến, Listen tại chỗ; About/Story; Add; Ask</td>
+<td>Hero; lý do ghé/điều nên chú ý/thời gian gợi ý, practical notes, nguồn và chưa verified; transcript; current trip/player độc lập</td>
 </tr>
 <tr>
 <td>UX06</td>
@@ -199,8 +199,8 @@ iframe{display:block;border:0;width:402px;height:874px;background:#fff}.toc-grid
 <tr>
 <td>UX17</td>
 <td>My Trips</td>
-<td>Mở/sửa/start/resume trip</td>
-<td>Planned/paused/active/completed/ended early; local persistence</td>
+<td>Tiếp tục hoặc quản lý lịch đã lưu</td>
+<td>Overview số trip/progress thực, next action theo status, Planned/paused/active/completed/ended early, downloads/favorites và empty state hữu ích</td>
 </tr>
 <tr>
 <td>UX18</td>
@@ -236,13 +236,13 @@ iframe{display:block;border:0;width:402px;height:874px;background:#fff}.toc-grid
 <td>UX23</td>
 <td>AI Guide tab và contextual Ask sheet</td>
 <td>Hỏi trong scope Da Nang / POI / Current trip; tạo/chỉnh lịch</td>
-<td>Chung engine; context chip rõ; sheet giữ origin; mở rộng/back không mất Detail/leg; không trả lời tự do giả</td>
+<td>Quick-plan và câu hỏi phù hợp context, capability disclosure; không task grid lặp; sheet giữ origin; preview trước thay đổi</td>
 </tr>
 <tr>
 <td>UX24</td>
 <td>Profile</td>
-<td>Xem/sửa tên và profile local; mở Settings; login/signup hoặc Sign out</td>
-<td>Guest dùng app đầy đủ; không giả cloud/account security; signout giữ trips/downloads</td>
+<td>Xem/sửa profile local; xem hoạt động, Settings, login/signup hoặc Sign out</td>
+<td>Counts từ state thực, lối về trips/favorites/downloads; guest dùng đầy đủ, signout giữ dữ liệu; không giả cloud/account security</td>
 </tr>
 <tr>
 <td>UX25</td>
@@ -255,6 +255,12 @@ iframe{display:block;border:0;width:402px;height:874px;background:#fff}.toc-grid
 <td>Forgot / Reset password</td>
 <td>Xem flow phục hồi và nhập lại form demo</td>
 <td>Không email được gửi, không reset tài khoản thật/token server; trạng thái nói đúng local demo</td>
+</tr>
+<tr>
+<td>UX27</td>
+<td>Weather/day brief</td>
+<td>Đọc forecast Đà Nẵng; mở chi tiết/refresh khi cần</td>
+<td>Nguồn Open-Meteo, vị trí cố định, forecast time/update time, units và loading/stale/unavailable; không số mẫu lấp lỗi, không tự đổi tour</td>
 </tr>
 </tbody></table>
 <p>Supporting surfaces: nguồn, duration picker, chọn/add place, move menu, xác nhận remove/undo, +15/time warning, Steps, pause/end/start-another confirmation, change preview và lỗi tải. Mỗi tác vụ phải có đường hủy/quay lại giữ input thích hợp. Home drawer là persistent/nonmodal, không phải modal dialog; sheet xác nhận/Steps là tương tác riêng, không chồng nhiều modal.</p>
@@ -270,16 +276,65 @@ iframe{display:block;border:0;width:402px;height:874px;background:#fff}.toc-grid
 <li>Arrival xác nhận đã tới; <strong>Finish stop</strong> mới chuyển sang stop kế. Skip không được tính là visited. Pause không complete và không tự thay vị trí.</li>
 <li>Tour template gốc bất biến. Start/customize tạo hoặc mở bản cá nhân. Start tái dùng bản cùng template/ngày chưa bắt đầu và chưa chỉnh; không ghi đè bản đã customize. Tên mặc định có ngày; nhấn Start lặp không sinh thêm bản. Nếu có trip active khác, chỉ Pause &amp; Start sau xác nhận; Keep giữ nguyên cả hai.</li>
 <li>Không ép mọi người nghe theo thứ tự hay tạo trip. Library/Detail luôn có direct playback/transcript; quay về vẫn giữ trip đang đi.</li>
-<li>Home map dùng pin ảnh và selected card, drawer đổi ba mức bằng grip/tap và pointer drag. Compact chỉ giữ search + Continue hoặc Plan my day; medium thêm selected/place cards; full mới có curated tours. Explore list giữ lối vào dễ đọc. Không bày cả catalog ở Home; map + ba mức vẫn là giả thuyết cần UAT.</li>
+<li>Home map dùng pin ảnh và selected card, drawer đổi ba mức bằng grip/tap và pointer drag. Compact tóm tắt search + Continue/Plan, có lối mở rõ. <strong>Medium/full cùng feed cuộn</strong>, không gate tour: weather ngắn gắn city context → Continue/Plan → hai story cards → hai collection previews → hai tour trong strip gọn → một entry Essentials. Không thêm story spotlight, hàng tips chung hoặc footer trang trí lặp. Full tăng vùng đọc; Explore giữ catalog và cả ba collections. Map/snap vẫn cần UAT.</li>
 <li>Tabs chính <strong>Home · Explore · AI Guide · Trips</strong>. AI thay Plan, không thêm tab thứ năm; lịch/edit ở Trips. Profile là icon trên header Home, Settings là màn riêng bên trong Profile; có Replay welcome và Downloads. Ask từ Detail/leg mở sheet trên màn gốc. Focused leg có Ask current-stop dù tab bar ẩn; Steps chỉ đổi demo instruction selection, không tự chuyển progress.</li>
-<li>Chưa có weather provider: ẩn weather khỏi Home mặc định. Nếu thêm sample trong Review sau này, nhãn Sample phải ở ngay giá trị. Không hiển thị nhiệt độ/forecast giả như dữ liệu hiện tại hoặc tự đổi itinerary theo thời tiết.</li>
+<li>Root Explore/AI Guide/Trips không lặp tên tab trong một top bar riêng phía trên nội dung. Bottom tabs vẫn đủ icon + label; heading nội dung có ích vẫn giữ. Các màn con vẫn có Back/title theo task, focused navigation giữ gọn.</li>
+<li>Weather dùng nguồn forecast thật cho <strong>Đà Nẵng</strong>, không suy vị trí người dùng từ map. Giá trị có units, nguồn và thời điểm; current conditions của provider là model, không trạm quan trắc tại POI. Loading/error/stale phải đọc được; không thay lỗi bằng nhiệt độ mẫu. Thời tiết là thông tin để quyết định, không tự thay itinerary, hứa biển an toàn hoặc xác nhận venue mở.</li>
 </ul>
+<h3>Nội dung phong phú nhưng có thứ bậc</h3>
+<p>Mỗi màn phải trả lời một quyết định cụ thể trước, rồi mới cung cấp chiều sâu. Không tăng số nút chính chỉ để làm app trông nhiều chức năng.</p>
+<table>
+<thead>
+<tr>
+<th>Màn</th>
+<th>Câu hỏi cần trả lời ngay</th>
+<th>Chiều sâu bằng nội dung/thao tác phụ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Home</td>
+<td>Hôm nay ở Đà Nẵng thế nào và nên làm gì tiếp?</td>
+<td>Inline weather gắn city context; Resume/Plan ưu tiên theo state; hai stories/hai collections/tour strip, một Essentials entry</td>
+</tr>
+<tr>
+<td>Explore</td>
+<td>Những lựa chọn nào hợp điều mình tìm?</td>
+<td>Category/collection có ý nghĩa, metadata về thời gian/story, số kết quả, Clear filters và đường mở Detail</td>
+</tr>
+<tr>
+<td>Place</td>
+<td>Vì sao ghé và ở đây làm gì?</td>
+<td>Hai highlights khác ý, practical facts chính không lặp duration; visit rhythm/tips/etiquette/source qua disclosure; About/Story và nghe tại trang</td>
+</tr>
+<tr>
+<td>Tour/proposal</td>
+<td>Lịch này có hợp ngày của mình không?</td>
+<td>Stops có thứ tự, visit/transfer breakdown, thời gian dư/thiếu từ core, lý do chọn, nội dung gói và chuẩn bị</td>
+</tr>
+<tr>
+<td>Trips</td>
+<td>Chuyến nào cần tiếp tục, xem lại hoặc chuẩn bị?</td>
+<td>Next stop/progress/status thực; active card rõ, nhóm planned/history, downloads và favorites</td>
+</tr>
+<tr>
+<td>AI Guide</td>
+<td>Mình có thể nhờ gì và đang hỏi về đâu?</td>
+<td>Quick-plan + hai câu hỏi city ngắn, context chip/capability disclosure; weather là entry ngữ cảnh, không thêm task grid; preview/diff/Apply riêng</td>
+</tr>
+<tr>
+<td>Profile/Settings</td>
+<td>Dữ liệu/cài đặt nào đang thuộc thiết bị này?</td>
+<td>Hoạt động thật từ state; shortcuts và nhóm settings có effect, giải thích local demo trong About/privacy</td>
+</tr>
+</tbody></table>
+<p>City notes và collections là biên tập của prototype, không recommendation cá nhân hóa hoặc tin live. Thời lượng chuyến từ core; audio duration từ file metadata; không dùng chung một con số cho hai ý nghĩa. Chi tiết operational không có nguồn hiện hành được ghi chưa xác minh trong đúng section, tránh banner cảnh báo lặp trên mọi card.</p>
+<p>Nguyên tắc chốt sau review là <strong>thêm đúng thông tin cần cho quyết định, bỏ phần lặp</strong>, không kéo dài mọi trang. Weather Home là dòng ngắn hòa vào city context: temperature/condition/rain của giờ, valid time và source; forecast đầy đủ mở màn chi tiết. Khi rain probability giờ hiện tại ≥50% có thể gợi ý xem Museum bằng action rõ, không tự thay itinerary hoặc hứa venue đang mở. Không dùng weather card lớn như widget được ghép thêm chỉ để lấp màn.</p>
 <p>Review panel/fault tools chỉ hiện khi thêm <code>?review=1</code> vào URL. Profile → Settings mặc định ưu tiên playback speed, reduced motion, replay welcome, downloads và thông tin/privacy của build; không lẫn fault toggles với tùy chỉnh du lịch. Review không phải sandbox bất biến: một số case tạo review trip, thay request form hoặc pause trip active và lưu trong khóa V7. Dùng browser profile test riêng hoặc export plan trước seed. Reset demo data khác Sign out: Reset chỉ dữ liệu/cache V7; Sign out chỉ đóng demo session, không xóa trips/downloads.</p>
 <h2>5. Nội dung và audio</h2>
 <p>POI, story, template và personal trip là các đối tượng riêng. Hai loại tour tham chiếu cùng story library; thay route/thời lượng không sinh lại bài kể. Bữa trưa generic là một break, không phải nhà hàng đã xác minh.</p>
 <p>Script/nguồn và tình trạng từng asset được mô tả ở <a href="#doc-5">05-Content-Sources.md</a>. Bundle hiện có năm WAV sample cho Cathedral/Museum/Beach/Mountain/Bridge, giọng hệ thống Samantha tạo trước; lunch không có audio. Đây là <strong>synthetic audio sample</strong>, không live AI voice, human narration, production-reviewed hay public/commercial rights đã xác minh. Player đọc file thực; thiếu/lỗi file thì dùng transcript và trạng thái lỗi, không chạy progress giả. File tồn tại không thay evidence đã nghe/đã kiểm player.</p>
 <p>Download theo <strong>personal trip</strong>: tour card/detail có badge trạng thái và action một chạm; action template chỉ chuẩn bị/tái dùng bản cá nhân rồi tải, không Start. Start luôn có gợi ý tải nhẹ, không một Ready/download gate. Quản lý dung lượng/xóa/cập nhật gói nằm ở Trips → Downloads. Chưa có package riêng cho một POI ở Place detail. Story đã cache qua trip nghe được độc lập; playback online không cần trip. Download gồm audio/ảnh/tour info theo manifest, không street map hoặc AI mới.</p>
-<p>Asset hiện có chỉ một ảnh phù hợp mỗi POI. Detail dùng hero lớn thật; hướng gallery ngang được giữ cho khi có thêm media đủ nguồn, không nhân một ảnh thành nhiều thumbnail hoặc lấy ảnh venue khác làm góc chụp. Giá/rating/thời tiết trong ảnh reference không trở thành dữ liệu sản phẩm.</p>
+<p>Asset hiện có chỉ một ảnh phù hợp mỗi POI. Detail dùng hero lớn thật; hướng gallery ngang được giữ cho khi có thêm media đủ nguồn, không nhân một ảnh thành nhiều thumbnail hoặc lấy ảnh venue khác làm góc chụp. Giá/rating trong ảnh reference không trở thành dữ liệu sản phẩm; weather chỉ lấy qua provider riêng, không từ mockup.</p>
 <p>GPS không biết khách đang nhìn gì. Story mô tả đối tượng bằng tên/ảnh hoặc điều kiện rõ như “nếu bạn đang nhìn mặt tiền trong ảnh”. Không khẳng định “bên trái/trước mặt bạn” từ GPS đơn lẻ. Giờ/giá/entrance chưa xác minh giữ nhãn chưa xác minh; không gán từ nguồn cũ thành facts live.</p>
 <h2>6. Ranh giới prototype</h2>
 <p>V7 cần chứng minh browser interactions, tính lịch thống nhất, bảo toàn draft/proposal/current stop, local persistence, media playback khi có file, caching có kiểm tra và Ask demo theo nguồn. Chưa chứng minh native GPS/background/audio focus, turn-by-turn SDK, live LLM, đồng bộ cloud, booking/payment, quyền ảnh hay tính khả thi thực địa của fixture.</p>
@@ -378,7 +433,7 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 <p><strong>Chỉnh đã có:</strong> My Trips → trip → manual draft hoặc Adjust → kiểm trước/sau → update. Nếu đang active chỉ được tác động phần upcoming; past/current được giữ, trừ +15 current duration và closure replacement trước arrival theo hai flow riêng, có xác nhận rõ.</p>
 <h3>Home map, drawer và focused navigation</h3>
 <ul>
-<li><code>homeSnap</code> là <code>compact/medium/full</code>; kích thước theo viewport/chữ, không native detent cố định. Compact có search + Continue hoặc Plan my day; medium thêm selected/place cards; full thêm curated tours. Grip button cycle hoặc pointer drag đổi mức; đổi mức không tạo/sửa trip. Search Home chuyển sang Explore cùng query thay vì tạo search state thứ hai; Explore giữ list/filter đầy đủ.</li>
+<li><code>homeSnap</code> là <code>compact/medium/full</code>; kích thước theo viewport/chữ, không native detent cố định. Compact tóm tắt search + Continue/Plan và lối mở feed. <strong>Medium/full cùng feed cuộn</strong>: city context có inline weather, next action, hai stories/hai collection previews, tour strip và một Essentials entry; full chỉ tăng vùng đọc. Không gate nội dung theo snap hoặc thêm tips/spotlight lặp. Grip/button/pointer drag đổi mức, không sửa trip. Home search/collection chuyển cùng Explore query/filter state.</li>
 <li>Home pin → <code>selectedMapPlace</code> và selected card. Route map/list → <code>selectedRoutePlace</code> của itinerary đang xem. Cả hai chỉ selection; không ghi arrival. Route overview dùng cùng stops/timing và cho mở Detail của selected POI.</li>
 <li>Active leg giữ progress pointer; top instruction và Steps modal có <strong>ba step mẫu</strong>. <code>navStep</code> đổi theo người review chọn, không theo GPS, khoảng cách live hoặc nhận biết đã rẽ. Số phút/km là schedule fixture, không tự cập nhật từ vị trí thật.</li>
 <li>Mini-player dùng cùng <code>Audio</code> object với full player, không tạo stream khác. I&#39;m here xác nhận thủ công. Về Home/Trips giữ plan/progress/audio state trong phiên; không auto Pause/Finish chỉ vì điều hướng. Focused leg ẩn bottom tabs để tập trung nhưng có Ask current-stop dạng sheet.</li>
@@ -537,7 +592,46 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 <li>Ask sheet giữ origin; scope hiển thị và scope dùng để lookup/adjust phải khớp. Tab AI không tạo một accepted plan thứ hai ngầm.</li>
 <li>Guest không bị auth gate; Sign out giữ dữ liệu chuyến đi. Password không persist/truyền; Forgot không claim email đã gửi và Reset không claim đổi tài khoản thật.</li>
 <li>Settings có effect thực: speed khớp audio/player, reduced motion khớp CSS; Reload giữ preference local trong phạm vi browser hỗ trợ.</li>
+<li>Weather/collection/filter/POI selection chỉ thay context đọc; không ghi arrival, không đổi plan revision, không auto-generate hay auto-apply itinerary.</li>
+<li>Home medium/full cung cấp cùng nội dung; thay snap hoặc cập nhật weather không được xóa search, trip/player context hoặc cuộn người dùng về đầu tác vụ đang đọc một cách bất ngờ.</li>
 </ol>
+<h2>9. Weather và trạng thái thông tin</h2>
+<p>Weather là adapter độc lập với <code>GN_CORE</code>, không là dữ kiện route/venue. Request dùng tọa độ Đà Nẵng cố định/timezone địa phương; không account/hội thoại/trip ID/GPS. Home chỉ inline city weather gồm temperature/condition/rain probability giờ và valid time/source; full forecast ở màn chi tiết. UI phân biệt forecast-valid với fetched time; city forecast không phải phép đo tại venue hay vị trí khách. Rain probability giờ hiện tại ≥50% có thể hiện một prompt xem Museum; action chỉ mở nội dung, không auto-apply plan hoặc xác nhận venue mở.</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>UI/hành vi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Chưa có response / loading</td>
+<td>Tên thành phố và placeholder có ý nghĩa; không hiện nhiệt độ số mẫu</td>
+</tr>
+<tr>
+<td>Response hợp lệ</td>
+<td>Giá trị hữu hạn + units + condition text; nguồn, forecast time/update time và lối xem chi tiết</td>
+</tr>
+<tr>
+<td>Refresh đang chạy</td>
+<td>Giữ giá trị trước có timestamp, không nhấp nháy thành sample hoặc gọi giá trị cũ là mới</td>
+</tr>
+<tr>
+<td>Network/provider/schema lỗi, có cache còn dùng được</td>
+<td>Last update/cached hoặc stale rõ theo tuổi dữ liệu; retry, không cập nhật timestamp thành lần thất bại</td>
+</tr>
+<tr>
+<td>Không có dữ liệu đủ điều kiện dùng</td>
+<td>Unavailable và Retry; feed/Plan/Continue/audio vẫn dùng được</td>
+</tr>
+<tr>
+<td>Offline</td>
+<td>Chỉ thông tin đã lưu đúng tuổi/nhãn nếu hỗ trợ; không claim forecast mới vừa tải</td>
+</tr>
+</tbody></table>
+<p>Implementation <code>prototype/weather.js</code> dùng <code>gonarra-weather-danang-v1</code>, freshness <strong>30 phút</strong>, giữ cache tối đa <strong>6 giờ</strong> từ <code>fetchedAt</code>, request timeout mặc định <strong>9 giây</strong>, cùng request đang chạy được dùng lại. Cache hỏng/ngoài hạn/future timestamp bị bỏ; storage không dùng được không làm forecast network thất bại. Request <code>credentials: omit</code>, không Service Worker trip package. Refresh thành công mới cập nhật fetch time; <code>forecastAt</code> là thời điểm có hiệu lực của current/model, <strong>không phải giờ model được nhà cung cấp cập nhật</strong> (<code>modelUpdatedAt: null</code>).</p>
+<p>Adapter validate vị trí grid gần Đà Nẵng, timezone <code>Asia/Ho_Chi_Minh</code>/UTC+7, epoch seconds và units trước dùng số. Trường thiếu/sai unit là unknown/null, không convert ngầm hoặc ép thành 0. Có ít nhất dữ liệu dùng được ở current/hourly/daily mới nhận response; hourly giữ tối đa 8 giờ, daily tối đa 3 ngày. Freshness tính theo lúc fetch, vì vậy UI vẫn phải cho đọc forecast-valid time, không gọi Cached/Fetched at là model-updated-at.</p>
+<p>Cache weather không thuộc manifest media của trip. Không lưu response vào accepted plan; lỗi weather không làm fail download/Start. Weather có thể gợi ý đọc/chuẩn bị theo rule hiển thị, nhưng không tự thay stop, thời gian, mode hoặc lock. Không suy forecast thành đánh giá biển/tắm, bão/cảnh báo chính thức hay giờ mở cửa.</p>
 <p>Kịch bản xác minh và cách đọc kết quả ở <a href="#doc-4">04-Validation-Handoff.md</a>.</p>
 <p class="muted"><a href="docs/02-Flow-State-Contract.md">Xem nguồn Markdown ↗</a></p></section><section id="doc-3"><h1>GoNarra V7 — Hợp đồng AI, audio và offline</h1>
 <p>Cập nhật ngày <strong>23/10/2026</strong> trên V7 hiện có. Phân biệt <strong>hành vi browser thực</strong>, <strong>thuật toán demo</strong> và <strong>tích hợp sản phẩm sau này</strong>. Tab AI Guide/sheet mới không làm engine thành LLM: V7 chưa gọi model, không navigation SDK hoặc AI chạy offline. Profile/login/reset là UI demo local, chưa server authentication/tài khoản thật/cloud sync.</p>
@@ -639,7 +733,13 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 </ul>
 <p>Không gồm map tiles/offline navigation, route computation/rerouting, live ETA, nguồn website bên ngoài hay live AI. Có file audio nào thì manifest liệt kê file đó; nếu chỉ text/transcript phải nói rõ, không dựa vào số story để suy ra có audio.</p>
 <p>Home/route/leg map là SVG minh họa trong bundle; việc nó vẫn render offline không làm nó thành bản đồ đường phố offline. Ba step mẫu trong Steps cũng không phải navigation service. Open Google Maps tạo HTTPS directions link thật tới destination fixture; Google Maps có availability riêng và điểm đến chưa field-verified. V7 không gọi geolocation hoặc tự phát hiện đã rẽ/đã tới.</p>
-<p>Đợt chỉnh UI không thêm weather provider: Home không hiển thị weather mẫu như forecast hiện tại. Nếu cần case Sample trong review sau này, phải ghi Sample ngay giá trị và không dùng nó để tự đổi itinerary. GPS thật, routes và weather là các integration riêng, không được suy ra từ map hoặc visual gradient.</p>
+<h3>Weather/day brief có provider riêng</h3>
+<p>Home dùng <strong>Open-Meteo Weather Forecast API</strong> cho Đà Nẵng cố định. Nhãn phải nói weather model/forecast và nguồn có link, không gọi đây là GPS hoặc trạm live tại POI. Dữ liệu weather không đi qua AI demo; temperature/condition/rain/wind và các trường được dùng phải đến từ response hợp lệ, không câu trả lời tự sinh. <a href="https://open-meteo.com/en/docs">API documentation</a> mô tả current conditions là dữ liệu model ở độ phân giải 15 phút; hourly/daily và timezone là các trường request riêng.</p>
+<p>Home hiển thị weather ngắn <strong>trong city context</strong>, không widget/card lớn tách rời: temperature/condition, rain probability giờ, valid time/source. Forecast đầy đủ ở màn chi tiết; có loading, unavailable/retry và cached/stale khi dùng dữ liệu cũ. Giữ timestamp response thành công; lỗi refresh không làm dữ liệu cũ trông mới. Không có response hợp lệ thì không điền 28°C từ ảnh reference. Không tạo forecast riêng venue hoặc gọi near you.</p>
+<p>Weather chỉ hỗ trợ đọc thông tin và chuẩn bị ngày đi. Rain probability giờ hiện tại ≥50% có thể đưa một prompt mở Museum; đó là gợi ý đọc/chọn, không auto-rewrite hoặc xác nhận venue mở. Không tự gọi Generate/Adjust, đổi accepted trip, mở khóa stop, xác nhận swimming/marine safety. Thay itinerary vì mưa vẫn phải là yêu cầu → proposal → review → Apply; engine demo không có dữ kiện vận hành live để làm lời bảo đảm.</p>
+<p>Request gửi tọa độ thành phố cố định, không profile/trip/hội thoại. Cache forecast là dữ liệu riêng, không làm một downloaded tour trở thành forecast offline được cập nhật. Timeout/provider/network/schema lỗi giữ các phần local khác hoạt động. Ngưỡng cache/refresh và những trường thực sự hiển thị cần đối chiếu code/evidence; không gọi API response thành công là đã field-test độ chính xác.</p>
+<p>Nguồn và điều kiện sử dụng: <a href="https://open-meteo.com/en/terms">Open-Meteo Terms</a>, kiểm tra 23/10/2026, quy định Free API cho noncommercial và attribution CC BY 4.0. Public prototype này không thu phí/quảng cáo; trước dùng thương mại cần chọn điều kiện/gói phù hợp và kiểm lại terms. UI giữ attribution nguồn gần weather, không chôn duy nhất ở handbook. Không thêm provider secret vào browser.</p>
+<p>GPS thật, street routes và weather là các adapter riêng. Chỉ weather được bổ sung trong lần tăng chiều sâu nội dung này; map vẫn SVG minh họa, AI vẫn bounded local demo và auth vẫn local UI.</p>
 <h3>State download</h3>
 <table>
 <thead>
@@ -941,7 +1041,7 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 <tr>
 <td>V38</td>
 <td>Home pin/card + compact/medium/full bằng button và grip</td>
-<td>Compact search+Continue/Plan; medium thêm card; full tour; selection đồng bộ; không current mutation</td>
+<td>Compact summary có lối mở; medium/full cùng feed cuộn đủ stories/collections/tours/city notes; selection đồng bộ; không current mutation</td>
 </tr>
 <tr>
 <td>V39</td>
@@ -990,8 +1090,8 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 </tr>
 <tr>
 <td>V48</td>
-<td>Home mặc định và Start chưa download</td>
-<td>Không weather sample như thật; Start vẫn được; download nudge không bắt qua màn Ready mới</td>
+<td>Home mặc định, weather chưa về/lỗi và Start chưa download</td>
+<td>Weather có nguồn/state hoặc unavailable, không số sample lấp lỗi; Start vẫn được; không Ready/download gate</td>
 </tr>
 <tr>
 <td>V49</td>
@@ -1043,6 +1143,91 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 <td>Inspect storage, URL và network sau login/signup/forgot/reset</td>
 <td>Không password/credential token trong storage/query/network; local session không coi là security/account boundary</td>
 </tr>
+<tr>
+<td>V59</td>
+<td>Home medium → cuộn hết feed rồi đổi full/medium</td>
+<td>Cùng feed inline weather/next action/hai stories/hai collection previews/tour strip/một Essentials entry; không gate tour, không tips/spotlight trang trí lặp hoặc cắt CTA cuối</td>
+</tr>
+<tr>
+<td>V60</td>
+<td>Weather response hợp lệ cho city cố định</td>
+<td>Condition/temperature/units đúng response, nhãn Đà Nẵng/model/source/time rõ; không near-you/GPS hoặc trạm tại POI</td>
+</tr>
+<tr>
+<td>V61</td>
+<td>Weather loading, timeout/network fail, invalid schema</td>
+<td>Không số mẫu; unavailable/retry rõ; các phần local và Start/Play/Explore vẫn dùng được</td>
+</tr>
+<tr>
+<td>V62</td>
+<td>Weather cache còn hạn/cũ, refresh thành công hoặc lỗi</td>
+<td>Nhãn và timestamp đúng tuổi; lỗi không làm timestamp mới giả; stale không trình bày như current mới</td>
+</tr>
+<tr>
+<td>V63</td>
+<td>Đọc feed/form ở scroll vị trí khác → weather trả về/Retry</td>
+<td>Không mất input/focus/trip/player hoặc bị cướp scroll về đầu tác vụ; response cũ không ghi đè state mới ngoài ý muốn</td>
+</tr>
+<tr>
+<td>V64</td>
+<td>Home inline weather → chi tiết/source; rain probability giờ ≥50% → Museum prompt</td>
+<td>Home gọn hòa vào city context, forecast sâu chỉ màn chi tiết; source/time đúng; prompt chỉ mở nội dung, không auto-adjust/claim venue mở hoặc biển an toàn</td>
+</tr>
+<tr>
+<td>V65</td>
+<td>Home collection → Explore category/filter → Clear → search</td>
+<td>Filter đúng tập POI, query/count/selection rõ; Clear phục hồi được; không tạo search/catalog state thứ hai</td>
+</tr>
+<tr>
+<td>V66</td>
+<td>Explore query không match hoặc kết hợp filter không kết quả</td>
+<td>Empty state trung thực + Clear/change query; không fake match/nearby distance/rating/giờ mở cửa</td>
+</tr>
+<tr>
+<td>V67</td>
+<td>Place About → highlights/practical/source → Story/Listen</td>
+<td>Hai highlights khác ý, practical facts chính; rhythm/tips/etiquette qua disclosure; không lặp duration/hero/name hoặc lẫn visit với WAV duration</td>
+</tr>
+<tr>
+<td>V68</td>
+<td>Tour detail/proposal → overview/stop list/time breakdown</td>
+<td>Visit/transfer/total/budget khớp core, nội dung gói và chuẩn bị đúng; không Start gate/nút Edit trùng</td>
+</tr>
+<tr>
+<td>V69</td>
+<td>Trips planned/active/paused/completed/ended và empty</td>
+<td>Counts/progress/next action theo record thực; active nổi bật, ended khác completed; downloads/favorites có đường vào</td>
+</tr>
+<tr>
+<td>V70</td>
+<td>AI Guide chưa chat và có current trip</td>
+<td>Quick-plan/câu hỏi/context giúp bắt đầu, không task grid lặp; đúng scope, chỉnh lịch vẫn preview/Apply; weather entry phụ; không tab/FAB AI thừa</td>
+</tr>
+<tr>
+<td>V71</td>
+<td>Profile guest/demo → activity/favorites/downloads/Settings</td>
+<td>Counts lấy dữ liệu thực, shortcuts tới đúng state; không stats/cloud sync giả; signout vẫn giữ dữ liệu</td>
+</tr>
+<tr>
+<td>V72</td>
+<td>Enriched screens ở 402×874 và browser hẹp/font lớn</td>
+<td>Text không clip, rail không làm cả page ngang, footer/composer không che last item, targets/focus đọc được</td>
+</tr>
+<tr>
+<td>V73</td>
+<td>Thu gọn/mở practical/source disclosures rồi điều hướng Back</td>
+<td>Secondary content tìm được, nút chính không lặp; Back giữ context phù hợp; không nested modal hoặc mất accepted plan</td>
+</tr>
+<tr>
+<td>V74</td>
+<td>Weather offline/route/AI package boundary</td>
+<td>Cache trip không hứa weather mới/AI inference/street navigation; không request profile/trip/AI text tới weather endpoint</td>
+</tr>
+<tr>
+<td>V75</td>
+<td>Root Explore/AI Guide/Trips và màn con → Back</td>
+<td>Không lặp tên ba tab trong top bar; bốn label bottom giữ nguyên, product heading có ích còn; màn con vẫn có Back/title phù hợp</td>
+</tr>
 </tbody></table>
 <p>Nếu UI/runner không hỗ trợ một nhánh trong gói hiện tại, ghi “not implemented/not run” thay vì gộp cùng một case pass rộng hơn. Core test không thay browser journey; browser journey không thay device field test.</p>
 <h2>3. Kiểm tính lịch và dữ liệu</h2>
@@ -1058,6 +1243,7 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 <li>Audio checks: file tồn tại/bytes/duration và playback events. OS synthetic file không phải người kể đã review; automated playback event không thay nghe chất lượng hoặc phát âm.</li>
 <li>Location checks: explicit API call/permissions nếu có; simulated denial/GPS state ghi simulated. Browser geolocation không chứng minh native/background arrival.</li>
 <li>Accessibility checks: semantic labels, keyboard/focus, scaling/contrast theo phần đã kiểm; không gọi một bảng contrast là chứng nhận toàn app.</li>
+<li>Weather checks: capture request/response source/time/units, valid/error/stale rendering và no-plan-mutation. Fixture injection kiểm logic; chỉ network fetch thực mới được ghi provider observation. Không gọi weather model accuracy hoặc biển an toàn là đã kiểm từ HTTP 200.</li>
 </ul>
 <p>Không ghi pass date/model/reviewer giả. Failure/retest giữ trong ledger; report summary phải dùng đúng denominators và environment.</p>
 <h3>Phạm vi implementation cần giữ khi đọc kết quả</h3>
@@ -1073,6 +1259,7 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 <p>Nếu phần offline/audio/API browser chưa chạy được trong môi trường người nhận, docs/UI phải hạ claim và hướng dẫn điều kiện chạy; không đổi simulation thành bằng chứng thật. Native, live AI/Routes, venue facts/media rights và user value chưa đạt chỉ vì prototype gate đạt.</p>
 <h2>6. Lộ trình sau handoff trong 2–3 tháng</h2>
 <p>Đồ án ưu tiên một vertical slice có chứng cứ. Giờ/tuần/rubric/budget còn phải chốt; bảng là thứ tự 8–12 tuần, không cam kết tiến độ. Giữ UI V7 có thể dùng lại; không thêm brand/module mới để thay bằng chứng còn thiếu.</p>
+<p>Ưu tiên phát triển ngay sau lần enrich: (1) đo khả năng tìm nội dung trong feed medium và hiểu weather/source/status; (2) biên tập POI và practical facts hiện hành có owner/review date; (3) test native audio/offline/permission trên thiết bị; (4) tích hợp planner/Ask và routing từng adapter sau khi guard/evaluation có bằng chứng. Không thêm booking/payment/social/account cloud chỉ để làm app trông đầy. Weather adapter là lát cắt dữ liệu thật đầu tiên, không rút ngắn các gate facts/routes/LLM còn lại.</p>
 <table>
 <thead>
 <tr>
@@ -1123,7 +1310,7 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 <p>Handoff browser này không phải app store release. Muốn pilot thật cần đối chiếu actual corpus/entrance, quyền ảnh/audio/offline, English/listener quality, secrets/provider terms/budget, target device và research consent. Chỉ thêm cloud account khi scope có nhu cầu sync; khi đó identity/ownership/logout/deletion là work riêng, không cho login flow cũ âm thầm lọt vào guest prototype.</p>
 <p>Người nhận nên bắt đầu bằng localhost và ba entry, sau đó dùng Review panel cho failure cases, rồi đối chiếu evidence JSON. Cần phân biệt “review được một trạng thái” với “đã kiểm chứng hệ thống thật ở ngoài thực địa”.</p>
 <p class="muted"><a href="docs/04-Validation-Handoff.md">Xem nguồn Markdown ↗</a></p></section><section id="doc-5"><h1>GoNarra V7 — Nội dung, nguồn và quyền sử dụng</h1>
-<p>Ngày đối chiếu nguồn: <strong>22/10/2026</strong>, múi giờ Việt Nam; cập nhật mô tả bundle ngày <strong>23/10/2026</strong>. Dữ liệu ở <code>prototype/data.js</code>, revision <code>2026-10-22-draft-1</code>, dùng cho <strong>prototype review/demo</strong>. Đã đọc nguồn công khai dưới đây; chưa có bilingual reviewer, narrator hoặc đánh giá thực địa. Deploy một prototype không tự xác nhận media rights hoặc biên tập độc lập.</p>
+<p>Ngày đối chiếu nguồn ban đầu: <strong>22/10/2026</strong>, múi giờ Việt Nam; cập nhật mô tả bundle/nội dung ngày <strong>23/10/2026</strong>. Dữ liệu ở <code>prototype/data.js</code>, revision <code>2026-10-22-draft-1</code>; companion biên tập <code>prototype/content.js</code> revision <code>2026-10-23-rich-content-1</code> bổ sung chiều sâu các màn từ cùng corpus. Dùng cho <strong>prototype review/demo</strong>. Đã đọc nguồn công khai dưới đây; chưa có bilingual reviewer, narrator hoặc đánh giá thực địa. Deploy một prototype không tự xác nhận media rights hoặc biên tập độc lập.</p>
 <h2>Phạm vi nội dung</h2>
 <p>Ba script English gốc dài khoảng 100–140 từ cho Cathedral, Museum, Beach; hai đoạn giới thiệu ngắn cho Bridge và Mountain. Chúng được viết riêng cho prototype từ dữ kiện chọn lọc, không sao chép audio hoặc nguyên bài. Câu khuyến nghị cách trải nghiệm là lời biên tập của GoNarra, không phải sự kiện lịch sử hay kết quả nghiên cứu người dùng. Script độc lập thứ tự, không dùng “bên trái”, “phía trước” hoặc giả định hướng nhìn từ GPS.</p>
 <p><code>questions</code> là <strong>câu hỏi/trả lời mẫu có sẵn</strong>, phục vụ review giao diện và nguồn; không phải bằng chứng hệ thống đã thực hiện retrieval, RAG hay trả lời câu hỏi tự do bằng mô hình. <code>sourceIds: []</code> ở câu về giới hạn prototype xác nhận khả năng của bản demo, không đóng giả citation bên ngoài.</p>
@@ -1170,6 +1357,31 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 <h2>Ảnh kế thừa</h2>
 <p>Các file <code>cathedral.png</code>, <code>museum.png</code>, <code>mountain.png</code>, <code>beach.png</code>, <code>coast.png</code> được <strong>copy nguyên trạng</strong> từ <code>/Users/lengoctanhien/Downloads/GoNarra-V6 2/prototype/assets/</code>. Không chỉnh bản V6. Đã xem <code>coast.png</code>: ảnh thể hiện Cầu Rồng, vì vậy dùng cho bridge và thumbnail tour river-coast. Lunch dùng ảnh này chỉ như minh họa nhịp nghỉ trong tour, <strong>không phải ảnh nhà hàng</strong>. Chưa nhận diện tác giả/stock provider, nguồn gốc chụp hay AI, giấy phép, attribution hoặc quyền thương mại của cả năm ảnh. <strong>Không coi là đã cleared để phát hành public/commercial</strong>. Cần thay bằng ảnh tự sở hữu hoặc có license được lưu trước phát hành.</p>
 <p>Ảnh UI reference do người dùng gửi dùng để định hướng collage welcome, map/white sheet, gallery và AI conversation; không là nguồn facts, rating/giá, forecast hoặc ảnh địa điểm Đà Nẵng. Không đưa ảnh mockup/reference vào catalog POI như ảnh chụp venue thật. Gallery chỉ dùng asset hiện có phù hợp; không bịa thêm các góc chụp.</p>
+<h2>Nội dung bổ sung và day brief</h2>
+<p>Home/Explore/Detail có thêm mô tả biên tập, collection, highlights và practical notes từ cùng POI/corpus. Mục đích là giúp hiểu vì sao ghé, điều nên chú ý và lượng thời gian thiết kế; không tạo POI mới để lấp card. Tên collection như văn hóa/sông/biển là taxonomy biên tập, không ranking, recommendation đã cá nhân hóa hoặc giải thưởng. Metadata story/transcript lấy từ library; counts về saved/confirmed/downloads lấy state thực. Không bịa review count, rating 4.8, ticket price, hours, distance from you hoặc travel ETA live.</p>
+<p><code>GN_CONTENT</code> chứa <code>places</code> (hook, highlights có source IDs, visit rhythm, practical facts có status, tips/etiquette/mobility, audio takeaways), <code>tours</code> (độ phù hợp, journey highlights, included/not included, start/end/planning note), <code>collections</code> và <code>city</code> tips. Ba collection hiện tại là <strong>Read the city</strong>, <strong>A little more open air</strong>, <strong>Start with one story</strong>; chúng chỉ lọc các IDs đã có trong library. Các trường biên tập không được engine coi như operational facts hoặc dùng để validate route/accessibility.</p>
+<p>Practical notes phân biệt điều đã có nguồn với gợi ý trải nghiệm và điều cần hỏi venue. “Suggested visit” là thời lượng thiết kế đã nêu trong fixture; effort/environment là mô tả giới hạn, không xác nhận accessible entrance hoặc phù hợp mọi người. Source list và status đặt trong disclosure dễ mở, không lặp cả đoạn cảnh báo trên tất cả card. Nội dung city notes chưa field-tested và không thay hướng dẫn của venue hoặc cảnh báo địa phương.</p>
+<p>Weather là nguồn dữ liệu mới, tách khỏi corpus lịch sử/biên tập:</p>
+<table>
+<thead>
+<tr>
+<th>Nguồn</th>
+<th>Phạm vi sử dụng</th>
+<th>Cách trình bày</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://open-meteo.com/en/docs">Open-Meteo Weather Forecast API</a>, đối chiếu 23/10/2026</td>
+<td>Model forecast theo tọa độ Đà Nẵng cố định; các trường response hiện dùng trong weather adapter</td>
+<td>City + units + condition text + forecast/update time + source; không GPS, sensor tại venue hoặc dự báo an toàn biển</td>
+</tr>
+<tr>
+<td><a href="https://open-meteo.com/en/terms">Open-Meteo Terms</a>, đối chiếu 23/10/2026</td>
+<td>Điều kiện Free API noncommercial/attribution; production thương mại kiểm gói phù hợp</td>
+<td>Link attribution gần weather; trạng thái stale/error không bị thay bằng số demo</td>
+</tr>
+</tbody></table>
+<p>Dữ liệu current của weather provider vẫn là model, không chứng minh thời tiết tại thời điểm/điểm người dùng đứng. Network response thực và việc parse/hiển thị là các phần cần evidence riêng; không gọi một fixture weather trong unit test là quan sát forecast live. Không nhét forecast vào tour package như thể tự cập nhật offline hoặc dùng nó để overwrite itinerary.</p>
 <h2>Fixture hành trình và vị trí</h2>
 <ul>
 <li>Cathedral, museum, beach, mountain, bridge có tọa độ <strong>xấp xỉ để mô phỏng</strong>. Không phải kết quả geocoding đã kiểm tra hay tọa độ cổng/điểm dừng xe an toàn. Bridge là điểm ven sông mô phỏng, không cố ý dẫn khách lên lòng cầu.</li>
@@ -1224,20 +1436,39 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 <td>Action dùng drag cần single-pointer alternative khi áp dụng</td>
 <td>Drawer có nút đổi mức; pin/list và reorder có nút</td>
 </tr>
+<tr>
+<td>Apple <a href="https://developer.apple.com/news/?id=s8sl4tpa">Q&amp;A: 10 Questions with Design Evangelism</a></td>
+<td>Phân nhóm feature theo mục tiêu, hierarchy/progressive disclosure và labels của tab</td>
+<td>Thêm thông tin hữu ích theo tầng đọc, không tăng một hàng CTA hoặc giấu tours sau snap; giữ bốn tab có nhãn</td>
+</tr>
+<tr>
+<td>Android Developers <a href="https://developer.android.com/develop/ui/compose/accessibility/api-defaults">Accessibility API defaults</a></td>
+<td>Target tương tác tối thiểu 48dp trong Material; icon cần semantics</td>
+<td>Dùng làm điểm đối chiếu khi enrich filter/weather/retry; prototype web giữ minimum riêng và kiểm gap/focus, không gọi CSS px bằng dp</td>
+</tr>
+<tr>
+<td>Android Developers <a href="https://developer.android.com/develop/ui/compose/components/bottom-sheets">Bottom sheets</a></td>
+<td>Sheet có state show/hide và dismiss rõ</td>
+<td>Ask/weather phụ có đường đóng, không chồng lên một sheet khác hoặc dùng sheet như màn Home bị gate</td>
+</tr>
 </tbody></table>
 <p>Apple HIG Motion được mở nhưng nội dung trực tiếp yêu cầu JavaScript; bản Markdown không tải được trong công cụ. Các quy tắc motion ở đây dựa trên hai nguồn Apple đã đọc ở trên, không trích giả nội dung trang chưa đọc.</p>
 <h2>Quyết định có lý do, chưa được người dùng xác nhận</h2>
 <p><strong>Home map + persistent drawer</strong> giúp liên hệ POI và vị trí, nhưng dễ che pin, tạo cạnh tranh scroll/drag và khiến khách tưởng map đang live. Map ghi rõ illustrative/demo; không marker “you are here” giả. Search luôn dễ tiếp cận và chuyển sang Explore cùng query, không tạo search flow thứ hai. Chọn pin cập nhật selected card; chọn card/list cập nhật pin. Không nhảy current trip stop.</p>
-<p>Ba mức drawer là giả thuyết có thứ bậc nội dung: <strong>compact</strong> search + Continue hoặc Plan my day; <strong>medium</strong> thêm selected/place cards; <strong>full</strong> mới thêm curated tours. Home trả lời việc nên làm tiếp, Explore dành cho catalog/tìm/filter. Có nút đổi mức mang label/state, không bắt đoán gesture. Drawer nonmodal; map còn thấy vẫn dùng được. Tỷ lệ cần thích nghi chữ lớn/keyboard, không cố giữ preset làm mất CTA.</p>
+<p>Review tiếp chỉ ra Home thiếu thông tin; review sau đó yêu cầu bỏ phần không cần thiết và weather không trông ghép thêm. Contract chốt: <strong>compact</strong> summary search + Continue/Plan/lối mở; <strong>medium/full cùng feed cuộn</strong>, full chỉ tăng diện tích, không gate tour. Weather ngắn gắn city context → next action → hai stories → hai collection previews → hai tours trong strip → một Essentials entry. Bỏ spotlight/tips/footer trang trí trùng. Explore giữ catalog/cả ba collections. Có nút đổi mức mang label/state; drawer nonmodal, map còn thấy dùng được. Tỷ lệ phải thích nghi chữ lớn/keyboard và CTA.</p>
 <p><strong>Navigation tập trung</strong> cho active leg: map/sơ đồ + instruction mẫu + mini-player + I&#39;m here; Steps mở sheet, Maps là lựa chọn ngoài khi cần directions thật. Tabs ẩn trong focused view, nhưng Ask current-stop vẫn hiện và mở sheet giữ màn nền. Back về Home/Trips giữ trip/index/player, không ngầm arrival/finish. Route preview có pin/list selection; đây là đọc lịch, không chứng minh SDK navigation/GPS live.</p>
 <p><strong>Welcome ba bước</strong> ưu tiên khác biệt nghe chuyện: Hear stories at each stop → Discover your Da Nang → A day that fits you. Skip đi Home, không lặp mỗi lần; Settings có Replay. Không xin GPS sớm; hiện prototype chưa gọi API location. Ba bước là lựa chọn đã chốt với chủ dự án, cần kiểm khả năng nhớ/skip/completion, không claim “trend tốt hơn”.</p>
 <p><strong>AI Guide thay tab Plan</strong>, vẫn tổng cộng bốn tab Home/Explore/AI Guide/Trips. Trips giữ lịch/save/edit; AI là nơi hỏi/lập/đề nghị chỉnh, với contextual sheet từ Detail/leg. Cùng engine cho ba scope city/POI/current trip; chưa model/RAG live. Hội thoại không bắt buộc cho chỉnh tay. AI orb/stages là feedback local demo, không giả phần trăm hoặc provider đang suy nghĩ.</p>
 <p><strong>Profile và Settings</strong> nằm ở entry header Home, không thêm bottom tab. Guest vẫn dùng nội dung và trips; login/signup/forgot/reset chỉ kiểm flow UI local theo yêu cầu demo. Không xin sign-in trước giá trị nghe/khám phá và không trình bày recovery như email thật đã gửi. Settings playback speed/reduced motion tác động player/CSS thật; không thêm những toggle không có hiệu lực để làm màn trông đầy đủ.</p>
-<p><strong>Detail</strong> lấy cảm hứng hero/gallery của ảnh reference: hero lớn, About/Story, Listen tại chỗ, Add to trip phụ và Ask theo context. Hiện mỗi POI một ảnh; gallery ngang chỉ bổ sung khi có thêm ảnh phù hợp. Không sao chép booking/price/rating khi thiếu dữ liệu. Một player chuyển bài có chủ ý và giữ vị trí, tách khỏi arrival/finish. <strong>Offline</strong> vẫn dễ thấy qua badge/action trên card/detail; quản lý sâu ở Trips. <strong>Weather</strong> ẩn đến khi có nguồn thật, không lấp khoảng trống bằng forecast sample trên màn đầu.</p>
+<p><strong>Detail</strong> lấy cảm hứng hero/gallery của ảnh reference: hero lớn, About/Story, Listen tại chỗ, Add to trip phụ và Ask theo context. Bổ sung highlights/why visit, suggested time, what to expect và practical notes với disclosure nguồn/unknowns; không lặp tên/ảnh/CTA thành các card rỗng. Hiện mỗi POI một ảnh; gallery ngang chỉ bổ sung khi có thêm ảnh phù hợp. Không sao chép booking/price/rating khi thiếu dữ liệu. Một player chuyển bài có chủ ý và giữ vị trí, tách khỏi arrival/finish. <strong>Offline</strong> vẫn thấy qua badge/action; quản lý sâu ở Trips.</p>
+<p><strong>Weather</strong> có adapter Open-Meteo thay quyết định ẩn trước đây. Home dùng dòng inline hòa vào city context: temperature/condition/rain giờ + valid time/source; forecast đầy đủ ở màn chi tiết. Loading/stale/unavailable không lấy số reference. Current là model, không sensor/GPS tại khách. Prompt Museum khi rain probability giờ ≥50% chỉ mở lựa chọn đọc, không đổi tour/claim venue mở. Đây là lựa chọn thiết kế theo review, chưa chứng minh task success. <a href="https://open-meteo.com/en/docs">Provider documentation</a> và <a href="https://open-meteo.com/en/terms">terms</a> được đối chiếu 23/10/2026; commercial khác prototype không thu phí.</p>
+<p><strong>Explore/Tour/Trips/AI/Profile</strong> chỉ tăng thông tin giúp quyết định: filter/kết quả, tour visit/transfer breakdown, Trips progress/next action, Profile counts thật. AI giữ quick-plan + hai câu hỏi city/context và capability disclosure, bỏ task grid lặp. Detail giữ hai highlights khác ý/practical facts chính, rhythm/tips/etiquette đọc khi mở. Root Explore/AI Guide/Trips bỏ top bar lặp tên tab; bottom bốn label và heading nội dung vẫn giữ. Nội dung phụ vào disclosure; đổi trip vẫn preview/confirm. Mục tiêu là relevance, không độ dài trang hay số card.</p>
+<p>Những quyết định này là suy luận áp dụng từ guideline và review sản phẩm, không câu bắt buộc nguyên văn trong HIG/Material. Trang HIG Layout/Accessibility bản JavaScript không trả nội dung cho công cụ ở lượt đối chiếu này; rationale về hierarchy/labels lấy từ Q&amp;A Apple chính thức đã đọc, không giả đã đọc Markdown thất bại. Material 3 guideline trực tiếp cũng yêu cầu JavaScript; tham chiếu triển khai/accessibility dùng tài liệu Android chính thức thay vì nguồn mirror.</p>
 <p>Visual reference chỉ là định hướng: collage du lịch cho welcome, trắng/navy/ice cho Detail, map + white sheet cho Home, conversation nhẹ cho AI. Không là bằng chứng usability, market trend, accessibility hoặc quyền sao chép sản phẩm khác.</p>
 <h2>Review cần thực hiện</h2>
 <p>So cùng task trên Home map và Explore list: tìm đúng POI, mở story, tạo plan, resume trip. Ghi wrong turns, thời gian và trợ giúp; chưa tự kết luận map nhanh hơn. Kiểm cả ba mức drawer bằng tap/keyboard, chữ lớn và reduced motion; map controls không bị che. Kiểm trở lại từ focused leg vẫn đúng progress và player.</p>
 <p>Kiểm thêm khả năng tìm AI Guide và Ask sheet, phân biệt câu hỏi với đề xuất thay lịch, đóng sheet về đúng origin, Start không tạo bản rác, nghe POI ngoài trip rồi trở lại mà không tự phát/advance. Ghi tỷ lệ hoàn thành và trợ giúp theo task thật; không suy từ ít nút hơn thành ít lỗi hơn.</p>
+<p>Trong lượt enrich cần kiểm khách tìm được tours/collections bằng scroll ở medium, hiểu city/model weather khác near-you và phân biệt dữ liệu cũ/lỗi. Weather load/refresh không cướp scroll/focus của form/card đang đọc. So nhiệm vụ tìm một điểm hợp sở thích, hiểu thời gian/giới hạn rồi Start; không đo chất lượng bằng số card hoặc độ dài trang. Trên màn khác kiểm người dùng trả lời được “vì sao ghé”, “ngày này tốn bao lâu”, “đang nghe/đi đâu”, “AI sắp đổi gì” mà không cần đọc hết docs.</p>
 <p>Ảnh export và browser checks chứng minh layout/interaction trong môi trường ghi nhận, không thay native safe-area, VoiceOver, interruption hoặc field/UAT. Hướng “chuyên nghiệp” được bảo vệ bằng hierarchy, consistency và trạng thái đúng; hiệu quả với khách cần evidence sau này.</p>
 <p class="muted"><a href="docs/06-Mobile-UX-Research.md">Xem nguồn Markdown ↗</a></p></section><section id="doc-7"><h1>GoNarra V7 — Design system</h1>
 <p>Cập nhật ngày <strong>23/10/2026</strong>, cùng V7 hiện có. Hợp đồng thiết kế mobile; cơ sở và giới hạn ở <a href="#doc-6">06-Mobile-UX-Research.md</a>. UI English, docs Vietnamese; các quy tắc là lựa chọn dự án, không tự là chứng nhận HIG/WCAG.</p>
@@ -1307,11 +1538,17 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 <h2>Components và hành vi</h2>
 <ul>
 <li><strong>Welcome:</strong> ba bước Hear stories → Discover → AI/day; collage ảnh/blue gradient và hình preview nhỏ minh họa lợi ích. Một headline, một câu giải thích, một CTA; Skip/Back rõ; không auth/permission/download gate. Settings Replay không reset dữ liệu.</li>
-<li><strong>Home map/drawer:</strong> map sáng, header/search gọn, pin ảnh/card đồng bộ. Compact chỉ search + Continue hoặc Plan my day với 2h/4h/6h; medium thêm card; full thêm tour. Grip có drag và nút thay thế. Home search chuyển Explore cùng query. Không chèn weather giả; header có Profile, Settings là màn riêng bên trong.</li>
+<li><strong>Home map/drawer:</strong> map sáng, header/search gọn, pin ảnh/card đồng bộ. Compact summary search + Continue/Plan/lối mở; <strong>medium/full cùng feed cuộn</strong>, full chỉ tăng vùng đọc. Inline city weather, next action, hai story cards/hai collection previews, compact strip hai tours và một Essentials entry. Không spotlight/tips/footer trang trí lặp. Grip có drag/nút thay thế; Explore nhận cùng query; Profile trên header.</li>
+<li><strong>Weather/day brief:</strong> Home là dòng thông tin trong city context, không thẻ widget lớn hoặc gradient bóng trông ghép thêm. Temperature/condition/rain giờ + valid time/source đọc được; forecast đầy đủ ở màn chi tiết. Loading không số giả; stale/cached/unavailable có text/Retry. Rain ≥50% cho prompt Museum phụ, không auto-apply tour/claim mở cửa. Không animation cloud/sun liên tục hoặc gọi city forecast là vị trí khách.</li>
+<li><strong>Feed section:</strong> title giải thích nội dung, mô tả một dòng nếu cần và View all chỉ khi có destination thật. Story có ảnh/POI/category/thời gian đúng nghĩa; collection có tên/lý do chọn, mở Explore với filter có thể xóa. Horizontal rail cho item song song, feed chính vertical; không carousel tự chạy. Nội dung không mất khi đổi snap.</li>
+<li><strong>Explore:</strong> search + category/collection/filter rõ, kết quả/count và Clear; card có summary phù hợp quyết định, không nhồi mọi source/hours vào thumbnail. Empty state nêu filter/query đang dùng và action phục hồi; không hiện danh sách khác như thể đã match.</li>
 <li><strong>Primary tabs:</strong> Home · Explore · AI Guide · Trips, bốn mục có label. AI thay Plan; Trips quản lý itinerary/edit/downloads. Không thêm AI FAB cạnh tab AI và không dùng tab như lệnh Start.</li>
+<li><strong>Root headers:</strong> Explore/AI Guide/Trips bỏ top bar chỉ lặp tên bottom tab. Giữ heading nội dung thực sự giải thích task; các màn con vẫn có Back/title phù hợp. Không bỏ label bottom để tiết kiệm chỗ.</li>
 <li><strong>Route preview:</strong> numbered pins, stop list, selected state; chọn pin không ghi arrival. <strong>Active leg:</strong> top instruction demo, map, mini-player, I&#39;m here; tabs ẩn trong focused mode, Ask current-stop vẫn có dạng sheet; Steps/itinerary và Maps phụ.</li>
-<li><strong>Detail/Arrival:</strong> hero ảnh lớn + nội dung trắng/ice, About/Story; inline player và transcript trong Story; Add to trip phụ; Ask sheet đúng POI. Hiện mỗi POI có một ảnh, chưa có gallery nhiều ảnh; hướng gallery ngang chỉ áp dụng khi đủ ảnh phù hợp, không bịa góc chụp. Full/inline/mini-player dùng cùng audio state; thiếu file có transcript/error thật. Player đang nghe POI khác có Return to current stop, không autoplay khi trở về.</li>
-<li><strong>AI Guide/sheet:</strong> city/POI/current-trip context chip; suggested questions khi trống; input/Send dễ thấy; source và demo/fallback label đọc được. Sheet giữ origin/focus khi đóng; expanded/back vẫn có đường về. Thẻ proposal nêu protected/locked stops, diff và Apply/Keep; không dùng chat bubble thay review thay đổi.</li>
+<li><strong>Detail/Arrival:</strong> hero lớn + trắng/ice, About/Story; hai highlights khác ý và practical facts chính, không lặp duration. Visit rhythm/tips/etiquette/source/unknowns qua disclosure. Inline player/transcript, Add phụ và Ask đúng POI. Một ảnh/POI, chưa gallery giả. Các player cùng audio state; lỗi có transcript. Return current không autoplay.</li>
+<li><strong>Tour/proposal:</strong> summary nêu experience/độ phù hợp, stops có thứ tự, visit/transfer/budget breakdown lấy cùng core; chuẩn bị/download/inclusions đọc theo nhóm. Một primary Start, Save/Edit phụ; không lặp đủ buttons cả body/footer. Reasons inline/disclosure và diff giữ rõ action Apply.</li>
+<li><strong>Trips/Profile:</strong> counts/progress là state thật với nhãn rõ; active/paused có next action ưu tiên, planned/history là nhóm dễ scan. Profile gom activity/shortcuts/settings theo mục tiêu; không thêm card trang trí rỗng hoặc số liệu account cloud giả.</li>
+<li><strong>AI Guide/sheet:</strong> city/POI/current-trip context chip; quick-plan + hai câu hỏi city khi trống, capability disclosure; bỏ task grid trùng. Weather là một entry phụ theo context. Input/Send/source/demo label rõ. Sheet giữ origin/focus, expanded/back có đường về. Proposal nêu protected/locked stops, diff/Apply/Keep; không dùng chat bubble thay review.</li>
 <li><strong>Tour card/detail:</strong> badge Not downloaded/Ready offline/Needs update theo manifest và action Download/Update một chạm. Lỗi tải có thông báo trong phiên, không badge Error đã lưu riêng. Start là CTA chính; Save for later và một Edit là phụ. Download nudge không chặn Start. Không lặp Customize/Edit/Back lớn cùng màn.</li>
 <li><strong>Forms/editor:</strong> một cột, validation cạnh field, move buttons thay drag, Cancel giữ accepted state. CTA cố định không che keyboard/safe area; long content cuộn được.</li>
 <li><strong>Profile / auth demo:</strong> Guest và demo session hiển thị khác rõ; optional Login/Sign up, edit profile và Sign out không chiếm tab. Login/signup/forgot/reset dùng form có label, validation, password visibility nếu hỗ trợ và đường Back rõ. Nhãn local demo luôn dễ thấy; không social OAuth button giả hoặc thông báo email đã gửi thật. Password không persist/truyền.</li>
@@ -1320,13 +1557,20 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 </ul>
 <p>Radius vừa phải theo component: controls 12–16, cards 20–24, drawer 28; border/shadow nhẹ để phân lớp. Không phối nhiều hiệu ứng mạnh cho một card. Line icons thống nhất; icon-only có accessible name.</p>
 <p>Reference mới ưu tiên <strong>collage ảnh welcome, map + white sheet, hero/gallery và conversation thoáng</strong>. Giữ palette navy/ice/slate để các màn cùng một sản phẩm; không đưa flight/hotel/pricing/rating hoặc forecast từ mockup tham khảo vào app khi chưa có dữ liệu/chức năng. Tránh glass/blur lên vùng cần đọc; text trên ảnh có nền/overlay đủ rõ và cần đo riêng.</p>
+<h2>Content density và responsive review</h2>
+<p>Mục tiêu là thông tin cần cho quyết định, <strong>không kéo dài mọi trang</strong>. Lớp đầu gồm title + insight/metadata + next action. Giữ schedule breakdown hoặc practical facts khi có ích; nhóm phụ vào disclosure có label. Bỏ headline/metadata/duration, task grids và nút trùng thay vì dựng thêm card. Source/unknown chi tiết trong disclosure, nhãn ngắn gần dữ liệu cần phân biệt thật/mô phỏng. Một trạng thái không được chỉ bằng màu.</p>
+<p>Giữ text/facts trong flow tự nhiên, không fixed height làm cắt dòng khi font lớn. Card rail không gây scroll ngang cả trang; không nested button giữa card và Download. Feed có bottom padding cho tab bar/mini-player, còn modal/composer có vùng cuộn riêng không che Send/Close. Cập nhật weather không làm mất draft, focus hoặc scroll của tác vụ khác. Kiểm minimum target của control mới, tab label, keyboard focus, reduced motion và 402×874/hẹp hơn; không nhận toàn app đạt accessibility từ token palette.</p>
 <h2>Motion và verification</h2>
 <p>Orb dùng blue gradient chuyển động chậm, không nhấp nháy/parallax lớn; loading không giả live LLM. Action feedback ngắn, chuyển trạng thái khoảng 120–240 ms là target thiết kế. <code>prefers-reduced-motion</code> dừng lặp orb và giảm transition, vẫn giữ stage text/status. Không dùng animation để cản Cancel hoặc giấu lỗi.</p>
 <p>Review ở frame gốc, compact width, chữ lớn, keyboard và reduced motion. Đo contrast/touch targets, kiểm pin/list/drawer/focus/player và regression trip state. Chỉ ghi đạt phần đã đo; design tokens không thay native accessibility testing.</p>
 <p class="muted"><a href="docs/07-Design-System.md">Xem nguồn Markdown ↗</a></p></section><section id="doc-8"><h1>Kết quả review và bàn giao</h1>
 <h2>Lần chỉnh UI trên cùng V7 — 23/10/2026</h2>
 <p>Phạm vi được chốt: bốn tab Home/Explore/AI Guide/Trips; welcome ba bước Story → Discover → AI/day; Home phân nội dung theo ba snap; Detail About/Story nghe tại chỗ; contextual Ask sheet và tab AI dùng chung context engine. Start trực tiếp, reuse bản chưa bắt đầu phù hợp và xác nhận pause chuyến khác; download vẫn có badge/action trên card/detail. Một audio session giữ vị trí nghe từng story, không đổi trip progress. Profile từ Home, Settings riêng và optional login/signup/forgot/reset demo local được bổ sung, giữ guest và trips khi Sign out; chưa server auth/email/cloud.</p>
-<p>Acceptance cases V01–V58 ở <a href="#doc-4">04-Validation-Handoff.md</a> là kế hoạch kiểm, không toàn bộ đã được kiểm trên browser. Các runs và quan sát thực hiện trong đợt refresh được tách dưới đây. Profile/auth/Settings có state checks riêng; browser chỉ có các journey được ghi cụ thể. Các thay đổi không thêm GPS thật, route SDK, weather provider, LLM/RAG, server auth hoặc native background audio. Detail hiện dùng một hero ảnh phù hợp mỗi POI, không gallery nhiều ảnh giả.</p>
+<p>Acceptance cases V01–V75 ở <a href="#doc-4">04-Validation-Handoff.md</a> là kế hoạch kiểm, không toàn bộ đã được kiểm trên browser. Các runs và quan sát thực hiện trong đợt refresh được tách dưới đây. Profile/auth/Settings có state checks riêng; browser chỉ có các journey được ghi cụ thể. Đợt refresh đầu không thêm weather; lượt enrich tiếp theo bổ sung adapter weather riêng như phần dưới. GPS/route SDK/LLM/RAG/server auth/native background vẫn chưa tích hợp. Detail hiện một hero ảnh phù hợp mỗi POI, không gallery giả.</p>
+<h2>Lượt tăng chiều sâu nội dung trên cùng V7</h2>
+<p>Review tiếp yêu cầu thêm thông tin, rồi chốt <strong>chỉ giữ phần cần cho quyết định</strong>, tránh kéo dài mọi màn. Home medium/full cùng feed: weather inline trong city context, next action, hai stories/hai collection previews, compact tour strip và một Essentials entry; full chỉ tăng chiều cao. Bỏ story spotlight/tips/footer trang trí lặp. Detail giữ hai highlights/practical facts, rhythm/tips/etiquette ở disclosure. AI bỏ task grid trùng; Trips/Profile dùng counts/state thực. Root Explore/AI Guide/Trips bỏ top bar lặp tên tab, giữ bốn label bottom và heading nội dung.</p>
+<p>Weather bổ sung nguồn Open-Meteo cho Đà Nẵng cố định với nguồn/time/units và state lỗi/cũ; không là GPS, sensor tại POI, marine assessment hoặc automatic trip rewrite. Nguồn UX/điều kiện provider được ghi tại docs 03/05/06. Logo production/master/brand assets giữ cùng hợp đồng.</p>
+<p>Các kết quả 22/63/34 và browser journey bên dưới là <strong>snapshot trước lượt enrich này</strong>, chưa tự thành pass cho weather hoặc layout mới. V59–V75 bổ sung phạm vi cần kiểm. Chỉ thay đoạn này bằng kết quả/current evidence khi thực chạy và nhận được outcome; chưa có con số mới được công bố trong tài liệu này.</p>
 <h2>Baseline trước lần chỉnh UI này</h2>
 <p>Kết quả dưới đây thuộc bản V7 trước đợt thay tab/welcome/Detail/Start/audio hiện tại. Nó giải thích bằng chứng đã có, <strong>không thay regression run trên source mới</strong>. Mỗi artifact chỉ có giá trị cho hash/environment và case mà nó ghi.</p>
 <table>
@@ -1444,6 +1688,6 @@ validate(plan) -&gt; danh sách lỗi; [] chỉ có nghĩa hợp lệ theo fixtu
 </tbody></table>
 <p>Không gọi các quan sát chọn lọc trên là tất cả V01–V58 đã pass. Browser refresh không lặp lại phép tắt origin của baseline; không dựa badge Ready để suy offline playback/reload mới đã kiểm. Screenshot trong đợt này cũng là browser capture, không ảnh iPhone vật lý.</p>
 <h2>Giới hạn còn lại</h2>
-<p>Chưa chạy trên iPhone vật lý/VoiceOver/background interruptions; chưa live LLM/RAG, map SDK/GPS, weather provider, server auth/email hoặc street-route calculation. Browser refresh chưa kiểm mạng thật bị ngắt; server-off reload/playback là evidence baseline riêng. Hai assertions baseline inconclusive do view đổi giữa các bước. Hai cặp màu chỉ vừa vượt 4.5:1; ảnh/gradient/component mới và accessibility toàn app cần audit theo source hiện tại.</p>
+<p>Chưa chạy trên iPhone vật lý/VoiceOver/background interruptions; chưa live LLM/RAG, map SDK/GPS, server auth/email hoặc street-route calculation. Weather provider là adapter riêng của lượt enrich, cần đọc evidence network/render hiện tại thay vì kết quả browser refresh đầu. Browser refresh đầu chưa kiểm mạng thật bị ngắt; server-off reload/playback là evidence baseline riêng. Hai assertions baseline inconclusive do view đổi giữa các bước. Hai cặp màu chỉ vừa vượt 4.5:1; ảnh/gradient/component mới và accessibility toàn app cần audit theo source hiện tại.</p>
 <p>Mục tiêu export physical 3× là 1206×2622; bundle chứa browser review captures, không giả thành ảnh 3× hoặc iPhone thật. Dùng prototype để inspect flow và docs để triển khai; field-test/nghiên cứu khách thực hiện riêng theo handoff.</p>
 <p class="muted"><a href="docs/08-Review-Results.md">Xem nguồn Markdown ↗</a></p></section></main></div></html>

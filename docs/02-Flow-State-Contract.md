@@ -70,7 +70,7 @@ Quick form dùng lại `req.endMode` và `req.mustVisit`, không reset chúng kh
 
 ### Home map, drawer và focused navigation
 
-- `homeSnap` là `compact/medium/full`; kích thước theo viewport/chữ, không native detent cố định. Compact có search + Continue hoặc Plan my day; medium thêm selected/place cards; full thêm curated tours. Grip button cycle hoặc pointer drag đổi mức; đổi mức không tạo/sửa trip. Search Home chuyển sang Explore cùng query thay vì tạo search state thứ hai; Explore giữ list/filter đầy đủ.
+- `homeSnap` là `compact/medium/full`; kích thước theo viewport/chữ, không native detent cố định. Compact tóm tắt search + Continue/Plan và lối mở feed. **Medium/full cùng feed cuộn**: city context có inline weather, next action, hai stories/hai collection previews, tour strip và một Essentials entry; full chỉ tăng vùng đọc. Không gate nội dung theo snap hoặc thêm tips/spotlight lặp. Grip/button/pointer drag đổi mức, không sửa trip. Home search/collection chuyển cùng Explore query/filter state.
 - Home pin → `selectedMapPlace` và selected card. Route map/list → `selectedRoutePlace` của itinerary đang xem. Cả hai chỉ selection; không ghi arrival. Route overview dùng cùng stops/timing và cho mở Detail của selected POI.
 - Active leg giữ progress pointer; top instruction và Steps modal có **ba step mẫu**. `navStep` đổi theo người review chọn, không theo GPS, khoảng cách live hoặc nhận biết đã rẽ. Số phút/km là schedule fixture, không tự cập nhật từ vị trí thật.
 - Mini-player dùng cùng `Audio` object với full player, không tạo stream khác. I'm here xác nhận thủ công. Về Home/Trips giữ plan/progress/audio state trong phiên; không auto Pause/Finish chỉ vì điều hướng. Focused leg ẩn bottom tabs để tập trung nhưng có Ask current-stop dạng sheet.
@@ -173,5 +173,26 @@ Closure trong Review panel là **mô phỏng**, không là tin venue thật. Nh�
 11. Ask sheet giữ origin; scope hiển thị và scope dùng để lookup/adjust phải khớp. Tab AI không tạo một accepted plan thứ hai ngầm.
 12. Guest không bị auth gate; Sign out giữ dữ liệu chuyến đi. Password không persist/truyền; Forgot không claim email đã gửi và Reset không claim đổi tài khoản thật.
 13. Settings có effect thực: speed khớp audio/player, reduced motion khớp CSS; Reload giữ preference local trong phạm vi browser hỗ trợ.
+14. Weather/collection/filter/POI selection chỉ thay context đọc; không ghi arrival, không đổi plan revision, không auto-generate hay auto-apply itinerary.
+15. Home medium/full cung cấp cùng nội dung; thay snap hoặc cập nhật weather không được xóa search, trip/player context hoặc cuộn người dùng về đầu tác vụ đang đọc một cách bất ngờ.
+
+## 9. Weather và trạng thái thông tin
+
+Weather là adapter độc lập với `GN_CORE`, không là dữ kiện route/venue. Request dùng tọa độ Đà Nẵng cố định/timezone địa phương; không account/hội thoại/trip ID/GPS. Home chỉ inline city weather gồm temperature/condition/rain probability giờ và valid time/source; full forecast ở màn chi tiết. UI phân biệt forecast-valid với fetched time; city forecast không phải phép đo tại venue hay vị trí khách. Rain probability giờ hiện tại ≥50% có thể hiện một prompt xem Museum; action chỉ mở nội dung, không auto-apply plan hoặc xác nhận venue mở.
+
+| State | UI/hành vi |
+|---|---|
+| Chưa có response / loading | Tên thành phố và placeholder có ý nghĩa; không hiện nhiệt độ số mẫu |
+| Response hợp lệ | Giá trị hữu hạn + units + condition text; nguồn, forecast time/update time và lối xem chi tiết |
+| Refresh đang chạy | Giữ giá trị trước có timestamp, không nhấp nháy thành sample hoặc gọi giá trị cũ là mới |
+| Network/provider/schema lỗi, có cache còn dùng được | Last update/cached hoặc stale rõ theo tuổi dữ liệu; retry, không cập nhật timestamp thành lần thất bại |
+| Không có dữ liệu đủ điều kiện dùng | Unavailable và Retry; feed/Plan/Continue/audio vẫn dùng được |
+| Offline | Chỉ thông tin đã lưu đúng tuổi/nhãn nếu hỗ trợ; không claim forecast mới vừa tải |
+
+Implementation `prototype/weather.js` dùng `gonarra-weather-danang-v1`, freshness **30 phút**, giữ cache tối đa **6 giờ** từ `fetchedAt`, request timeout mặc định **9 giây**, cùng request đang chạy được dùng lại. Cache hỏng/ngoài hạn/future timestamp bị bỏ; storage không dùng được không làm forecast network thất bại. Request `credentials: omit`, không Service Worker trip package. Refresh thành công mới cập nhật fetch time; `forecastAt` là thời điểm có hiệu lực của current/model, **không phải giờ model được nhà cung cấp cập nhật** (`modelUpdatedAt: null`).
+
+Adapter validate vị trí grid gần Đà Nẵng, timezone `Asia/Ho_Chi_Minh`/UTC+7, epoch seconds và units trước dùng số. Trường thiếu/sai unit là unknown/null, không convert ngầm hoặc ép thành 0. Có ít nhất dữ liệu dùng được ở current/hourly/daily mới nhận response; hourly giữ tối đa 8 giờ, daily tối đa 3 ngày. Freshness tính theo lúc fetch, vì vậy UI vẫn phải cho đọc forecast-valid time, không gọi Cached/Fetched at là model-updated-at.
+
+Cache weather không thuộc manifest media của trip. Không lưu response vào accepted plan; lỗi weather không làm fail download/Start. Weather có thể gợi ý đọc/chuẩn bị theo rule hiển thị, nhưng không tự thay stop, thời gian, mode hoặc lock. Không suy forecast thành đánh giá biển/tắm, bão/cảnh báo chính thức hay giờ mở cửa.
 
 Kịch bản xác minh và cách đọc kết quả ở [04-Validation-Handoff.md](04-Validation-Handoff.md).

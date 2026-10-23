@@ -16,16 +16,16 @@ Repo này là bản standalone để mở trực tiếp trong VS Code. Toàn b�
 ## Nên thử theo thứ tự
 
 1. Welcome 3 bước **Hear stories → Discover → AI plan**; Skip/Back được, Home → Profile → Settings có Replay.
-2. Home: compact có search + Continue hoặc Plan my day 2h/4h/6h; medium thêm card; full thêm tours. Search chuyển sang Explore cùng query.
-3. Detail: hero ảnh lớn, About/Story; Listen ngay tại trang, transcript và Ask sheet đúng POI. Hiện mỗi POI có một ảnh phù hợp; chưa dựng gallery nhiều góc giả. Nghe riêng không đổi trip.
-4. Bốn tab **Home · Explore · AI Guide · Trips**. AI Guide có context Da Nang/POI/current trip; các shortcut lập ngày/chỉnh lịch vẫn là local demo và preview trước Apply.
+2. Home: compact summary có lối mở; medium/full cùng feed cuộn **inline city weather, Continue/Plan my day 2h/4h/6h, hai stories/hai collection previews, tour strip và một Essentials entry**. Full chỉ tăng vùng đọc, không gate tours. Search/collection sang Explore cùng query/filter; forecast đầy đủ ở màn chi tiết.
+3. Detail: hero lớn, About/Story; hai highlights khác ý và practical facts chính, rhythm/tips/etiquette/source qua disclosure, Listen tại trang/transcript/Ask đúng POI. Một ảnh phù hợp/POI, chưa gallery giả. Tour có itinerary/time breakdown/chuẩn bị/download; Trips/AI/Profile chỉ thêm thông tin giúp quyết định, không kéo dài mọi trang. Nghe riêng không đổi trip.
+4. Bốn tab **Home · Explore · AI Guide · Trips**; ba root tab sau không lặp tên trong top bar. AI Guide có context Da Nang/POI/current trip, quick-plan/câu hỏi ngắn và capability disclosure; shortcut vẫn local demo, preview trước Apply, không task grid lặp.
 5. Tour detail/proposal → Start trực tiếp, không màn Ready bắt buộc. Save for later là phụ; bản chưa bắt đầu phù hợp được tái dùng. Có active trip khác cần chọn Pause current & Start hoặc Keep current.
 6. Edit: đổi duration, move, remove/Undo, add, lock/unlock; Cancel giữ tour cũ. Adjust dùng shortcut hỗ trợ; chỉ upcoming chưa khóa được đổi khi active.
 7. Focused leg → sample Steps/mini-player/Ask sheet → I'm here → Story/About/+15 preview → Finish stop. Pause/resume/skip/end dùng progress thật lưu local.
 8. Tour card/detail → Download một chạm → ready theo cache/manifest → tắt mạng rồi reload/nghe nội dung đã tải. Download tùy chọn, không chặn Start; quản lý tại Trips → Downloads.
 9. Home profile icon → Profile/Settings; thử Guest, Login/Sign up, Forgot/Reset và Sign out. Đây là **UI demo local**, không server authentication/email thật; password không lưu/truyền. Sign out giữ trips/downloads. Playback speed và reduced motion trong Settings tác động player/CSS thật và nhớ local.
 
-Một Audio object phát từng bài; Play POI khác pause/nhớ vị trí bài cũ. Return to current stop và Back không tự phát lại hoặc advance trip. Không có weather mẫu trên Home; chưa thêm provider thời tiết/GPS hoặc routes trong lần chỉnh UI này.
+Một Audio object phát từng bài; Play POI khác pause/nhớ vị trí bài cũ. Return to current stop và Back không tự phát lại hoặc advance trip. Weather dùng **Open-Meteo** cho city Đà Nẵng cố định, nhãn model/source/time/units và loading/stale/unavailable; không nhiệt độ mẫu hoặc GPS near-you. Cần mạng cho forecast mới; lỗi weather không chặn các tác vụ local và không tự đổi itinerary. Map/routes vẫn là fixture.
 
 Chế độ người dùng mặc định có Profile và Settings riêng. Thêm **`?review=1`** vào URL prototype để hiện Review panel và fault/scenario tools; các công cụ không bày cạnh tác vụ du lịch thông thường. **Scenario controls thay dữ liệu V7 local**, có thể tạo review tour hoặc pause tour đang active. Dùng browser profile test riêng nếu cần. Reset chỉ xóa khóa/cache GoNarra V7; không sửa V6. Reset khác Sign out: Sign out chỉ đóng demo session.
 
@@ -37,6 +37,7 @@ Chế độ người dùng mặc định có Profile và Settings riêng. Thêm 
 | Tính lịch từ cùng một travel fixture; preview/apply/cancel | Travel/arrival estimates, GPS location và step navigation |
 | Nhiều trip, một active, progress/favorites/answers lưu local | Native background GPS, audio interruptions và cloud sync |
 | Cache asset thật qua localhost/HTTPS; manifest theo revision | Venue closures, live hours/fees/accessibility và real-time rerouting |
+| Forecast qua Open-Meteo cho Đà Nẵng, source/time/state độc lập | Weather sensor tại POI, marine assessment hoặc tự viết lại itinerary theo thời tiết |
 | Profile/session/form validation local; speed/reduced-motion preferences thật | Server authentication, xác minh email, email recovery, social OAuth hoặc bảo mật dữ liệu theo account |
 
 **Ask** khớp câu mẫu theo đúng POI và hiện nguồn; city/trip scope chỉ có demo actions/giới hạn được công bố, ngoài phạm vi fallback. **AI Generate/Adjust** dùng quy tắc local; tab/sheet mới không là LLM. Story audio là giọng hệ thống Samantha tạo trước từ script gốc, chưa có review phát âm/English/thực địa hoặc quyền xuất bản thương mại. Ảnh kế thừa V6 chưa có provenance đầy đủ. Map là vector minh họa; Google Maps là lựa chọn phụ cho directions thật, không SDK chỉ đường bên trong app.
@@ -58,9 +59,11 @@ Chế độ người dùng mặc định có Profile và Settings riêng. Thêm 
 
 ## Kiểm tra lại
 
-Chạy `node scripts/test-core.cjs`, `node scripts/test-app.cjs` và `node scripts/check-assets.cjs`. Các bài kiểm tra dùng Node sẵn có, không dependency install. Run hiện tại ghi **22/22 core, 63/63 app-state trong Node VM và 34/34 asset/static checks**; app hash/timestamp trong evidence. Hai kiểm tra asset mới xác nhận bộ SVG production không có live text, dùng chung hình học g và trang Brand Assets hoạt động hoàn toàn local. VM không kiểm rendering/media/service worker thật, static contrast chỉ 9 cặp được chỉ định.
+Chạy `node scripts/test-core.cjs`, `node scripts/test-app.cjs` và `node scripts/check-assets.cjs`. Các bài kiểm tra dùng Node sẵn có, không dependency install. Snapshot trước lượt enrich ghi **22/22 core, 63/63 app-state trong Node VM và 34/34 asset/static checks**; app hash/timestamp trong evidence. Không dùng snapshot đó làm pass cho weather/layout mới. SVG checks xác nhận production không live text, cùng hình học g và Brand Assets local; VM không kiểm rendering/media/service worker thật, static contrast chỉ 9 cặp được chỉ định. Acceptance mới V59–V75 trong docs 04.
 
 Browser refresh ở localhost:8770 đã quan sát welcome, Home/Detail, quick-plan 4h → proposal 3 stops → Start trực tiếp, focused Ask, WAV Play/Pause/progress, optional demo login/Profile, Settings và one-tap download/đúng package. Xem `evidence/browser-refresh.json`; `evidence/browser-review.json` là baseline trước refresh. Bản refresh này chưa lặp lại test ngắt mạng/tắt server rồi reload; không nhận Ready badge là bằng chứng offline playback mới.
+
+Weather API của [Open-Meteo](https://open-meteo.com/en/docs) là dịch vụ bên ngoài, khác assets local. Free API dành cho noncommercial theo [terms](https://open-meteo.com/en/terms); trước dùng thương mại cần kiểm điều kiện/gói phù hợp và giữ attribution. Không có key provider trong bundle. Cách đặt nội dung/source và hướng phát triển được cập nhật trong docs 01/03/04/05/06/07.
 
 Sau khi sửa tài liệu, chạy `node scripts/build-handbook.mjs` để tạo lại `index.html` và `Product-Handbook.html`; script dùng bộ Markdown renderer được bundle trong repo, không cần cài thêm package.
 

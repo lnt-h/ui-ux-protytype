@@ -87,7 +87,19 @@ Không gồm map tiles/offline navigation, route computation/rerouting, live ETA
 
 Home/route/leg map là SVG minh họa trong bundle; việc nó vẫn render offline không làm nó thành bản đồ đường phố offline. Ba step mẫu trong Steps cũng không phải navigation service. Open Google Maps tạo HTTPS directions link thật tới destination fixture; Google Maps có availability riêng và điểm đến chưa field-verified. V7 không gọi geolocation hoặc tự phát hiện đã rẽ/đã tới.
 
-Đợt chỉnh UI không thêm weather provider: Home không hiển thị weather mẫu như forecast hiện tại. Nếu cần case Sample trong review sau này, phải ghi Sample ngay giá trị và không dùng nó để tự đổi itinerary. GPS thật, routes và weather là các integration riêng, không được suy ra từ map hoặc visual gradient.
+### Weather/day brief có provider riêng
+
+Home dùng **Open-Meteo Weather Forecast API** cho Đà Nẵng cố định. Nhãn phải nói weather model/forecast và nguồn có link, không gọi đây là GPS hoặc trạm live tại POI. Dữ liệu weather không đi qua AI demo; temperature/condition/rain/wind và các trường được dùng phải đến từ response hợp lệ, không câu trả lời tự sinh. [API documentation](https://open-meteo.com/en/docs) mô tả current conditions là dữ liệu model ở độ phân giải 15 phút; hourly/daily và timezone là các trường request riêng.
+
+Home hiển thị weather ngắn **trong city context**, không widget/card lớn tách rời: temperature/condition, rain probability giờ, valid time/source. Forecast đầy đủ ở màn chi tiết; có loading, unavailable/retry và cached/stale khi dùng dữ liệu cũ. Giữ timestamp response thành công; lỗi refresh không làm dữ liệu cũ trông mới. Không có response hợp lệ thì không điền 28°C từ ảnh reference. Không tạo forecast riêng venue hoặc gọi near you.
+
+Weather chỉ hỗ trợ đọc thông tin và chuẩn bị ngày đi. Rain probability giờ hiện tại ≥50% có thể đưa một prompt mở Museum; đó là gợi ý đọc/chọn, không auto-rewrite hoặc xác nhận venue mở. Không tự gọi Generate/Adjust, đổi accepted trip, mở khóa stop, xác nhận swimming/marine safety. Thay itinerary vì mưa vẫn phải là yêu cầu → proposal → review → Apply; engine demo không có dữ kiện vận hành live để làm lời bảo đảm.
+
+Request gửi tọa độ thành phố cố định, không profile/trip/hội thoại. Cache forecast là dữ liệu riêng, không làm một downloaded tour trở thành forecast offline được cập nhật. Timeout/provider/network/schema lỗi giữ các phần local khác hoạt động. Ngưỡng cache/refresh và những trường thực sự hiển thị cần đối chiếu code/evidence; không gọi API response thành công là đã field-test độ chính xác.
+
+Nguồn và điều kiện sử dụng: [Open-Meteo Terms](https://open-meteo.com/en/terms), kiểm tra 23/10/2026, quy định Free API cho noncommercial và attribution CC BY 4.0. Public prototype này không thu phí/quảng cáo; trước dùng thương mại cần chọn điều kiện/gói phù hợp và kiểm lại terms. UI giữ attribution nguồn gần weather, không chôn duy nhất ở handbook. Không thêm provider secret vào browser.
+
+GPS thật, street routes và weather là các adapter riêng. Chỉ weather được bổ sung trong lần tăng chiều sâu nội dung này; map vẫn SVG minh họa, AI vẫn bounded local demo và auth vẫn local UI.
 
 ### State download
 

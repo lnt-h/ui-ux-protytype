@@ -34,11 +34,11 @@ ID dưới đây phục vụ trace review, không yêu cầu một URL/file riê
 
 | ID | Màn/cụm | Hành động chính | Trạng thái cần có |
 |---|---|---|---|
-| UX01 | Home map + persistent drawer | Search chuyển Explore; Continue hoặc Plan my day | Compact: search + Continue/Plan; medium thêm card; full thêm tour; không live location/thời tiết mẫu |
-| UX02 | Explore list/search results | Tìm và mở tour/POI/story | Một search state dùng chung; nhận nguyên query từ Home; kết quả/rỗng/filter |
+| UX01 | Home map + persistent drawer | Xem city context; Continue hoặc Plan my day; khám phá nội dung | Compact là tóm tắt; medium/full cùng feed cuộn đủ inline weather, next action, hai stories/hai collection previews và tour strip; snap chỉ đổi chiều cao; một entry Essentials |
+| UX02 | Explore list/search results | Tìm, lọc và mở tour/POI/story | Một search state dùng chung; nhận query từ Home; số kết quả, active filter/clear, collection và empty state có đường phục hồi |
 | UX03 | Ready-made tours | Chọn template | Nội dung mẫu, mode/ngôn ngữ/phạm vi rõ |
-| UX04 | Tour detail | Start tour; Save for later; một Edit | Template bất biến; tái dùng bản chưa bắt đầu phù hợp; download badge/one-tap; nudge không chặn Start |
-| UX05 | Place detail | Listen tại chỗ; About/Story; Add to trip; Ask sheet | Hero ảnh; source; transcript; gallery ngang khi có nhiều ảnh phù hợp; current trip và player context độc lập |
+| UX04 | Tour detail | Hiểu lịch/độ phù hợp rồi Start; Save for later; một Edit | Overview, visit/transfer/time budget, stop sequence, điều đã gồm/chưa gồm, chuẩn bị và download status; template bất biến, Start không bị chặn bởi download |
+| UX05 | Place detail | Hiểu điểm đến, Listen tại chỗ; About/Story; Add; Ask | Hero; lý do ghé/điều nên chú ý/thời gian gợi ý, practical notes, nguồn và chưa verified; transcript; current trip/player độc lập |
 | UX06 | Story browsing trong Explore | Chọn story/POI trực tiếp | Không thêm CTA thư viện trùng; không đổi trip đang đi; transcript fallback |
 | UX07 | Quick planning form | Chọn 2h/4h/6h; start/time/mode, mở thêm khi cần | Required fields và defaults rõ; inputs giữ; không ép chat thay form |
 | UX08 | Preferences | Interests/pace/must-keep | Không tìm thấy candidate; không hứa facts thiếu |
@@ -50,16 +50,17 @@ ID dưới đây phục vụ trace review, không yêu cầu một URL/file riê
 | UX14 | Start action, không màn Ready bắt buộc | Start hoặc xử lý active trip khác | Pause & Start / Keep; không tự End; không tạo trip trùng khi nhấn lại; download tùy chọn |
 | UX15 | Focused active leg map | Steps; mini-player; I'm here; Ask sheet | Ẩn tab bar chỉ ở focused mode; ba chỉ dẫn mẫu; Maps phụ; pause/skip/end qua options |
 | UX16 | Arrival | Story/player/transcript; About; Ask sheet | Arrival khác Finish stop; +15 preview; missing audio |
-| UX17 | My Trips | Mở/sửa/start/resume trip | Planned/paused/active/completed/ended early; local persistence |
+| UX17 | My Trips | Tiếp tục hoặc quản lý lịch đã lưu | Overview số trip/progress thực, next action theo status, Planned/paused/active/completed/ended early, downloads/favorites và empty state hữu ích |
 | UX18 | Downloads | Tải/refresh/remove theo trip; export JSON | Actual bytes/items; failed/update-needed/unavailable; JSON không chứa audio bytes |
 | UX19 | Recap | Xem visited/skipped/not visited | Completed khác ended early; đếm xác nhận thực |
 | UX20 | Profile từ header Home → Settings riêng & Review panel | Profile/guest; playback speed; reduced motion; Replay; downloads/about/privacy | Không thêm bottom tab; settings có tác dụng thật trong browser; fault tools chỉ review mode |
 | UX21 | Welcome ba bước | Hear stories → Discover → AI plan; Next/Back/Skip/Start | Bỏ qua được; lưu onboarded; replay từ Settings; không auth/GPS/download gate |
 | UX22 | Route overview | Chọn pin/list/card; xem route | Map toàn vùng nội dung + drawer ba mức; selection không ghi arrival |
-| UX23 | AI Guide tab và contextual Ask sheet | Hỏi trong scope Da Nang / POI / Current trip; tạo/chỉnh lịch | Chung engine; context chip rõ; sheet giữ origin; mở rộng/back không mất Detail/leg; không trả lời tự do giả |
-| UX24 | Profile | Xem/sửa tên và profile local; mở Settings; login/signup hoặc Sign out | Guest dùng app đầy đủ; không giả cloud/account security; signout giữ trips/downloads |
+| UX23 | AI Guide tab và contextual Ask sheet | Hỏi trong scope Da Nang / POI / Current trip; tạo/chỉnh lịch | Quick-plan và câu hỏi phù hợp context, capability disclosure; không task grid lặp; sheet giữ origin; preview trước thay đổi |
+| UX24 | Profile | Xem/sửa profile local; xem hoạt động, Settings, login/signup hoặc Sign out | Counts từ state thực, lối về trips/favorites/downloads; guest dùng đầy đủ, signout giữ dữ liệu; không giả cloud/account security |
 | UX25 | Login / Sign up | Nhập form có validation và mở demo session | UI demo local; không xác thực danh tính qua server; password không lưu/truyền; không social OAuth giả |
 | UX26 | Forgot / Reset password | Xem flow phục hồi và nhập lại form demo | Không email được gửi, không reset tài khoản thật/token server; trạng thái nói đúng local demo |
+| UX27 | Weather/day brief | Đọc forecast Đà Nẵng; mở chi tiết/refresh khi cần | Nguồn Open-Meteo, vị trí cố định, forecast time/update time, units và loading/stale/unavailable; không số mẫu lấp lỗi, không tự đổi tour |
 
 Supporting surfaces: nguồn, duration picker, chọn/add place, move menu, xác nhận remove/undo, +15/time warning, Steps, pause/end/start-another confirmation, change preview và lỗi tải. Mỗi tác vụ phải có đường hủy/quay lại giữ input thích hợp. Home drawer là persistent/nonmodal, không phải modal dialog; sheet xác nhận/Steps là tương tác riêng, không chồng nhiều modal.
 
@@ -75,9 +76,28 @@ Supporting surfaces: nguồn, duration picker, chọn/add place, move menu, xác
 - Arrival xác nhận đã tới; **Finish stop** mới chuyển sang stop kế. Skip không được tính là visited. Pause không complete và không tự thay vị trí.
 - Tour template gốc bất biến. Start/customize tạo hoặc mở bản cá nhân. Start tái dùng bản cùng template/ngày chưa bắt đầu và chưa chỉnh; không ghi đè bản đã customize. Tên mặc định có ngày; nhấn Start lặp không sinh thêm bản. Nếu có trip active khác, chỉ Pause & Start sau xác nhận; Keep giữ nguyên cả hai.
 - Không ép mọi người nghe theo thứ tự hay tạo trip. Library/Detail luôn có direct playback/transcript; quay về vẫn giữ trip đang đi.
-- Home map dùng pin ảnh và selected card, drawer đổi ba mức bằng grip/tap và pointer drag. Compact chỉ giữ search + Continue hoặc Plan my day; medium thêm selected/place cards; full mới có curated tours. Explore list giữ lối vào dễ đọc. Không bày cả catalog ở Home; map + ba mức vẫn là giả thuyết cần UAT.
+- Home map dùng pin ảnh và selected card, drawer đổi ba mức bằng grip/tap và pointer drag. Compact tóm tắt search + Continue/Plan, có lối mở rõ. **Medium/full cùng feed cuộn**, không gate tour: weather ngắn gắn city context → Continue/Plan → hai story cards → hai collection previews → hai tour trong strip gọn → một entry Essentials. Không thêm story spotlight, hàng tips chung hoặc footer trang trí lặp. Full tăng vùng đọc; Explore giữ catalog và cả ba collections. Map/snap vẫn cần UAT.
 - Tabs chính **Home · Explore · AI Guide · Trips**. AI thay Plan, không thêm tab thứ năm; lịch/edit ở Trips. Profile là icon trên header Home, Settings là màn riêng bên trong Profile; có Replay welcome và Downloads. Ask từ Detail/leg mở sheet trên màn gốc. Focused leg có Ask current-stop dù tab bar ẩn; Steps chỉ đổi demo instruction selection, không tự chuyển progress.
-- Chưa có weather provider: ẩn weather khỏi Home mặc định. Nếu thêm sample trong Review sau này, nhãn Sample phải ở ngay giá trị. Không hiển thị nhiệt độ/forecast giả như dữ liệu hiện tại hoặc tự đổi itinerary theo thời tiết.
+- Root Explore/AI Guide/Trips không lặp tên tab trong một top bar riêng phía trên nội dung. Bottom tabs vẫn đủ icon + label; heading nội dung có ích vẫn giữ. Các màn con vẫn có Back/title theo task, focused navigation giữ gọn.
+- Weather dùng nguồn forecast thật cho **Đà Nẵng**, không suy vị trí người dùng từ map. Giá trị có units, nguồn và thời điểm; current conditions của provider là model, không trạm quan trắc tại POI. Loading/error/stale phải đọc được; không thay lỗi bằng nhiệt độ mẫu. Thời tiết là thông tin để quyết định, không tự thay itinerary, hứa biển an toàn hoặc xác nhận venue mở.
+
+### Nội dung phong phú nhưng có thứ bậc
+
+Mỗi màn phải trả lời một quyết định cụ thể trước, rồi mới cung cấp chiều sâu. Không tăng số nút chính chỉ để làm app trông nhiều chức năng.
+
+| Màn | Câu hỏi cần trả lời ngay | Chiều sâu bằng nội dung/thao tác phụ |
+|---|---|---|
+| Home | Hôm nay ở Đà Nẵng thế nào và nên làm gì tiếp? | Inline weather gắn city context; Resume/Plan ưu tiên theo state; hai stories/hai collections/tour strip, một Essentials entry |
+| Explore | Những lựa chọn nào hợp điều mình tìm? | Category/collection có ý nghĩa, metadata về thời gian/story, số kết quả, Clear filters và đường mở Detail |
+| Place | Vì sao ghé và ở đây làm gì? | Hai highlights khác ý, practical facts chính không lặp duration; visit rhythm/tips/etiquette/source qua disclosure; About/Story và nghe tại trang |
+| Tour/proposal | Lịch này có hợp ngày của mình không? | Stops có thứ tự, visit/transfer breakdown, thời gian dư/thiếu từ core, lý do chọn, nội dung gói và chuẩn bị |
+| Trips | Chuyến nào cần tiếp tục, xem lại hoặc chuẩn bị? | Next stop/progress/status thực; active card rõ, nhóm planned/history, downloads và favorites |
+| AI Guide | Mình có thể nhờ gì và đang hỏi về đâu? | Quick-plan + hai câu hỏi city ngắn, context chip/capability disclosure; weather là entry ngữ cảnh, không thêm task grid; preview/diff/Apply riêng |
+| Profile/Settings | Dữ liệu/cài đặt nào đang thuộc thiết bị này? | Hoạt động thật từ state; shortcuts và nhóm settings có effect, giải thích local demo trong About/privacy |
+
+City notes và collections là biên tập của prototype, không recommendation cá nhân hóa hoặc tin live. Thời lượng chuyến từ core; audio duration từ file metadata; không dùng chung một con số cho hai ý nghĩa. Chi tiết operational không có nguồn hiện hành được ghi chưa xác minh trong đúng section, tránh banner cảnh báo lặp trên mọi card.
+
+Nguyên tắc chốt sau review là **thêm đúng thông tin cần cho quyết định, bỏ phần lặp**, không kéo dài mọi trang. Weather Home là dòng ngắn hòa vào city context: temperature/condition/rain của giờ, valid time và source; forecast đầy đủ mở màn chi tiết. Khi rain probability giờ hiện tại ≥50% có thể gợi ý xem Museum bằng action rõ, không tự thay itinerary hoặc hứa venue đang mở. Không dùng weather card lớn như widget được ghép thêm chỉ để lấp màn.
 
 Review panel/fault tools chỉ hiện khi thêm `?review=1` vào URL. Profile → Settings mặc định ưu tiên playback speed, reduced motion, replay welcome, downloads và thông tin/privacy của build; không lẫn fault toggles với tùy chỉnh du lịch. Review không phải sandbox bất biến: một số case tạo review trip, thay request form hoặc pause trip active và lưu trong khóa V7. Dùng browser profile test riêng hoặc export plan trước seed. Reset demo data khác Sign out: Reset chỉ dữ liệu/cache V7; Sign out chỉ đóng demo session, không xóa trips/downloads.
 
@@ -89,7 +109,7 @@ Script/nguồn và tình trạng từng asset được mô tả ở [05-Content-
 
 Download theo **personal trip**: tour card/detail có badge trạng thái và action một chạm; action template chỉ chuẩn bị/tái dùng bản cá nhân rồi tải, không Start. Start luôn có gợi ý tải nhẹ, không một Ready/download gate. Quản lý dung lượng/xóa/cập nhật gói nằm ở Trips → Downloads. Chưa có package riêng cho một POI ở Place detail. Story đã cache qua trip nghe được độc lập; playback online không cần trip. Download gồm audio/ảnh/tour info theo manifest, không street map hoặc AI mới.
 
-Asset hiện có chỉ một ảnh phù hợp mỗi POI. Detail dùng hero lớn thật; hướng gallery ngang được giữ cho khi có thêm media đủ nguồn, không nhân một ảnh thành nhiều thumbnail hoặc lấy ảnh venue khác làm góc chụp. Giá/rating/thời tiết trong ảnh reference không trở thành dữ liệu sản phẩm.
+Asset hiện có chỉ một ảnh phù hợp mỗi POI. Detail dùng hero lớn thật; hướng gallery ngang được giữ cho khi có thêm media đủ nguồn, không nhân một ảnh thành nhiều thumbnail hoặc lấy ảnh venue khác làm góc chụp. Giá/rating trong ảnh reference không trở thành dữ liệu sản phẩm; weather chỉ lấy qua provider riêng, không từ mockup.
 
 GPS không biết khách đang nhìn gì. Story mô tả đối tượng bằng tên/ảnh hoặc điều kiện rõ như “nếu bạn đang nhìn mặt tiền trong ảnh”. Không khẳng định “bên trái/trước mặt bạn” từ GPS đơn lẻ. Giờ/giá/entrance chưa xác minh giữ nhãn chưa xác minh; không gán từ nguồn cũ thành facts live.
 
