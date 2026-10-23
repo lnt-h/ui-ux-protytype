@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-23T13:34:18.230Z",
+  "generatedAt": "2026-10-23T14:15:15.466Z",
   "suite": "V7 app action/state guards in Node VM",
   "environment": "v24.22.0",
   "scope": "Minimal DOM and fake Audio; real app.js, core.js, data.js, content.js, weather.js and experience.js are evaluated. Weather failure paths use absent/failing fetch only. No browser rendering, service worker, real audio, GPS, live provider or live AI verified.",
-  "appSha256": "df7dbafb3b5b7a463a660ae39a448d1fe5f95d6539dc969b3791f2bc0a456596",
-  "passed": 74,
-  "total": 74,
+  "appSha256": "3ba7ae3c98fbaf2c61f5c9bc3811f0b4481298b89d6915686a0db5f89afd3bd4",
+  "passed": 78,
+  "total": 78,
   "results": [
     {
       "name": "finishing before arrival and double-finishing cannot advance an unconfirmed next stop",
@@ -301,6 +301,22 @@
     },
     {
       "name": "AI overview selects the real active trip even when a different saved trip is currently selected",
+      "status": "PASS"
+    },
+    {
+      "name": "AI Guide exposes a truthful voice flow with review before sending",
+      "status": "PASS"
+    },
+    {
+      "name": "cancelling voice returns to the contextual AI sheet and resumes interrupted story audio",
+      "status": "PASS"
+    },
+    {
+      "name": "comfort pass removes misleading Home filters, uses readable Explore rows and one Detail action bar",
+      "status": "PASS"
+    },
+    {
+      "name": "an empty Trips screen prioritizes its next action instead of three zero statistics",
       "status": "PASS"
     }
   ]

@@ -38,6 +38,8 @@ AI Guide là tab thay Plan, không là tab thứ năm. Ba scope **Da Nang / POI 
 
 Ask từ Detail mở sheet **selected POI** trên màn đang đọc; Ask từ focused navigation mở sheet current stop dù bottom tabs ẩn. Dismiss/Back trở về đúng màn, selection và context; nếu mở rộng toàn màn vẫn giữ đường về. Sheet và tab dùng chung engine/context rules, không hai bộ answer trái nhau. Hỏi POI khác không sửa trip và không khẳng định khách đã tới. Không camera/heading nên “chi tiết này” cần tên/đối tượng rõ trước khi trả lời. Mở sheet không tự Pause/Play audio.
 
+Voice trong V7 là **interaction prototype**, không phải speech recognition: nút mic giải thích rõ không truy cập microphone/không lưu recording, sau đó cho xem listening state và một sample transcript theo context. Người dùng phải review/sửa transcript rồi mới Send; Send đi qua cùng rules với text. Không tự submit khi đang “nghe”, không giữ nội dung voice giữa session và không gọi sample transcript là lời người dùng đã nói. Khi voice mở từ contextual Ask, đóng hoặc hoàn tất vẫn giữ POI/trip scope và đường quay lại.
+
 | Case | Hành vi bắt buộc |
 |---|---|
 | Câu khớp exact sample question sau normalize punctuation/case | Trả câu mẫu theo facts/script, evidence cards/IDs và nhãn demo |

@@ -1,0 +1,53 @@
+{
+  "reviewedAt": "2026-10-23",
+  "environment": {
+    "origin": "http://127.0.0.1:8772/prototype/",
+    "surface": "in-app Chromium browser",
+    "logicalFrame": "402x874",
+    "deviceLabel": "iPhone 17 prototype frame"
+  },
+  "scope": "Selected visual and interaction checks after the voice and information-hierarchy completion pass. This is not physical-device, microphone, GPS, VoiceOver or usability evidence.",
+  "observations": [
+    {
+      "area": "Home",
+      "status": "observed-pass",
+      "evidence": "Illustrated map remains visible behind the medium drawer; city/search/weather/next action read as one hierarchy; decorative quick filters are absent."
+    },
+    {
+      "area": "Explore",
+      "status": "observed-pass",
+      "evidence": "Place results use one-column horizontal rows at 402 px so image, title, summary and visit metadata remain readable."
+    },
+    {
+      "area": "AI Guide",
+      "status": "observed-pass",
+      "evidence": "Context, time shortcuts, sample prompts and composer are visible without a duplicate root header; mic and Send are separate labelled controls."
+    },
+    {
+      "area": "Voice interaction",
+      "status": "observed-pass",
+      "evidence": "Intro states that the microphone is not accessed or recorded; sample listening leads to editable transcript review before Send."
+    },
+    {
+      "area": "Trips empty state",
+      "status": "observed-pass",
+      "evidence": "The first action is to plan or browse; the three zero-stat tiles are hidden when they communicate no useful state."
+    },
+    {
+      "area": "Place detail",
+      "status": "observed-pass",
+      "evidence": "Hero, facts and About/Story are readable above the fold; only one fixed action row remains with Listen and Add to plan."
+    }
+  ],
+  "automatedRegression": {
+    "core": "22/22",
+    "appState": "78/78",
+    "weather": "21/21",
+    "assetsAndStatic": "34/34"
+  },
+  "limitations": [
+    "Voice uses a sample transcript and never requests microphone access.",
+    "Maps and focused navigation remain illustrative fixtures without live GPS or rerouting.",
+    "No physical iPhone, VoiceOver, background-audio interruption or field usability session was run."
+  ]
+}

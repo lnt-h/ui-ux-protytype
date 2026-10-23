@@ -97,6 +97,10 @@ Các case dưới đây dùng fixture và app state sạch riêng của prototyp
 | V73 | Thu gọn/mở practical/source disclosures rồi điều hướng Back | Secondary content tìm được, nút chính không lặp; Back giữ context phù hợp; không nested modal hoặc mất accepted plan |
 | V74 | Weather offline/route/AI package boundary | Cache trip không hứa weather mới/AI inference/street navigation; không request profile/trip/AI text tới weather endpoint |
 | V75 | Root Explore/AI Guide/Trips và màn con → Back | Không lặp tên ba tab trong top bar; bốn label bottom giữ nguyên, product heading có ích còn; màn con vẫn có Back/title phù hợp |
+| V76 | AI Guide hoặc contextual Ask → mic → sample listening → review/edit → Send | Nói rõ simulation/no recording; không tự gửi; giữ city/POI/trip context và dùng cùng answer rules với text |
+| V77 | Story đang phát → mở voice từ Detail/leg → Cancel hoặc Send | Cancel trở đúng AI sheet và phục hồi audio intent; Send không bật lại audio cạnh câu trả lời; trip pointer không đổi |
+| V78 | Explore và Detail ở 402×874 | Explore dùng hàng một cột đọc được; Detail chỉ một action row Listen/Add to plan, không CTA trùng hoặc che nội dung |
+| V79 | Trips không có journey/download/favorite | Ưu tiên empty-state next action; không bày ba số 0 như dashboard hoặc kéo dài màn bằng filler |
 
 Nếu UI/runner không hỗ trợ một nhánh trong gói hiện tại, ghi “not implemented/not run” thay vì gộp cùng một case pass rộng hơn. Core test không thay browser journey; browser journey không thay device field test.
 

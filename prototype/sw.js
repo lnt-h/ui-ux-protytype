@@ -1,5 +1,5 @@
 /* Offline shell and explicitly downloaded media only. No external API caching. */
-const SHELL='gonarra-v7-shell-8';
+const SHELL='gonarra-v7-shell-9';
 const MEDIA='gonarra-v7-packages';
 const shell=['./','index.html','styles.css','theme.css','experience.css','data.js','content.js','core.js','visuals.js','weather.js','experience.js','app.js','assets/brand/gonarra-wordmark-color.svg','assets/brand/gonarra-mark-color.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(SHELL).then(cache=>cache.addAll(shell)).then(()=>self.skipWaiting())));

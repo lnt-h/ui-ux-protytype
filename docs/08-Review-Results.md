@@ -12,7 +12,7 @@ Review tiếp yêu cầu thêm thông tin, rồi chốt **chỉ giữ phần c�
 
 Weather bổ sung nguồn Open-Meteo cho Đà Nẵng cố định với nguồn/time/units và state lỗi/cũ; không là GPS, sensor tại POI, marine assessment hoặc automatic trip rewrite. Nguồn UX/điều kiện provider được ghi tại docs 03/05/06. Logo production/master/brand assets giữ cùng hợp đồng.
 
-Các kết quả 22/63/34 và browser journey bên dưới là **snapshot trước lượt enrich này**, chưa tự thành pass cho weather hoặc layout mới. V59–V75 bổ sung phạm vi cần kiểm. Chỉ thay đoạn này bằng kết quả/current evidence khi thực chạy và nhận được outcome; chưa có con số mới được công bố trong tài liệu này.
+Regression hiện tại đã chạy lại sau lượt hoàn thiện voice/hierarchy: **22/22 core, 78/78 app-state, 21/21 weather và 34/34 asset/static**. Browser review trên frame iPhone 17 402×874 đã quan sát Home map/drawer, Explore list một cột, AI Guide + voice review sheet, Trips empty state và Detail một action row. Đây vẫn là browser prototype review, chưa là UAT/VoiceOver/device test hoặc microphone integration.
 
 ## Baseline trước lần chỉnh UI này
 
@@ -33,12 +33,13 @@ Xem [evidence README](../evidence/README.md), [browser review](../evidence/brows
 | Kiểm tra có evidence | Kết quả snapshot | Phạm vi và giới hạn |
 |---|---|---|
 | Core/domain | 22/22 | [core-tests.txt](../evidence/core-tests.txt); engine fixture và constraints; không live route/model/GPS |
-| App state mở rộng | 63/63 | [app-state-tests.json](../evidence/app-state-tests.json), run 23/10/2026; app hash nằm trong JSON. DOM/Audio giả trong Node VM; không layout, media hoặc service worker thật. |
+| App state mở rộng | 78/78 | [app-state-tests.json](../evidence/app-state-tests.json), run 23/10/2026; app hash nằm trong JSON. DOM/Audio giả trong Node VM; thêm voice review/context/audio-intent và hierarchy Home/Explore/Detail/Trips; không layout, microphone, media hoặc service worker thật. |
+| Weather adapter | 21/21 | Parser, units, timezone, cache/stale/error/concurrency; không xác minh forecast ngoài thực địa hoặc UI network trên thiết bị. |
 | Asset/static | 34/34 | `assets-and-contrast.json`, snapshot 23/10/2026; 5 WAV có data, local refs/shell dependencies, production logo SVG/Brand Assets và 9 cặp màu được chỉ định. Không đo toàn bộ CSS/ảnh/gradient mới. |
 
-App-state run hiện ghi `appSha256: 33215db74c93db683662f539662e84d5feed1a239f9f027f6b4c9036b2370dbf`. 63 cases gồm các guard cũ và Start/dedup, một player/positions, AI context, welcome, optional guest/login/signup/recovery/profile/signout, actual speed/motion preferences và modal form behavior. Password test kiểm giá trị đã nhập không xuất hiện trong localStorage; đây không là security audit hoặc server authentication test.
+App-state run hiện ghi `appSha256: 3ba7ae3c98fbaf2c61f5c9bc3811f0b4481298b89d6915686a0db5f89afd3bd4`. 78 cases gồm các guard cũ và Start/dedup, một player/positions, AI/voice context, welcome, hierarchy responsive, optional guest/login/signup/recovery/profile/signout, actual speed/motion preferences và modal form behavior. Password test kiểm giá trị đã nhập không xuất hiện trong localStorage; đây không là security audit hoặc server authentication test.
 
-Không cộng 28 app baseline với 63 app refresh: suite mới chứa lại các guard cũ. App đổi sau timestamp/hash phải rerun phù hợp; các con số là kết quả snapshot, không cam kết cho mọi chỉnh sửa tiếp. VM pass không được quy thành browser/media/SW pass.
+Không cộng 28 app baseline với 78 app refresh: suite mới chứa lại các guard cũ. App đổi sau timestamp/hash phải rerun phù hợp; các con số là kết quả snapshot, không cam kết cho mọi chỉnh sửa tiếp. VM pass không được quy thành browser/media/SW pass.
 
 ## Browser refresh đã quan sát
 

@@ -567,6 +567,31 @@ test('AI overview selects the real active trip even when a different saved trip 
   e.click('close-modal');assert.deepEqual(clone(e.g.db.trips),before);assertNoRenderError(e);
 });
 
+test('AI Guide exposes a truthful voice flow with review before sending',async()=>{
+  const e=environment();await e.g.play('cathedral');assert.equal(e.g.audio.paused,false);
+  e.click('ai-open');assert.match(e.html(),/data-action="voice-open"/);assert.match(visibleText(e.html()),/voice input.*simulated/i);
+  e.click('voice-open');assert.equal(e.g.ui.modal.kind,'voice');assert.equal(e.g.ui.voice.stage,'intro');assert.equal(e.g.audio.paused,true);
+  assert.match(visibleText(e.html()),/does not access or record your microphone/i);
+  e.click('voice-start');assert.equal(e.g.ui.voice.stage,'listening');assert.match(visibleText(e.html()),/Listening to a sample/i);
+  e.click('voice-review');assert.equal(e.g.ui.voice.stage,'review');assert.match(e.html(),/id="voice-transcript"/);
+  const transcript=e.g.ui.voice.transcript;e.click('voice-send');assert.equal(e.g.ui.modal,null);assert.match(visibleText(e.html()),new RegExp(transcript.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
+  assert.equal(e.g.audio.paused,true,'Sending a voice request must not restart a competing story');assertNoRenderError(e);
+});
+test('cancelling voice returns to the contextual AI sheet and resumes interrupted story audio',async()=>{
+  const e=environment();await e.g.play('cathedral');e.g.ui.placeId='cathedral';e.click('ask-place',{id:'cathedral'});assert.equal(e.g.ui.modal.kind,'aiSheet');
+  e.click('voice-open');assert.equal(e.g.ui.modal.kind,'voice');assert.equal(e.g.audio.paused,true);
+  e.click('voice-cancel');assert.equal(e.g.ui.modal.kind,'aiSheet');assert.equal(e.g.audio.paused,false);assertNoRenderError(e);
+});
+test('comfort pass removes misleading Home filters, uses readable Explore rows and one Detail action bar',()=>{
+  const e=environment();e.click('welcome-skip');assert.doesNotMatch(e.html(),/home-quick-filter-row|Da Nang Food/);
+  e.g.go('explore');assert.match(e.html(),/class="place-results-list"/);assert.doesNotMatch(e.html(),/class="discover-grid"><button class="discovery-card rich-place-card"/);
+  e.click('place',{id:'cathedral'});assert.doesNotMatch(e.html(),/detail-floating-bar|Listen to this story/);assert.equal((e.html().match(/class="footer"/g)||[]).length,1);assert.match(e.html(),/footer-actions/);
+  assert.doesNotMatch(visibleText(e.html()),/08:00|10:30/);assert.match(visibleText(e.html()),/Suggested time · Morning light/);assertNoRenderError(e);
+});
+test('an empty Trips screen prioritizes its next action instead of three zero statistics',()=>{
+  const e=environment();e.click('welcome-skip');e.g.go('trips');assert.doesNotMatch(e.html(),/journey-stats/);assert.match(visibleText(e.html()),/Your next day starts here/);assert.match(e.html(),/data-action="quick-plan"/);assertNoRenderError(e);
+});
+
 async function run(){
 const results=[];
 for(const [name,fn] of tests){try{await fn();results.push({name,status:'PASS'});process.stdout.write('PASS '+name+'\n')}catch(error){results.push({name,status:'FAIL',error:error.message,stack:error.stack});process.stderr.write('FAIL '+name+'\n'+error.stack+'\n')}}
